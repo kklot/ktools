@@ -1,0 +1,62 @@
+#' @export
+dhs_cname <- function(x="AO", short=0) {
+  cname = c(
+  "AF","AL","AO","AM","AZ","BD","BJ","BO","BT","BR","BF","BU","KH","CM","CV",
+  "CF","TD","CO","KM","CG","CD","CI","DR","EC","EG","ES","EK","ER","SZ","ET",
+  "GA","GM","GH","GU","GN","GY","HT","HN","IA","ID","JO","KK","KE","KY","LA",
+  "LS","LB","MD","MW","MV","ML","MR","MX","MB","MA","MZ","MM","NM","NP","NC",
+  "NI","NG","PK","PG","PY","PE","PH","RW","WS","ST","SN","SL","ZA","LK","SD",
+  "TJ","TZ","TH","TL","TG","TT","TN","TR","TM","UG","UA","UZ","VN","YE","ZM",
+  "ZW")
+  full = c(
+  "Afghanistan",                      "Albania",
+  "Angola",                           "Armenia",
+  "Azerbaijan",                       "Bangladesh",
+  "Benin",                            "Bolivia",
+  "Botswana",                         "Brazil",
+  "Burkina Faso",                     "Burundi",
+  "Cambodia",                         "Cameroon",
+  "Cape Verde",                       "Central African R.",
+  "Chad",                             "Colombia",
+  "Comoros",                          "Congo",
+  "Congo D.R.",                       "Cote d'Ivoire",
+  "Dominican R.",                     "Ecuador",
+  "Egypt",                            "El Salvador",
+  "Equatorial Guinea",                "Eritrea",
+  "Eswatini",                         "Ethiopia",
+  "Gabon",                            "Gambia",
+  "Ghana",                            "Guatemala",
+  "Guinea",                           "Guyana",
+  "Haiti",                            "Honduras",
+  "India",                            "Indonesia",
+  "Jordan",                           "Kazakhstan",
+  "Kenya",                            "Kyrgyz R.",
+  "Laos",                             "Lesotho",
+  "Liberia",                          "Madagascar",
+  "Malawi",                           "Maldives",
+  "Mali",                             "Mauritania",
+  "Mexico",                           "Moldova",
+  "Morocco",                          "Mozambique",
+  "Myanmar",                          "Namibia",
+  "Nepal",                            "Nicaragua",
+  "Niger",                            "Nigeria",
+  "Pakistan",                         "Papua New Guinea",
+  "Paraguay",                         "Peru",
+  "Philippines",                      "Rwanda",
+  "Samoa",                            "Sao Tome & Principe",
+  "Senegal",                          "Sierra Leone",
+  "South Africa",                     "Sri Lanka",
+  "Sudan",                            "Tajikistan",
+  "Tanzania",                         "Thailand",
+  "Timor-Leste",                      "Togo",
+  "Trinidad & Tobago",                "Tunisia",
+  "Turkey",                           "Turkmenistan",
+  "Uganda",                           "Ukraine",
+  "Uzbekistan",                       "Vietnam",
+  "Yemen",                            "Zambia",
+  "Zimbabwe")
+  if (short) 
+    full[cname==x] %>% substr(1, min(5, nchar(.))) %>% paste0('.') %>% return
+  else
+    full[cname==x] %>% return
+}

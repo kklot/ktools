@@ -1,0 +1,13 @@
+Package: ktools
+Type: Package
+Title: Miscellaneous tools
+Version: 1.0
+Date: 2015-06-25
+Author: Van Kinh Nguyen
+Maintainer: Van Kinh Nguyen <van-kinh.nguyen@outlook.com>
+Description: plotting, reading, converting,...
+License: GPL (>= 2)
+LazyData: true
+Imports:
+    txtplot
+RoxygenNote: 7.0.2
