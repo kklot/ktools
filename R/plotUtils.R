@@ -425,11 +425,18 @@ hlegend <- function(...) legend(..., horiz = TRUE, bty = 'n')
 #' genCols 
 #'
 #' @export
-genCols <- function(n, c_pallete = "Set1") {
+gen_brewer <- function(n, c_pallete = "Set1") {
   pals <- try(RColorBrewer::brewer.pal(8, c_pallete))
   if (inherits(pals, 'try-error')) pals <- c_pallete
   getCols <- colorRampPalette(pals)
   return(getCols(n))
+}
+
+#' genCols 
+#'
+#' @export
+gen_colors <- function(c_pallete = kg, n) {
+  colorRampPalette(c_pallete)(n)
 }
 
 #' lo 
