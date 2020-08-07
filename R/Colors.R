@@ -1,3 +1,16 @@
+kg <- c(
+"#5643BD",
+"#9030DA",
+"#E3059E",
+"#FF293F",
+"#FF6538",
+"#FFA127",
+"#FFC600",
+"#FEFE38",
+"#97E221",
+"#00BD33",
+"#00CCD3",
+"#007EBE")
 zurich <- c(
 grDevices::rgb(182, 206, 229, maxColorValue=255),
 grDevices::rgb( 88, 132, 179, maxColorValue=255),
