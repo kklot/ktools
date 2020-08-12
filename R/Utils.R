@@ -1,3 +1,14 @@
+#' rownames to id
+#' 
+#' mainly used to extract coef. of named random effects in TMB, INLA
+row2id <- function(pattern, x) grep(pattern, rownames(x))
+
+
+#' Range to sequence
+#' 
+#' give me a vector, I produces a continous sequence from the range
+range2seq <- function(x) eval(parse(text=paste0(range(x), collapse=':')))
+
 #' Calculate Information criteria for TMB model
 #' 
 #' @param obj TMB object
