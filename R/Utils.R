@@ -1,3 +1,40 @@
+
+#' Generalized logistic type I density
+#' 
+#' @export
+f_glogisI <- function(x, alpha, beta, gamma) {
+  (gamma/beta) * exp((alpha-x)/beta) * (1 + exp((alpha-x)/beta))^(-gamma-1)
+}
+#' Generalized logistic type I cumulative
+#' 
+#' @export
+F_glogisI <- function(x, alpha, beta, gamma) {
+  1 / (1 + exp((alpha-x)/beta)^gamma)
+}
+
+#' Generalized logistic type I survival
+#' 
+#' @export
+S_glogisI <- function(x, alpha, beta, gamma) {
+  1 - F_glogisI(x, alpha, beta, gamma)
+}
+
+#' Generalized log-logistic type I density
+#' 
+#' @export
+f_gllogisI <- function(t, lambda, p, gamma) {
+  term = (lambda * t)^-p
+  (1/t) * gamma * p * term / (1 + term)^(gamma+1)
+}
+
+#' Generalized log-logistic type I probability density
+#' 
+#' @export
+F_gllogisI <- function(t, lambda, p, gamma) {
+  (1/gamma*p) * (1 + (lambda*x)^-p)^-gamma
+}
+
+
 #' rownames to id
 #' 
 #' mainly used to extract coef. of named random effects in TMB, INLA
