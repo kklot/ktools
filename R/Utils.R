@@ -27,11 +27,19 @@ f_gllogisI <- function(t, lambda, p, gamma) {
   (1/t) * gamma * p * term / (1 + term)^(gamma+1)
 }
 
+#' Generalized log-logistic type I survival
+#' 
+#' @export
+S_gllogisI <- function(t, lambda, p, gamma) {
+  term = (lambda * t)^-p
+  1 - 1 / (1 + term)^gamma;
+}
+
 #' Generalized log-logistic type I probability density
 #' 
 #' @export
 F_gllogisI <- function(t, lambda, p, gamma) {
-  (1/gamma*p) * (1 + (lambda*x)^-p)^-gamma
+  (1 + (lambda*t)^-p)^-gamma
 }
 
 
