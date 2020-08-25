@@ -79,3 +79,14 @@ export(tmb_fixit)
 export(vline)
 export(wait)
 export(xyline)
+
+importFrom("grDevices", "cairo_ps", "col2rgb", "colorRampPalette",
+        "dev.copy", "dev.new", "dev.off", "dev.size", "palette",
+        "pdf", "png", "rgb")
+importFrom("graphics", "abline", "axis", "boxplot", "hist", "legend",
+        "lines", "par", "plot", "points", "polygon", "rect",
+        "segments", "strwidth", "text")
+importFrom("stats", "AIC", "as.formula", "cor", "glm", "heatmap",
+        "loess", "mahalanobis", "predict", "rnorm", "smooth.spline",
+        "var")
+importFrom("utils", "head", "object.size", "tail")
