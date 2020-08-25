@@ -191,10 +191,6 @@ put <- function(n.row, n.col, mar = NULL, ...) {
 #' @param cols (string) Gridlines color  Defaults to "white".
 #' @keywords grid
 #' @export
-#' @examples
-#' Kgrid()
-# Kgrid(bg = "white", cols = AddAlpha("skyblue"))
-# Kgrid <- function(bg = AddAlpha('steelblue', .05), cols = "white") {
 Kgrid <- function(bg = NA, cols = "gray93" ) {
     bg(col = bg, border = NA)
     xaxp <- par("xaxp"); yaxp <- par("yaxp")
@@ -213,8 +209,6 @@ Kgrid <- function(bg = NA, cols = "gray93" ) {
 #' @param cols (string) Gridlines color  Defaults to "white".
 #' @keywords grid
 #' @export
-#' @examples
-#' savePNG()
 savePNG <- function(name="name", w = dev.size()[1], h = dev.size()[2]) {
   dev.copy(png, paste(name, "png", sep="."), width=w, height=h, res=300, units="in")
   dev.off()
@@ -227,8 +221,6 @@ savePNG <- function(name="name", w = dev.size()[1], h = dev.size()[2]) {
 #' @param cols (string) Gridlines color  Defaults to "white".
 #' @keywords grid
 #' @export
-#' @examples
-#' savePDF()
 savePDF <- function(name="name", w = dev.size()[1], h = dev.size()[2]) {
   dev.copy(pdf, paste(name, "pdf", sep="."), width=w, height=h)
   dev.off()
@@ -241,8 +233,6 @@ savePDF <- function(name="name", w = dev.size()[1], h = dev.size()[2]) {
 #' @param cols (string) Gridlines color  Defaults to "white".
 #' @keywords grid
 #' @export
-#' @examples
-#' savePs()
 savePs <- function(name="name", w = dev.size()[1], h = dev.size()[2]) {
   dev.copy(png, paste(name, "png", sep="."), width=w, height=h, res=300, units="in")
   dev.off()
@@ -260,8 +250,6 @@ savePs <- function(name="name", w = dev.size()[1], h = dev.size()[2]) {
 #' @param cols (string) Gridlines color  Defaults to "white".
 #' @keywords grid
 #' @export
-#' @examples
-#' PlotData()
 PlotData <- function(data, origin = TRUE, ...) {
     plot(times, log10(Data0[, "V"]), type = "n", ylim = c(0, 7),
         ylab = expression(paste(log[10], "(Viral load)") ),
