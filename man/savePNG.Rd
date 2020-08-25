@@ -14,7 +14,4 @@ savePNG(name = "name", w = dev.size()[1], h = dev.size()[2])
 \description{
 Add background and grid lines similar to ggplot.
 }
-\examples{
-savePNG()
-}
 \keyword{grid}

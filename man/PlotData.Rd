@@ -14,7 +14,4 @@ PlotData(data, origin = TRUE, ...)
 \description{
 Add background and grid lines similar to ggplot.
 }
-\examples{
-PlotData()
-}
 \keyword{grid}
