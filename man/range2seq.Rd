@@ -6,9 +6,6 @@
 \usage{
 range2seq(x)
 }
-\arguments{
-\item{x}{vector (decimal not catched)}
-}
 \description{
 give me a vector, I produces a continous sequence from the range
 }

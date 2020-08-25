@@ -14,7 +14,4 @@ Kgrid(bg = NA, cols = "gray93")
 \description{
 Add background and grid lines similar to ggplot.
 }
-\examples{
-Kgrid()
-}
 \keyword{grid}
