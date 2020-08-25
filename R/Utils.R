@@ -1,3 +1,17 @@
+#' dagum density
+#' 
+#' @export
+iso2name <- function(x) {
+  code <- ifelse(nchar(x)==2, 'iso2c', 'iso3c')
+  countrycode::countrycode(x, code, 'country.name')
+}
+
+#' dagum density
+#' 
+#' @export
+f_dagum <- function(x, a, b, p) {
+  num = a*p*x
+}
 
 #' Generalized logistic type I density
 #' 
@@ -46,13 +60,21 @@ F_gllogisI <- function(t, lambda, p, gamma) {
 #' rownames to id
 #' 
 #' mainly used to extract coef. of named random effects in TMB, INLA
+#' @export
 row2id <- function(pattern, x) grep(pattern, rownames(x))
 
 
 #' Range to sequence
 #' 
 #' give me a vector, I produces a continous sequence from the range
+#' @export
 range2seq <- function(x) eval(parse(text=paste0(range(x), collapse=':')))
+
+#' Evaluate a text as expression
+#' 
+#' give me a vector, I produces a continous sequence from the range
+#' @export
+eval_text <- function(x) eval(parse(text=x))
 
 #' Calculate Information criteria for TMB model
 #' 
@@ -60,6 +82,7 @@ range2seq <- function(x) eval(parse(text=paste0(range(x), collapse=':')))
 #' @param n_post Number of posterior samples
 #' @param pointwise Name of pointwise predictive density from your model
 #' @param looic Report leave one out IC from `loo` package?
+#' @export
 tmb_ICs <- function(obj, n_post=1000, pointwise='pwdens', looic=FALSE) {
   
   if (is.null(obj$env$random)) {
@@ -110,6 +133,14 @@ gen_inla_rw <- function(n=10, order=1, sd=1, seed=123) {
     INLA::inla.qsample(1, sd^-2 * (Q+Matrix::Diagonal(n, 1e-9)), constr=constr, seed=seed)
 }
 
+#' Simulated random walk
+#' 
+#' @export 
+gen_rw <- function(n, order=2, sig=0.1) {
+  D <- diff(diag(n), diff = order) # differences matrix 
+  x_i = rnorm(n - order, sd = sig)
+  c(t(D) %*% solve( D %*% t(D) ) %*% x_i)
+}
 
 NullSpace <- function (A) {
   m <- dim(A)[1]; n <- dim(A)[2]
@@ -381,7 +412,9 @@ fibonaci <- function(len=10) {
   fibvals
 }
 
-
+#' Write a note to file
+#' 
+#' @export
 take_note <- function(text="text", to="Rnote", thisfilename=NULL,
                       home=FALSE, wd = !home, time_stamp=TRUE)
 {

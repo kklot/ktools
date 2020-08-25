@@ -43,6 +43,16 @@ bg <- function(col='Orange',...)
 #' @export
 plott = function(...) txtplot::txtplot(...)
 
+#' Plot density in terminal
+#'
+#' @export
+histt = function(...) txtplot::textdensity(...)
+
+#' Plot bar chart in terminal
+#'
+#' @export
+barplott = function(...) txtplot::txtbarchart(...)
+
 #' Plot segments
 #'
 #' plot segment based on output from boxplot
