@@ -1,4 +1,13 @@
-#' dagum density
+#' Is negative
+#' 
+#' Just a replacement of `<`(0)
+#' @param x
+#' @export
+is_negative <- function(x) {
+    x < 0
+}
+
+#' shorthand ISO to country name from countrycode package
 #' 
 #' @export
 iso2name <- function(x) {
@@ -122,11 +131,13 @@ tmb_ICs <- function(obj, n_post=1000, pointwise='pwdens', looic=FALSE) {
 }
 
 
+#' @export
 genQ <- function(n=10, order=2) {
     D <- diff(diag(n), diff = 2)
     t(D) %*% D
 }
 
+#' @export
 gen_inla_rw <- function(n=10, order=1, sd=1, seed=123) {
     Q = INLA:::inla.rw(n, order=order, scale.model=TRUE)
     constr = list(A = rbind(rep(1, n), c(scale(1:n))), e = rep(0, 2))
@@ -135,7 +146,7 @@ gen_inla_rw <- function(n=10, order=1, sd=1, seed=123) {
 
 #' Simulated random walk
 #' 
-#' @export 
+#' @export
 gen_rw <- function(n, order=2, sig=0.1) {
   D <- diff(diag(n), diff = order) # differences matrix 
   x_i = rnorm(n - order, sd = sig)
@@ -414,6 +425,8 @@ fibonaci <- function(len=10) {
 
 #' Write a note to file
 #' 
+#' Useful for taking note in loop
+#' 
 #' @export
 take_note <- function(text="text", to="Rnote", thisfilename=NULL,
                       home=FALSE, wd = !home, time_stamp=TRUE)
@@ -427,11 +440,11 @@ take_note <- function(text="text", to="Rnote", thisfilename=NULL,
     paste0('echo ', '"in ', thisfilename, '"', ' >> ', to) %>% system
   paste0('echo ', '"', '\t- ', text, '"', " >> ", to) %>% system
 }
-# take_note()
 
 #' AUC calculation
 #'
-#' Shorten the log10() to l()
+#' Numerical integration
+#' 
 #' @export
 AUC <- function(x, y, maxX=length(x)) {
   x <- x[0:maxX]
@@ -445,7 +458,7 @@ AUC <- function(x, y, maxX=length(x)) {
 # #' @export
 # l <- function(x) log10(x)
 
-#' #' genSmooth
+#' genSmooth
 #'
 #' Generate smoothed data dynamics
 #' @export
@@ -509,21 +522,15 @@ d2r <- function(x) log10(log(2)/x)
 # --------------------------------------------------------------------------
 #' wait function
 #'
-#' Add background and grid lines similar to ggplot.
-#' @param bg (string) Background color Defaults to "gray90".
-#' @param cols (string) Gridlines color  Defaults to "white".
-#' @keywords grid
+#' Add waiting time before evaluate an expression
+#' 
+#' @param wait.time in seconds
+#' @keywords time
 #' @export
-#' @examples
-#' wait()
 wait <- function(wait.time = 2){
   now <- proc.time()[3]
   while(proc.time()[3] < (now + wait.time)) dum <- 0
 }
-
-#' @export
-plott <- function(...) txtplot::txtplot(...) 
-
 
 #' Binding rows, auto set colnames
 #' 
