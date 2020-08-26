@@ -154,6 +154,7 @@ gen_rw <- function(n, order=2, sig=0.1) {
   c(t(D) %*% solve( D %*% t(D) ) %*% x_i)
 }
 
+#' @export
 NullSpace <- function (A) {
   m <- dim(A)[1]; n <- dim(A)[2]
   ## QR factorization and rank detection
