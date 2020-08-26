@@ -146,6 +146,7 @@ gen_inla_rw <- function(n=10, order=1, sd=1, seed=123) {
 
 #' Simulated random walk
 #' 
+#' @keyword internal
 #' @export
 gen_rw <- function(n, order=2, sig=0.1) {
   D <- diff(diag(n), diff = order) # differences matrix 
