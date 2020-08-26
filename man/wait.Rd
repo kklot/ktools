@@ -7,14 +7,9 @@
 wait(wait.time = 2)
 }
 \arguments{
-\item{bg}{(string) Background color Defaults to "gray90".}
-
-\item{cols}{(string) Gridlines color  Defaults to "white".}
+\item{wait.time}{in seconds}
 }
 \description{
-Add background and grid lines similar to ggplot.
+Add waiting time before evaluate an expression
 }
-\examples{
-wait()
-}
-\keyword{grid}
+\keyword{time}

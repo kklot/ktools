@@ -2,7 +2,7 @@
 % Please edit documentation in R/Utils.R
 \name{genSmooth}
 \alias{genSmooth}
-\title{#' genSmooth}
+\title{genSmooth}
 \usage{
 genSmooth(x, y, newx = NULL, logy = TRUE, method = 2, ...)
 }

@@ -14,5 +14,5 @@ take_note(
 )
 }
 \description{
-Write a note to file
+Useful for taking note in loop
 }

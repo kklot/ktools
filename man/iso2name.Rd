@@ -2,10 +2,10 @@
 % Please edit documentation in R/Utils.R
 \name{iso2name}
 \alias{iso2name}
-\title{dagum density}
+\title{shorthand ISO to country name from countrycode package}
 \usage{
 iso2name(x)
 }
 \description{
-dagum density
+shorthand ISO to country name from countrycode package
 }
