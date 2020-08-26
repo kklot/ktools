@@ -46,7 +46,7 @@ plott = function(...) txtplot::txtplot(...)
 #' Plot density in terminal
 #'
 #' @export
-histt = function(...) txtplot::textdensity(...)
+histt = function(...) txtplot::txtdensity(...)
 
 #' Plot bar chart in terminal
 #'
