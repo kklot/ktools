@@ -1,3 +1,33 @@
+#' Find consecutive (by one unit only)
+#' 
+#' As title
+#' @param x vector of integer
+#' @export
+find_consecutive <- function(x) {
+  dd <- c(0, diff(x))
+  which(dd==1)  
+}
+
+#' Remove consecutive (by one unit only)
+#' 
+#' When you want to remove/merge consecutive grouping to one, such as combining consecutive survey year to one. Is there a simpler way to do this?
+#' 
+#' @param x vector of integer
+#' @export
+remove_consecutive <- function(x, keep_first=TRUE) {
+  done <- FALSE
+  while(!done) {
+    id <- find_consecutive(x)
+    if (keep_first) 
+      x[id] <- x[id-1]
+    else
+      x[id-1] <- x[id]
+    done <- length(find_consecutive(x)) == 0
+  }
+  x
+}
+
+
 #' Is negative
 #' 
 #' Just a replacement of `<`(0)
