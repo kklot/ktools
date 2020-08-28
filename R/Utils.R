@@ -1,9 +1,28 @@
+#' Open file with system's program (on MAC)
+#' 
+#' Description
+#' @param x path to file
+#' @export
+open_file <- function(x) {
+    system(paste('open', x))
+}
+#' is sorted?
+#' 
+#' As title
+#' 
+#' @param x vector of integer
+#' @export
+is_sorted <- function(x) {
+  all(diff(x) > 0) | all(diff(x) < 0)
+}
+
 #' Find consecutive (by one unit only)
 #' 
 #' As title
 #' @param x vector of integer
 #' @export
 find_consecutive <- function(x) {
+  if (!is_sorted) x <- sort(x)
   dd <- c(0, diff(x))
   which(dd==1)  
 }
@@ -15,6 +34,7 @@ find_consecutive <- function(x) {
 #' @param x vector of integer
 #' @export
 remove_consecutive <- function(x, keep_first=TRUE) {
+  if (!is_sorted) x <- sort(x)
   done <- FALSE
   while(!done) {
     id <- find_consecutive(x)
@@ -160,10 +180,11 @@ tmb_ICs <- function(obj, n_post=1000, pointwise='pwdens', looic=FALSE) {
   )
 }
 
-
+#' Generate random walk precision structure matrix
+#' 
 #' @export
-genQ <- function(n=10, order=2) {
-    D <- diff(diag(n), diff = 2)
+genR <- function(n=10, order=2) {
+    D <- diff(diag(n), diff = order)
     t(D) %*% D
 }
 
