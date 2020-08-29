@@ -1,10 +1,10 @@
-#' Open file with system's program (on MAC)
+#' Invert
 #' 
-#' Description
-#' @param x path to file
+#' inverting an number (I told you this package is trivial)
+#' @param x R object
 #' @export
-open_file <- function(x) {
-    system(paste('open', x))
+invert <- function(x) {
+    1/x
 }
 #' is sorted?
 #' 
@@ -47,7 +47,6 @@ remove_consecutive <- function(x, keep_first=TRUE) {
   x
 }
 
-
 #' Is negative
 #' 
 #' Just a replacement of `<`(0)
@@ -63,56 +62,6 @@ is_negative <- function(x) {
 iso2name <- function(x) {
   code <- ifelse(nchar(x)==2, 'iso2c', 'iso3c')
   countrycode::countrycode(x, code, 'country.name')
-}
-
-#' dagum density
-#' 
-#' @export
-f_dagum <- function(x, a, b, p) {
-  num = a*p*x
-}
-
-#' Generalized logistic type I density
-#' 
-#' @export
-f_glogisI <- function(x, alpha, beta, gamma) {
-  (gamma/beta) * exp((alpha-x)/beta) * (1 + exp((alpha-x)/beta))^(-gamma-1)
-}
-#' Generalized logistic type I cumulative
-#' 
-#' @export
-F_glogisI <- function(x, alpha, beta, gamma) {
-  1 / (1 + exp((alpha-x)/beta)^gamma)
-}
-
-#' Generalized logistic type I survival
-#' 
-#' @export
-S_glogisI <- function(x, alpha, beta, gamma) {
-  1 - F_glogisI(x, alpha, beta, gamma)
-}
-
-#' Generalized log-logistic type I density
-#' 
-#' @export
-f_gllogisI <- function(t, lambda, p, gamma) {
-  term = (lambda * t)^-p
-  (1/t) * gamma * p * term / (1 + term)^(gamma+1)
-}
-
-#' Generalized log-logistic type I survival
-#' 
-#' @export
-S_gllogisI <- function(t, lambda, p, gamma) {
-  term = (lambda * t)^-p
-  1 - 1 / (1 + term)^gamma;
-}
-
-#' Generalized log-logistic type I probability density
-#' 
-#' @export
-F_gllogisI <- function(t, lambda, p, gamma) {
-  (1 + (lambda*t)^-p)^-gamma
 }
 
 
@@ -135,140 +84,6 @@ range2seq <- function(x) eval(parse(text=paste0(range(x), collapse=':')))
 #' @export
 eval_text <- function(x) eval(parse(text=x))
 
-#' Calculate Information criteria for TMB model
-#' 
-#' @param obj TMB object
-#' @param n_post Number of posterior samples
-#' @param pointwise Name of pointwise predictive density from your model
-#' @param looic Report leave one out IC from `loo` package?
-#' @export
-tmb_ICs <- function(obj, n_post=1000, pointwise='pwdens', looic=FALSE) {
-  
-  if (is.null(obj$env$random)) {
-    joint_cov = sdreport(obj)$cov.fixed
-  } else {
-    joint_cov = as.matrix(solve(sdreport(obj,,,1)$jointPrecision))
-  }
-  post_sample = mvtnorm::rmvnorm(n_post, obj$env$last.par.best, joint_cov)
-
-  # pointwise_predictive_density
-  ppd = apply(post_sample, 1, function(x) obj$report(x)[[pointwise]])
-  log_ppd = sum(log(rowMeans(ppd)))
-
-  # DIC
-  log_post = sum(log(obj$report(obj$env$last.par.best)[[pointwise]]))
-  mean_log = mean(colSums(log(ppd)))
-
-  # WAIC
-  log_mean_post = log(rowMeans(ppd))
-  mean_log_post = rowMeans(log(ppd))
-
-  p_DIC   = 2 * (log_post - mean_log)
-  p_WAIC1 = 2 * sum(log_mean_post - mean_log_post)
-  p_WAIC2 = sum(apply(log(ppd), 1, var))
-
-  # LOO-PSIS # n_post x N
-  LOOIC = NULL
-  if (looic) {
-    LOOIC = loo::loo(t(log(ppd)))$looic
-  }
-
-  c(DIC   = -2 * log_post + 2 * p_DIC,
-    WAIC1 = -2 * (log_ppd - p_WAIC1),
-    WAIC2 = -2 * (log_ppd - p_WAIC2),
-    LOOIC = LOOIC
-  )
-}
-
-#' Generate random walk precision structure matrix
-#' 
-#' @export
-genR <- function(n=10, order=2) {
-    D <- diff(diag(n), diff = order)
-    t(D) %*% D
-}
-
-#' @export
-gen_inla_rw <- function(n=10, order=1, sd=1, seed=123) {
-    Q = INLA:::inla.rw(n, order=order, scale.model=TRUE)
-    constr = list(A = rbind(rep(1, n), c(scale(1:n))), e = rep(0, 2))
-    INLA::inla.qsample(1, sd^-2 * (Q+Matrix::Diagonal(n, 1e-9)), constr=constr, seed=seed)
-}
-
-#' Simulated random walk
-#' 
-#' @export
-gen_rw <- function(n, order=2, sig=0.1) {
-  D <- diff(diag(n), diff = order) # differences matrix 
-  x_i = rnorm(n - order, sd = sig)
-  c(t(D) %*% solve( D %*% t(D) ) %*% x_i)
-}
-
-#' @export
-NullSpace <- function (A) {
-  m <- dim(A)[1]; n <- dim(A)[2]
-  ## QR factorization and rank detection
-  QR <- base::qr.default(A)
-  r <- QR$rank
-  ## cases 2 to 4
-  if ((r < min(m, n)) || (m < n)) {
-    R <- QR$qr[1:r, , drop = FALSE]
-    P <- QR$pivot
-    F <- R[, (r + 1):n, drop = FALSE]
-    I <- base::diag(1, n - r)
-    B <- -1.0 * base::backsolve(R, F, r)
-    Y <- base::rbind(B, I)
-    X <- Y[base::order(P), , drop = FALSE]
-    return(X)
-    }
-  ## case 1
-  return(base::matrix(0, n, 1))
-}
-
-# hazard function for log-logistic distribution (parameterize as in INLA)
-hz_llogis <- function (x, alpha = 8, lambda = 1/18) {
-    num <- alpha * lambda
-    den <- (lambda * x)^(1-alpha) + lambda * x
-    num/den
-}
-
-mu_llogis <- function(alpha, lambda) { # convert to other
-    (1 / lambda * pi * 1 / alpha) /(sin(pi / alpha))
-}
-
-mu_llogis2 <- function(alpha, lambda) { # convert to other
-    pi / (alpha*lambda* sin(pi / alpha))
-}
-
-# density function for log-logistic distribution (parameterize as in INLA)
-d_llogis <- function (x, alpha = 8, lambda = 1/18) {
-    num <- alpha
-    den <- x^(1+alpha)*lambda^alpha + x^(1-alpha)*lambda^(-alpha) + 2*x
-    num/den
-}
-d_llogis2 <- function (x, alpha = 8, lambda = 1/18) {
-    num <- alpha * lambda * (x * lambda)^(alpha-1)
-    den <- ( (lambda*x)^alpha + 1 )^2
-    num/den
-}
-
-# convert mean back to lambda
-lambda_llogis <- function(mu, alpha) pi / (mu * alpha * sin(pi/alpha))
-
-
-# Cumulative function for log-logistic distribution (parameterize as in INLA)
-cdf_llogis <- function (x, alpha = 8, lambda = 1/18) {
-    1 / ( 1 + (lambda * x)^(-alpha) )
-}
-
-logit <- function(p) log(p/(1-p))
-invlogit <- function(x) 1/(1+exp(-x))
-ldinvlogit <- function(x){v <- invlogit(x); log(v) + log(1-v)}
-
-fwrite_bz2 <- function(x, y) {
-    data.table::fwrite(x, y)
-    system(paste0('bzip2 -f ', y))
-}
 
 getcoding_readstata13 <- function(data, var_name) {
   meta_obj <- getmeta_readstata13(data)
@@ -313,8 +128,6 @@ query_readstata13 <- function(d, x, in_labels=TRUE) {
   return(o)
 }
 
-efunc <- function(e) 'Error'
-
 list_name_to_column <- function(a_list, col_name="ele_name") {
    name <- names(a_list)
    lapply(seq_along(a_list), function(x) {
@@ -331,19 +144,6 @@ list_name_to_column <- function(a_list, col_name="ele_name") {
 #' @export
 cutat0 = function(x, n, mid=0) 
   c(seq(min(x), mid, length=n), seq(mid, max(x), length=n))[-n]
-
-#' TMB fix parameters
-#' 
-#' @export
-tmb_fixit <- function(par, fix_names) {
-  for (i in names(par)) {
-    if (i %in% fix_names)
-      par[[i]][] <- NA
-    else
-      par[[i]] <- NULL
-  }
-  par %>% lapply(as.factor)
-}
 
 #' Get original value before scale
 #' 
@@ -368,9 +168,6 @@ browse <- function(x, nrow=66, ...) {
 }
 
 #' @export 
-foo <- function() browser()
-
-#' @export 
 show_colors <- function(x) {
   if (missing(x)) 
     plot(factor(palette()), col=palette())
@@ -385,15 +182,6 @@ showPch <- function() {
     text(0:25, labels=0:25, pos=3, xpd=T)
     text(0:25, labels=0:25, pos=3, xpd=T)
 }
-
-#' @export
-brk <- function() {
-  cat("Parent:\n", deparse(sys.calls()[[sys.nframe()-1]]), '\n')
-  browser()
-}
-
-#' @export
-remove <- function(pat='_$') rm(list=ls()[grep(pat, ls())])
 
 #' Auto sort the columns to plotable matrix
 #' 
@@ -475,24 +263,6 @@ fibonaci <- function(len=10) {
   fibvals
 }
 
-#' Write a note to file
-#' 
-#' Useful for taking note in loop
-#' 
-#' @export
-take_note <- function(text="text", to="Rnote", thisfilename=NULL,
-                      home=FALSE, wd = !home, time_stamp=TRUE)
-{
-  to <- paste0(if (home) "~" else getwd(),
-               format(Sys.time(), "/%Y_%b_%d_"), to, ".md")
-  if (time_stamp)
-    paste0('echo ', '"',
-           format(Sys.time(), "%H:%M:%S"), '"', ' >> ', to) %>% system
-  if (!is.null(thisfilename))
-    paste0('echo ', '"in ', thisfilename, '"', ' >> ', to) %>% system
-  paste0('echo ', '"', '\t- ', text, '"', " >> ", to) %>% system
-}
-
 #' AUC calculation
 #'
 #' Numerical integration
@@ -534,25 +304,6 @@ genSmooth <- function(x, y, newx=NULL, logy=TRUE, method = 2, ...) {
 #' Subseting not in
 #' @export
 `%notin%` <- function (x, table) is.na(match(x, table, nomatch=NA_integer_))
-#' lsSize
-#'
-#' List top (default 10) objects by size
-#' @export
-lsSize <- function(x = 10) {
-  # List top largest objects in R global environments
-  temp <- NULL
-  for (i in ls(envir = .GlobalEnv)) {
-    temp <- rbind(temp, cbind(i, format(object.size(get(i)), units="Mb") ))
-  }
-  temp[,2] <- substr(temp[,2], 1, nchar(temp[,2])-3)
-  temp <- as.data.frame(temp, stringsAsFactors=0)
-  temp[,2] <- as.numeric(temp[,2])
-  temp <- temp[order(temp[, 2], decreasing=TRUE), ]
-  names(temp) <- c("name", "size(Mb)")
-  return(head(temp, x))
-  head(temp)
-}
-
 ## ------------------------------------------------------------------------
 #' Order data frame
 #'
@@ -572,18 +323,6 @@ pfu2TCID50 <- function(x) -x*log(.5)
 #' @export
 d2r <- function(x) log10(log(2)/x)
 # --------------------------------------------------------------------------
-#' wait function
-#'
-#' Add waiting time before evaluate an expression
-#' 
-#' @param wait.time in seconds
-#' @keywords time
-#' @export
-wait <- function(wait.time = 2){
-  now <- proc.time()[3]
-  while(proc.time()[3] < (now + wait.time)) dum <- 0
-}
-
 #' Binding rows, auto set colnames
 #' 
 #' @export

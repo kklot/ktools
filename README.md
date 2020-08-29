@@ -2,8 +2,21 @@
 
 MISC handy wrapper functions
 
+News:
 
+Added C++ header of some functions to use in modelling with TMB, to call the defined functions (such as lagged differences, random walk model, Besag, BYM,...) instead of using `TMB::compile` using `ktools::kompile` and include a directive in TMB's model file as
+
+```C++
+#include <TMB.hpp>
+#include <ktools.hpp>
+
+template<class Type>
+Type objective_function<Type>::operator() ()
+{
+    ...
+}
 ```
+
 The MIT License (MIT)
 
 Copyright (c) 2020 Van Kinh Nguyen
