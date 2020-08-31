@@ -128,8 +128,8 @@ Type iid(vector<Type> x, Type tau, bool sum_c=true) {
 // prepare Q
 template <class Type>
 Eigen::SparseMatrix<Type> prepare_Q(matrix<Type> R, Type tau) {
-  R.diagonal().array() += _eps;
   R = tau * R.array();
+  R.diagonal().array() += _eps;
   return tmbutils::asSparseMatrix(R);
 }
 

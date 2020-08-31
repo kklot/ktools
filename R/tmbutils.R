@@ -4,9 +4,11 @@
 #' 
 #' @param user_flags extra flag to compile
 #' @export
-kompile <- function(..., user_flags) {
+kompile <- function(..., user_flags, verbose=FALSE) {
   kfile <- system.file('include', 'ktools.hpp', package='ktools')
   kheader <- paste0("-I", dirname(kfile))
+  if (!verbose)
+    kheader <- paste(kheader, '-Wno-macro-redefined -Wno-unused-variable -Wno-unused-function -Wno-unused-local-typedefs -Wno-unknown-pragmas -Wno-c++11-inline-namespace')
   if (!missing(user_flags))
     kheader <- paste(kheader, user_flags)
   compile(..., flags=kheader)

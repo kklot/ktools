@@ -4,7 +4,7 @@
 \alias{kompile}
 \title{Compile TMB with ktools header}
 \usage{
-kompile(..., user_flags)
+kompile(..., user_flags, verbose = FALSE)
 }
 \arguments{
 \item{user_flags}{extra flag to compile}
