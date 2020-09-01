@@ -7,7 +7,7 @@
 #' @export
 MakeADFunSafe <- function(...) {
   o <- parallel::mcparallel(MakeADFun(...))
-  parallel::mccollect(o)
+  parallel::mccollect(o)[[1]]
 }
 
 #' Compile TMB with ktools header

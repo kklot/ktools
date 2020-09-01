@@ -1,3 +1,11 @@
+#' Number of unique elemements in a vector
+#' 
+#' to type less
+#' @param x vector
+#' @export
+n_unique <- function(x) {
+    length(unique(x))
+}
 #' Invert
 #' 
 #' inverting an number (I told you this package is trivial)
