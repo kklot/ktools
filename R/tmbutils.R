@@ -1,3 +1,15 @@
+#' MakeADFun safely terminated if there is bound error
+#' 
+#' to prevent TMB crashing an R session
+#' 
+#' @param ... MakeADFun argments
+#' 
+#' @export
+MakeADFunSafe <- function(...) {
+  o <- parallel::mcparallel(MakeADFun(...))
+  parallel::mccollect(o)
+}
+
 #' Compile TMB with ktools header
 #' 
 #' Add ktools.hpp to compile flags

@@ -22,7 +22,7 @@ is_sorted <- function(x) {
 #' @param x vector of integer
 #' @export
 find_consecutive <- function(x) {
-  if (!is_sorted) x <- sort(x)
+  if (!is_sorted(x)) x <- sort(x)
   dd <- c(0, diff(x))
   which(dd==1)  
 }
@@ -34,7 +34,7 @@ find_consecutive <- function(x) {
 #' @param x vector of integer
 #' @export
 remove_consecutive <- function(x, keep_first=TRUE) {
-  if (!is_sorted) x <- sort(x)
+  if (!is_sorted(x)) x <- sort(x)
   done <- FALSE
   while(!done) {
     id <- find_consecutive(x)
