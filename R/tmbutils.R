@@ -94,7 +94,7 @@ tmb_ICs <- function(obj, n_post=1000, pointwise='pwdens', looic=FALSE) {
 #' @export
 genR <- function(n=10, order=2) {
     D <- diff(diag(n), diff = order)
-    t(D) %*% D
+    t(D) %*% D # == crossprod
 }
 
 #' @export
