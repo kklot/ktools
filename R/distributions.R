@@ -1,3 +1,13 @@
+#' Compute the mean of skew loglogistic distribution
+#' 
+#' @param scale scale
+#' @param shape shape
+#' @param skew skewness parameters
+#' @export
+mu_skew_llogis <- function(scale, shape, skew) {
+  scale + shape * (digamma(1) - digamma(skew))
+}
+
 #' dagum density
 #' 
 #' @export
