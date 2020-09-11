@@ -3,8 +3,8 @@
 #' Query variable and labels from data read with haven
 #' 
 #' @param d data
-#' @param p character regex pattern for \link[base](grep)
-#' @param ... extra arguments to \link[base](grep)
+#' @param p character regex pattern for \link[base]{grep}
+#' @param ... extra arguments to \link[base]{grep}
 #' @export
 query_label <- function(d, p, ...) {
   tab = label_table(d)

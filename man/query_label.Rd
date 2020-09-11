@@ -9,9 +9,9 @@ query_label(d, p, ...)
 \arguments{
 \item{d}{data}
 
-\item{p}{character regex pattern for \link[base](grep)}
+\item{p}{character regex pattern for \link[base]{grep}}
 
-\item{...}{extra arguments to \link[base](grep)}
+\item{...}{extra arguments to \link[base]{grep}}
 }
 \description{
 Query variable and labels from data read with haven
