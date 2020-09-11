@@ -1,3 +1,13 @@
+#' Kill R session
+#' 
+#' Kill R session
+#' 
+#' @export
+kill <- function(x) {
+    message("Bye then!")
+    quit('no')
+} 
+
 #' Open file with system's program (on MAC)
 #' 
 #' Description
