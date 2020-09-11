@@ -7,7 +7,7 @@
 
 namespace ktools {
   
-#define _eps 1e-12 // An alternative limit argument for the first-order IGRMF
+#define _eps 1e-8 // An alternative limit argument for the first-order IGRMF
 
 // lag difference
 template <class Type>
