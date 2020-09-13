@@ -6,6 +6,11 @@
 #' @param p character regex pattern for \link[base]{grep}
 #' @param ... extra arguments to \link[base]{grep}
 #' @export
+query_name <- function(d, p, ...) {
+  tab = label_table(d)
+  position = grep(p, tab[, 'name'], 1,...)
+  tab[position, ]
+}
 query_label <- function(d, p, ...) {
   tab = label_table(d)
   position = grep(p, tab[, 'label'], 1)
