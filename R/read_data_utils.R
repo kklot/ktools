@@ -1,3 +1,19 @@
+#' find filename matching regex in a zipped file
+#' 
+#' find filename matching regex in a zipped file
+#' 
+#' @param x character zip file path
+#' @param pattern character regex pattern
+#' @param basename boolean find in base name only (exclude path but with extensiion)
+#' @param ... extra regex's args
+#' @export
+find_in_zip <- function(x, pattern, basename=FALSE, ...) {
+  xpath <- where <- unzip(x, list=TRUE)$Name
+  if (basename)
+    where <- basename(where)
+  found <- grep(pattern, where, ignore.case=TRUE, value=FALSE, useBytes=TRUE, ...)
+  xpath[found]
+}
 #' Query variable and labels from data read with haven
 #' 
 #' Query variable and labels from data read with haven
