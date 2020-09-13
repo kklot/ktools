@@ -1,3 +1,13 @@
+#' Remove NA/Inf from objects
+#' 
+#' Remove NA/Inf from objects
+#' 
+#' @param x R object
+#' @export
+nan_rm <- function(x) {
+    x[!is.na(x) | is.finite(x)]
+}
+
 #' Number of unique elemements in a vector
 #' 
 #' to type less
@@ -58,7 +68,7 @@ remove_consecutive <- function(x, keep_first=TRUE) {
 #' Is negative
 #' 
 #' Just a replacement of `<`(0)
-#' @param x
+#' @param x x
 #' @export
 is_negative <- function(x) {
     x < 0
