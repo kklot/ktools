@@ -24,11 +24,12 @@ query_label <- function(d, p, ...) {
 #' @param d data
 #' @export
 label_table <- function(d) {
-  lapply(names(d), function(x) {
+  o <- lapply(names(d), function(x) {
       lab <- attributes(d[[x]])$label
       lab <- ifelse(is.null(lab), "", lab)
       data.table::data.table(name=x, label=lab)
-  }) %>% data.table::rbindlist()
+  })
+  data.table::rbindlist(o)
 }
 
 
