@@ -47,6 +47,53 @@ list_zip <- function(zipfile, long=FALSE, verylong=FALSE, password, encoding, pr
       system(paste(cmd, shQuote(zipfile)), intern=TRUE)
     }
 }
+
+#' Unzip file with unar instead of unzip
+#' 
+#' Unzip file with unar instead of unzip
+#' 
+#' @param zipfile similar to \link[utils]{unzip}, put in \link[base]{shQuote} if there is space or special characters in the path, name.
+#' @param files same as above parameter
+#' @param overwrite similar to \link[utils]{unzip}
+#' @param exdir similar to \link[utils]{unzip}
+#' @param ... extra args to \link[utils]{unzip}
+#' @param password unar only, zip password
+#' @param force_directory Always create a containing directory for the contents of the unpacked archive? By default, a directory is created if there is more than one top-level file or folder.
+#' @param no_directory Never create a containing directory for the contents of the unpacked archive (This should be used to have the same file path as list_zip.
+#' @param encoding unar only, defined encoding, autodetect if not given
+#' @param more_flags for unar, see man unar, not dupplicate what already here
+#' @export
+unar <- function(zipfile, files = NULL, overwrite = TRUE, exdir = ".", password, 
+  encoding, force_directory = TRUE, no_directory = !force_directory, verbose=FALSE, more_flags, ...) {
+    if (!.IS_UNAR_EXIST) {
+      unar_warn()
+      unzip(zipfile, files = files, overwrite = overwrite, exdir = exdir, ...)
+    } else {
+      if (exdir != ".")
+        dir.create(exdir, 0)
+      flags <- paste("-o", exdir)
+      if (overwrite)
+        flags <- paste(flags, "-f")
+      if (force_directory)
+        flags <- paste(flags, "-d")
+      if (no_directory)
+        flags <- paste(flags, "-D")
+      if (!missing(password))
+        flags <- paste(flags, "-p", password)
+      if (!missing(encoding))
+        flags <- paste(flags, "-e", encoding)
+      if (!verbose)
+        flags <- paste(flags, "-q")
+      if (!missing(more_flags))
+        flags <- paste(flags, more_flags)
+      if (is.null(files))
+        cmd <- paste("unar", flags, zipfile)
+      else 
+        cmd <- paste("unar", flags, zipfile, files)
+      system(cmd, intern=TRUE)
+    }
+}
+
 #' find filename matching regex in a zipped file
 #' 
 #' find filename matching regex in a zipped file
