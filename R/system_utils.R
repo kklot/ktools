@@ -1,3 +1,45 @@
+#' Find text match regex with grep with some tailored options
+#' 
+#' Overidding is OK
+#' 
+#' @param ... grep's args
+#' @export
+grept <- function(pattern, x, ignore.case=1, useBytes=TRUE, value=TRUE,...) {
+    defaultpar <- as.list(environment())
+    # callpar <- as.list(match.call())[-1]
+    wantpar <- join_list(defaultpar, list(...),,0)
+    do.call('grep', wantpar)
+}
+
+#' Join elements of list a from list b
+#' 
+#' Join elements of list a from list b
+#' 
+#' @param of_a list to replace
+#' @param from_b list with elements to take
+#' @param add_new add new elements if not existed
+#' @param replace TRUE replace elements with the same name
+#' @export
+join_list <- function(of_a, from_b, add_new=TRUE, replace=TRUE) {
+    anames <- names(of_a)
+    bnames <- names(from_b)
+    shared_names <- intersect(anames, bnames)
+    new_names <- bnames[which(!bnames %in% anames)]
+    if (length(shared_names) > 1)
+      message(length(shared_names), " elements with the same name, default to ignore")
+    if (replace)
+      if (add_new)
+        donames <- c(shared_names, new_names)
+      else
+        donames <- shared_names
+    else
+      if (add_new)
+        donames <- new_names
+      else
+        return(of_a)
+    for (e in donames) of_a[[e]] <- from_b[[e]]
+    of_a
+}
 .ktools_OLD_WD <- '~'
 #' replicate some features of bash cd
 #' 
