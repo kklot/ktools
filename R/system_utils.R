@@ -36,7 +36,7 @@ open_file <- function(x) {
 #' @export
 fwrite_bz2 <- function(x, y) {
     data.table::fwrite(x, y)
-    system(paste0('bzip2 -f ', y))
+    system(paste0('bzip2 -f ', shQuote(y)))
 }
 
 #' Write a note to file
