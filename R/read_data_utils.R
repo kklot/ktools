@@ -29,6 +29,39 @@ napply <- function(x, ...) {
 which_empty <- function(x) {
     which(unlist(lapply(x, function(y) length(y)==0)))
 }
+#' Unroll zipped files
+#' 
+#' If a zipped file contains a nested zipped file, this function will extract the parent zip, extract the nested zip follow the original structure, zips them back again with the nested zip now unzipped.
+#' 
+#' There are options to keep the temp file for inspection, otherwise new zipped file will appear in the same directory, overwritten if the same output name was given.
+#' 
+#' If there is more than one level, apply again to the newly created zip.
+#' 
+#' @param x parent zipped file, including path if needed
+#' @param keep_tmp do not remove the temporary extracted folder
+#' @param new_name new name for the zipped file, default to parent's original name
+#' @export
+unroll_zip <- function(x, keep_tmp=FALSE, overwrite=FALSE) {
+  name <- basename(x)
+  dname <- dirname(x)
+  wname <- paste0(dname, '/tmp')
+  unzip(x, exdir=wname)
+  setwd(wname)
+  z <- list.files(, '.*\\.zip$',,1,1,1)
+  sapply(z, function(f) unzip(f, exdir=dirname(f)))
+  sapply(z, file.remove)
+  zip(name, '.')
+  new_name <- name
+  if (!overwrite) {
+    new_name = paste0(tools::file_path_sans_ext(name),'_new.zip')
+    file.rename(name, new_name)
+  }
+  file.copy(new_name, '..', overwrite=overwrite)
+  setwd('..')
+  if (!keep_tmp) unlink('tmp', 1)
+  message(name, " was repacked as ", new_name)
+}
+
 .IS_UNAR_EXIST = invisible(system('unar -v', intern=FALSE) == 0)
 .UNAR_WARNINGS = "
   Using unzip but please install unar, unzip can't handle non-latin
