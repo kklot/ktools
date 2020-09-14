@@ -102,7 +102,12 @@ range2seq <- function(x) eval(parse(text=paste0(range(x), collapse=':')))
 #' @export
 eval_text <- function(x) eval(parse(text=x))
 
-
+#' Add nested list name to nested data column
+#' 
+#' Add nested list name to nested data column
+#' 
+#' @param a_list list contains nested data frame
+#' @export
 list_name_to_column <- function(a_list, col_name="ele_name") {
    name <- names(a_list)
    lapply(seq_along(a_list), function(x) {

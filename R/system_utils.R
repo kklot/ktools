@@ -1,3 +1,16 @@
+.ktools_OLD_WD <- '~'
+#' replicate some features of bash cd
+#' 
+#' replicate some features of bash cd such as go backs to previous working directory with cd('-')
+#' 
+#' @param x x
+#' @export
+cd <- function(to='~') {
+    .ktools_OLD_WD <- getwd()
+    if (to=="-")
+      to <- .ktools_OLD_WD
+    setwd(to)
+}
 #' Kill R session
 #' 
 #' Kill R session
