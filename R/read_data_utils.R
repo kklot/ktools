@@ -168,10 +168,10 @@ unar <- function(zipfile, files = NULL, overwrite = TRUE, exdir = ".", password,
 #' @param ... extra regex's args
 #' @export
 find_in_zip <- function(x, pattern, basename=FALSE, ...) {
-  xpath <- where <- unzip(x, list=TRUE)$Name
+  xpath <- where <- list_zip(x)
   if (basename)
     where <- basename(where)
-  found <- grep(pattern, where, ignore.case=TRUE, value=FALSE, useBytes=TRUE, ...)
+  found <- grep(pattern, where, ignore.case=TRUE, value=FALSE, ...)
   xpath[found]
 }
 #' Query variable and labels from data read with haven
