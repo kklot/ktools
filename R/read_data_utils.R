@@ -1,3 +1,52 @@
+.IS_UNAR_EXIST = invisible(system('unar -v', intern=FALSE) == 0)
+.UNAR_WARNINGS = "
+  Using unzip but please install unar, unzip can't handle non-latin
+  names, path, contents properly (try unziping Ivory Coast's MICS files).
+  On Mac with Home brew (https://brew.sh/):
+    brew install unar
+    or go to https://theunarchiver.com/command-line
+  On Ubuntu:
+    sudo apt-get install unar"
+.UNAR_WARNINGS_DID = FALSE
+unar_warn <- function() {
+  if (!.UNAR_WARNINGS_DID) warning(.UNAR_WARNINGS)
+  .UNAR_WARNINGS_DID = TRUE
+}
+#' List zip file contents with unzip or unar (default)
+#' 
+#' Just to easy to remember the function name and alternate between unar and unzip
+#' 
+#' @param zipfile zip file
+#' @param long Print more information about each file in the archive.
+#' @param verylong Print all available information about each file in the archive.
+#' @param password The password to use for decrypting protected archives.
+#' @param encoding The encoding to use for filenames in the archive, when it is not known. If not specified, the program attempts to auto-detect the encoding used.
+#' @param print_encoding Print the auto-detected encoding and the confidence factor after the file list
+#' @param indexes Instead of specifying the files to list as filenames or wildcard patterns, specify them as indexes.
+#' @export
+list_zip <- function(zipfile, long=FALSE, verylong=FALSE, password, encoding, print_encoding=FALSE, indexes=FALSE, ...) {
+    if (!.IS_UNAR_EXIST) {
+      unar_warn()
+      unzip(zipfile, list=TRUE,...)
+    } else {
+      cmd = paste("lsar")
+      if (verylong) {
+        long <- FALSE
+        cmd <- paste(cmd, '-L')
+      }
+      if (long)
+        cmd <- paste(cmd, '-l')
+      if (!missing(password))
+        cmd <- paste(cmd, '-p', password)
+      if (!missing(encoding))
+        cmd <- paste(cmd, '-p', encoding)
+      if (print_encoding)
+        cmd <- paste(cmd, '-pe')
+      if (indexes)
+        cmd <- paste(cmd, '-i')
+      system(paste(cmd, shQuote(zipfile)), intern=TRUE)
+    }
+}
 #' find filename matching regex in a zipped file
 #' 
 #' find filename matching regex in a zipped file
