@@ -1,3 +1,5 @@
+.extra_ISOA3 <- c(Kosovo = 'XKX')
+
 #' Remove NA/Inf from objects
 #' 
 #' Remove NA/Inf from objects
