@@ -1,3 +1,34 @@
+#' Pick element in vector base on regex
+#' 
+#' Pick element in vector base on regex
+#' 
+#' @param x vector
+#' @param pat regex pattern
+#' @param ... extra args to \link[base]{grep}
+#' @export
+pick <- function(x, pat, ...) {
+    x[grep(pat, x,...)]
+}
+#' n(amed)apply: lapply but automatic add names to output
+#' 
+#' lapply but automatic add names to output
+#' 
+#' @param x lappy args
+#' @param ... lappy args
+#' @export
+napply <- function(x, ...) {
+    names(x) <- x
+    lapply(x, ...)
+}
+#' Find empty element in a nested list
+#' 
+#' Find empty element in a nested list
+#' 
+#' @param x a nested list
+#' @export
+which_empty <- function(x) {
+    which(unlist(lapply(x, function(y) length(y)==0)))
+}
 .IS_UNAR_EXIST = invisible(system('unar -v', intern=FALSE) == 0)
 .UNAR_WARNINGS = "
   Using unzip but please install unar, unzip can't handle non-latin
