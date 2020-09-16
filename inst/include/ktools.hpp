@@ -21,13 +21,13 @@ Type constraint2D(Type * v, int n_rows, int n_cols,
 
   Type prior = 0;
   Map<mat_Type> M(v, n_rows, n_cols);
-  if (over_cols) {
-    vector<Type> cols = M.colwise().sum();
+  if (over_cols) { // means constraint over space ids within a time id
+    vector<Type> cols = M.rowwise().sum(); // each row is a time id
     // add here to keep consistent TMB -= in the main file
     prior += dnorm(cols, Type(0.0), Type(0.001) * n_cols, true).sum();
   }
-  if (over_rows) {
-    vector<Type> rows = M.rowwise().sum();
+  if (over_rows) { // means constraint over time ids within a space id
+    vector<Type> rows = M.colwise().sum(); // each col is a space id
     prior += dnorm(rows, Type(0.0), Type(0.001) * n_rows, true).sum();
   }
   return prior;
