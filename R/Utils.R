@@ -1,5 +1,35 @@
 .extra_ISOA3 <- c(Kosovo = 'XKX')
 
+#' Double logistic function
+#' 
+#' Double logistic function  have two periods each with a logistic shape, either one of them will be decreasing and the other increases.
+#' 
+#' @param x time horizon
+#' @param bound1 the boundary of function (this will equals the function value at time zero)
+#' @param bound2 the second boundary, if bound1 > bound2 the function increase first then decrease, and vice versa.
+#' @param rate1 rate of change of first period, control the sharpness of changes
+#' @param rate2 rate of change of second period, control the sharpness of changes
+#' @param midpoint1 midpoint where the chance occurs in the first period
+#' @param midpoint2 midpoint where the chance occurs in the second period
+#' @return vector of length x
+#' @seealso \code{\link{logistic}}
+#' @references 
+#' @note 
+#' @author
+#' @examples
+#' plotl(double_logistic(lower=0.1, upper=0.8))
+#' plotl(double_logistic(lower=0.8, upper=0.1))
+#' 
+#' @export
+double_logistic <- function(x = seq(0, 10, 0.01), lower = 0, upper= 1, rate1 = 2, rate2 = 5, midpoint1 = 3, midpoint2=7) {
+  if (midpoint1 > max(x) | midpoint2 > max(x) | midpoint1 < min(x) | midpoint2 < min(x) | midpoint1 > midpoint2)
+    stop('midpoints not in range!')
+  t1 = 1 / (1 + exp(-rate1*(x - midpoint1)))
+  t2 = 1 / (1 + exp( rate2*(x - midpoint2)))
+  lower + (upper-lower) * ((t1 + t2) - 1)
+}
+
+
 #' Logistic shape generator
 #' 
 #' Logistic shape generator
