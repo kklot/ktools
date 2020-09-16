@@ -17,16 +17,16 @@
 #' @note 
 #' @author
 #' @examples
-#' plotl(double_logistic(lower=0.1, upper=0.8))
-#' plotl(double_logistic(lower=0.8, upper=0.1))
+#' plotl(double_logistic(bound1=0.1, bound2=0.8))
+#' plotl(double_logistic(bound1=0.8, bound2=0.1))
 #' 
 #' @export
-double_logistic <- function(x = seq(0, 10, 0.01), lower = 0, upper= 1, rate1 = 2, rate2 = 5, midpoint1 = 3, midpoint2=7) {
+double_logistic <- function(x = seq(0, 10, 0.01), bound1 = 0, bound2= 1, rate1 = 2, rate2 = 5, midpoint1 = 3, midpoint2=7) {
   if (midpoint1 > max(x) | midpoint2 > max(x) | midpoint1 < min(x) | midpoint2 < min(x) | midpoint1 > midpoint2)
     stop('midpoints not in range!')
   t1 = 1 / (1 + exp(-rate1*(x - midpoint1)))
   t2 = 1 / (1 + exp( rate2*(x - midpoint2)))
-  lower + (upper-lower) * ((t1 + t2) - 1)
+  bound1 + (bound2-bound1) * ((t1 + t2) - 1)
 }
 
 

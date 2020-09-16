@@ -6,8 +6,8 @@
 \usage{
 double_logistic(
   x = seq(0, 10, 0.01),
-  lower = 0,
-  upper = 1,
+  bound1 = 0,
+  bound2 = 1,
   rate1 = 2,
   rate2 = 5,
   midpoint1 = 3,
@@ -17,6 +17,10 @@ double_logistic(
 \arguments{
 \item{x}{time horizon}
 
+\item{bound1}{the boundary of function (this will equals the function value at time zero)}
+
+\item{bound2}{the second boundary, if bound1 > bound2 the function increase first then decrease, and vice versa.}
+
 \item{rate1}{rate of change of first period, control the sharpness of changes}
 
 \item{rate2}{rate of change of second period, control the sharpness of changes}
@@ -24,10 +28,6 @@ double_logistic(
 \item{midpoint1}{midpoint where the chance occurs in the first period}
 
 \item{midpoint2}{midpoint where the chance occurs in the second period}
-
-\item{bound1}{the boundary of function (this will equals the function value at time zero)}
-
-\item{bound2}{the second boundary, if bound1 > bound2 the function increase first then decrease, and vice versa.}
 }
 \value{
 vector of length x
@@ -39,8 +39,8 @@ Double logistic function  have two periods each with a logistic shape, either on
 
 }
 \examples{
-plotl(double_logistic(lower=0.1, upper=0.8))
-plotl(double_logistic(lower=0.8, upper=0.1))
+plotl(double_logistic(bound1=0.1, bound2=0.8))
+plotl(double_logistic(bound1=0.8, bound2=0.1))
 
 }
 \references{
