@@ -6,8 +6,32 @@
 #pragma once
 
 namespace ktools {
+
+using namespace Eigen;
   
 #define _eps 1e-8 // An alternative limit argument for the first-order IGRMF
+
+// Constraint space-time interaction if use a vector input
+template<class Type>
+Type constraint2D(Type * v, int n_rows, int n_cols, 
+  bool over_rows=true, bool over_cols=true) {
+  // nrows is typical time dimension and ncol is space dimention
+  // rows is over space/ cols is over time
+  typedef Matrix<Type, Dynamic, Dynamic> mat_Type;
+
+  Type prior = 0;
+  Map<mat_Type> M(v, n_rows, n_cols);
+  if (over_cols) {
+    vector<Type> cols = M.colwise().sum();
+    // add here to keep consistent TMB -= in the main file
+    prior += dnorm(cols, Type(0.0), Type(0.001) * n_cols, true).sum();
+  }
+  if (over_rows) {
+    vector<Type> rows = M.rowwise().sum();
+    prior += dnorm(rows, Type(0.0), Type(0.001) * n_rows, true).sum();
+  }
+  return prior;
+}
 
 // lag difference
 template <class Type>
