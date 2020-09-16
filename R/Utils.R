@@ -1,5 +1,33 @@
 .extra_ISOA3 <- c(Kosovo = 'XKX')
 
+#' Logistic shape generator
+#' 
+#' Logistic shape generator
+#' 
+#' @param time time horizon
+#' @param initial value at time zero
+#' @param midpoint the time the function changes
+#' @param percent_reduction in [0, 1], percentage reduction compare to the initial value after midpoint of the time horizon, so the end value equals initial x percent_reduction
+#' @param shape control how sharp the transition from initial value to the end value
+#' @export
+logistic <- function(time=seq(0, 1, 0.01), initial=1, percent_reduction=0.5, midpoint=0.5, shape=1) {
+  initial * (1 - percent_reduction) + initial * percent_reduction / (1 + (time/midpoint)^shape)
+}
+
+
+#' Generate precision matrix for spatial model from matrix of network
+#' 
+#' Generate precision matrix for spatial model from matrix of network
+#' 
+#' @param x matrix of connectivity with 1s denote connected nodes and zeros otherwise.
+#' @export
+network_to_precision <- function(x) {
+    x <- -x
+    diag(x) <- 0
+    diag(x) <- -rowSums(x)
+    x
+}
+
 #' Remove NA/Inf from objects
 #' 
 #' Remove NA/Inf from objects
