@@ -135,7 +135,10 @@ NullSpace <- function (A) {
 }
 
 #' TMB fix parameters
-#' 
+#' @param par initial set of parameter
+#' @param fix_names names of parameters to be fixed (not fitting)
+#' @return TMB's format for map argument
+#' @seealso \code{\link[ktools]{get_report}}.
 #' @export
 tmb_fixit <- function(par, fix_names) {
   for (i in names(par)) {

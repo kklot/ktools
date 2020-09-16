@@ -6,6 +6,17 @@
 \usage{
 tmb_fixit(par, fix_names)
 }
+\arguments{
+\item{par}{initial set of parameter}
+
+\item{fix_names}{names of parameters to be fixed (not fitting)}
+}
+\value{
+TMB's format for map argument
+}
 \description{
 TMB fix parameters
+}
+\seealso{
+\code{\link[ktools]{get_report}}.
 }
