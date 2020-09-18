@@ -2,7 +2,7 @@
 % Please edit documentation in R/Utils.R
 \name{n_unique}
 \alias{n_unique}
-\title{Number of unique elemements in a vector}
+\title{Number of unique elements in a vector}
 \usage{
 n_unique(x)
 }

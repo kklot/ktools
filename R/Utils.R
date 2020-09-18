@@ -51,13 +51,13 @@ logistic <- function(time=seq(0, 1, 0.01), initial=1, percent_reduction=0.5, mid
 }
 
 
-#' Generate precision matrix for spatial model from matrix of network
+#' Generate precision matrix for spatial model from matrix of adjacency
 #' 
-#' Generate precision matrix for spatial model from matrix of network
+#' Generate precision matrix for spatial model from matrix of adjacency
 #' 
 #' @param x matrix of connectivity with 1s denote connected nodes and zeros otherwise.
 #' @export
-network_to_precision <- function(x) {
+adj_to_precision <- function(x) {
     x <- -x
     diag(x) <- 0
     diag(x) <- -rowSums(x)
@@ -74,7 +74,7 @@ nan_rm <- function(x) {
     x[!is.na(x) | is.finite(x)]
 }
 
-#' Number of unique elemements in a vector
+#' Number of unique elements in a vector
 #' 
 #' to type less
 #' @param x vector
