@@ -2,10 +2,10 @@
 % Please edit documentation in R/Utils.R
 \name{iso2name}
 \alias{iso2name}
-\title{shorthand ISO to country name from countrycode package}
+\title{shorthand ISO to country name from countrycode package with some custom match}
 \usage{
-iso2name(x)
+iso2name(x, ...)
 }
 \description{
-shorthand ISO to country name from countrycode package
+shorthand ISO to country name from countrycode package with some custom match
 }
