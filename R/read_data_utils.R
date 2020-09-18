@@ -27,8 +27,34 @@ napply <- function(x, ...) {
 #' @param x a nested list
 #' @export
 which_empty <- function(x) {
+    stopifnot(is.list(x))
     which(unlist(lapply(x, function(y) length(y)==0)))
 }
+
+#' Find element in a vector and extract name not indice
+#' 
+#' Find element in a vector and extract name not indice
+#' 
+#' @param x a vector (scalar is also evaluated to TRUE)
+#' @param y a vector
+#' @export
+which_in <- function(x, y) {
+    stopifnot(is.vector(x) | is.vector(y))
+    x[x %in% y]
+}
+
+#' Find element not in a vector and extract name not indice
+#' 
+#' Find element not in a vector and extract name not indice
+#' 
+#' @param x a vector (scalar is also evaluated to TRUE)
+#' @param y a vector
+#' @export
+which_not <- function(x, y) {
+    stopifnot(is.vector(x) | is.vector(y))
+    x[!(x %in% y)]
+}
+
 #' Unroll zipped files
 #' 
 #' If a zipped file contains a nested zipped file, this function will extract the parent zip, extract the nested zip follow the original structure, zips them back again with the nested zip now unzipped.
