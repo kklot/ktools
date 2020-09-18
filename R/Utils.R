@@ -1,4 +1,7 @@
-.extra_ISOA3 <- c(Kosovo = 'XKX')
+.extra_ISOA3 <- c(
+  'Spratly Islands' = 'VNM',
+  Kosovo = 'XKX'
+)
 
 #' Double logistic function
 #' 
