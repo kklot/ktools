@@ -137,13 +137,23 @@ is_negative <- function(x) {
     x < 0
 }
 
-#' shorthand ISO to country name from countrycode package
+#' shorthand ISO to country name from countrycode package with some custom match
 #' 
 #' @export
-iso2name <- function(x) {
+iso2name <- function(x,...) {
   code <- ifelse(nchar(x)==2, 'iso2c', 'iso3c')
-  countrycode::countrycode(x, code, 'country.name')
+  countrycode::countrycode(x, code, 'country.name', custom_match=.extra_ISOA3,...)
 }
+iso2name <- Vectorize(iso2name)
+
+#' shorthand country name to ISO from countrycode package with some custom match
+#' 
+#' @export
+name2iso <- function(x, version=3,...) {
+  code <- paste0('iso', version, 'c')
+  countrycode::countrycode(x, 'country.name', code, custom_match=.extra_ISOA3,...)
+}
+name2iso <- Vectorize(name2iso)
 
 
 #' rownames to id
