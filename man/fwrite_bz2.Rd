@@ -4,7 +4,7 @@
 \alias{fwrite_bz2}
 \title{Write bzipped data file}
 \usage{
-fwrite_bz2(x, y)
+fwrite_bz2(x, y, quote = TRUE)
 }
 \arguments{
 \item{x}{data file to write as csv}

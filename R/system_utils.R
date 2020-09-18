@@ -76,9 +76,11 @@ open_file <- function(x) {
 #' using bzip and data.table
 #' @param x data file to write as csv
 #' @export
-fwrite_bz2 <- function(x, y) {
+fwrite_bz2 <- function(x, y, quote = TRUE) {
+    y <- path.expand(y)
     data.table::fwrite(x, y)
-    system(paste0('bzip2 -f ', shQuote(y)))
+    if (quote) y <- shQuote(y)
+    system2('bzip2', c('-f', y))
 }
 
 #' Write a note to file
