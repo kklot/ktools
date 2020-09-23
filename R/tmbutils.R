@@ -149,3 +149,17 @@ tmb_fixit <- function(par, fix_names) {
   }
   par %>% lapply(as.factor)
 }
+
+#' Get values of summary(\code{\link[TMB]{sd_report}}) by name
+#' 
+#' Get values of summary(\code{\link[TMB]{sd_report}}) by name
+#' 
+#' @param x object
+#' @param name regex of parameter's name
+#' @param se get the standard error as well
+#' @export
+get_report <- function(x, name='.*', se = TRUE) {
+  pick_rows <- row2id(name, x)
+  cols <- ifelse(se, c(1, 2), 1)
+  x[row2id(name, x), cols]
+}
