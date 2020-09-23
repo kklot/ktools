@@ -28,6 +28,39 @@ gen_widths <- function(x) {
     yy = c(xl[-1] - xu[-length(xu)], 0)
     wo+(yy*2)
 }
+
+#' Today date
+#' 
+#' get today date in optinally date format
+#' 
+#' @param as_date R's date format
+#' @export
+today <- function(as_date=TRUE) {
+  td = format(Sys.time(), '%Y-%m-%d')
+  if(as_date)
+    return(as.Date(td))
+  td
+}
+
+#' Do calculation, automatically converting type
+#' 
+#' If input is character then converting to factor then to numeric
+#' 
+#' @param FUN function, default to add
+#' @param x scalar, vector
+#' @param y scalar, vector
+#' @param ... extra args to FUN
+#' @export
+compute <- function(x, y, FUN = '+', ...) {
+    FUN <- match.fun(FUN)
+    x <- as_numeric(x)
+    y <- as_numeric(y)
+    FUN(x, y, ...)
+}
+#' @seealso compute
+#' @export
+add_to <- compute
+
 #' Double logistic function
 #' 
 #' Double logistic function  have two periods each with a logistic shape, either one of them will be decreasing and the other increases.
@@ -199,6 +232,7 @@ range2seq <- function(x) eval(parse(text=paste0(range(x), collapse=':')))
 #' give me a vector, I produces a continous sequence from the range
 #' @export
 eval_text <- function(x) eval(parse(text=x))
+eval_text <- Vectorize(eval_text)
 
 #' Add nested list name to nested data column
 #' 
