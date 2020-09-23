@@ -6,6 +6,28 @@
 # https://en.wikipedia.org/wiki/Sub-Saharan_Africa
 .UN_SSA = c("Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", "Cameroon", "Cape Verde", "Central African Republic", "Chad", "Comoros", "Democratic Republic of the Congo", "Djibouti", "Equatorial Guinea", "Eritrea", "Ethiopia", "Gabon", "Gambia", "Ghana", "Guinea", "Guinea Bissau", "Ivory Coast", "Kenya", "Lesotho", "Liberia", "Madagascar", "Malawi", "Mali", "Mauritania", "Mauritius", "Mozambique", "Namibia", "Niger", "Nigeria", "Republic of the Congo", "Rwanda", "São Tomé and Príncipe", "Senegal", "Seychelles", "Sierra Leone", "Somalia", "South Africa", "South Sudan", "Sudan", "Swaziland", "Tanzania", "Togo", "Uganda", "Zambia", "Zimbabwe")
 
+#' Generate widths for geom_tile with unevenly space x-axis
+#' 
+#' Calculate the widths needed to fill the white space when we have unevenly spaced x-axis value
+#' 
+#' @param x x-axis vector to plot
+#' @return weights use in \code{\link[ggplot2]{geom_tile}}
+#' @examples
+#' df <- data.frame(
+#'   x = rep(c(2, 5, 7, 9, 12), 2),
+#'   y = rep(c(1, 2), each = 5),
+#'   z = factor(rep(1:5, each = 2)),
+#' )
+#' w = gen_w(df$x)
+#' ggplot(df, aes(x, y)) +geom_tile(aes(fill = z, width=w), colour = "white")
+#' @export
+gen_widths <- function(x) {
+    xx = sort(unique(x))
+    wo = min(diff(xx))
+    xl = xx - wo/2; xu = xx + wo/2
+    yy = c(xl[-1] - xu[-length(xu)], 0)
+    wo+(yy*2)
+}
 #' Double logistic function
 #' 
 #' Double logistic function  have two periods each with a logistic shape, either one of them will be decreasing and the other increases.
