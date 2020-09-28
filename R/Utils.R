@@ -6,6 +6,14 @@
 # https://en.wikipedia.org/wiki/Sub-Saharan_Africa
 .UN_SSA = c("Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", "Cameroon", "Cape Verde", "Central African Republic", "Chad", "Comoros", "Democratic Republic of the Congo", "Djibouti", "Equatorial Guinea", "Eritrea", "Ethiopia", "Gabon", "Gambia", "Ghana", "Guinea", "Guinea Bissau", "Ivory Coast", "Kenya", "Lesotho", "Liberia", "Madagascar", "Malawi", "Mali", "Mauritania", "Mauritius", "Mozambique", "Namibia", "Niger", "Nigeria", "Republic of the Congo", "Rwanda", "São Tomé and Príncipe", "Senegal", "Seychelles", "Sierra Leone", "Somalia", "South Africa", "South Sudan", "Sudan", "Swaziland", "Tanzania", "Togo", "Uganda", "Zambia", "Zimbabwe")
 
+#' Square
+#' 
+#' why not when we have square root
+#' 
+#' @param x R object
+#' @export x x
+square <- function(x) x^2
+
 #' Generate widths for geom_tile with unevenly space x-axis
 #' 
 #' Calculate the widths needed to fill the white space when we have unevenly spaced x-axis value
@@ -90,6 +98,18 @@ double_logistic <- function(x = seq(0, 10, 0.01), bound1 = 0, bound2= 1, rate1 =
   bound1 + (bound2-bound1) * ((t1 + t2) - 1)
 }
 
+#' Double logistic with three bounds
+#' @seealso \code{\link{double_logistic}}
+#' @examples
+#' plotl(double_logistic2())
+#' @export
+double_logistic2 <- function(x = seq(0, 10, 0.01), bound1 = 1, bound2= 0.1, bound3 = 0.5,  rate1 = 2, rate2 = 5, midpoint1 = 3, midpoint2=7) {
+  if (midpoint1 > max(x) | midpoint2 > max(x) | midpoint1 < min(x) | midpoint2 < min(x) | midpoint1 > midpoint2)
+    stop('midpoints not in range!')
+  t1 = 1 / (1 + exp(rate1*(x - midpoint1)))
+  t2 = 1 / (1 + exp(-rate2*(x - midpoint2)))
+  bound1 + (bound1-bound2) * (t1 - 1) + (bound3 - bound2) * t2
+}
 
 #' Logistic shape generator
 #' 
