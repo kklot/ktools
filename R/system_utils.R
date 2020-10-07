@@ -40,6 +40,17 @@ join_list <- function(of_a, from_b, add_new=TRUE, replace=TRUE) {
     for (e in donames) of_a[[e]] <- from_b[[e]]
     of_a
 }
+
+#' Remove text from strings with gsub
+#' 
+#' Remove text from strings with gsub
+#' 
+#' @param x strings
+#' @param p pattern
+#' @export
+remove_text <- function(x, p,...) {
+    x <- gsub(p, '', x, ...)
+}
 .ktools_OLD_WD <- '~'
 #' replicate some features of bash cd
 #' 

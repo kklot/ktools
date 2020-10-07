@@ -16,11 +16,13 @@ weights use in \code{\link[ggplot2]{geom_tile}}
 Calculate the widths needed to fill the white space when we have unevenly spaced x-axis value
 }
 \examples{
+\dontrun{
 df <- data.frame(
   x = rep(c(2, 5, 7, 9, 12), 2),
   y = rep(c(1, 2), each = 5),
-  z = factor(rep(1:5, each = 2)),
+  z = factor(rep(1:5, each = 2))
 )
-w = gen_w(df$x)
+w = gen_widths(df$x)
 ggplot(df, aes(x, y)) +geom_tile(aes(fill = z, width=w), colour = "white")
+}
 }

@@ -6,6 +6,21 @@
 # https://en.wikipedia.org/wiki/Sub-Saharan_Africa
 .UN_SSA = c("Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", "Cameroon", "Cape Verde", "Central African Republic", "Chad", "Comoros", "Democratic Republic of the Congo", "Djibouti", "Equatorial Guinea", "Eritrea", "Ethiopia", "Gabon", "Gambia", "Ghana", "Guinea", "Guinea Bissau", "Ivory Coast", "Kenya", "Lesotho", "Liberia", "Madagascar", "Malawi", "Mali", "Mauritania", "Mauritius", "Mozambique", "Namibia", "Niger", "Nigeria", "Republic of the Congo", "Rwanda", "São Tomé and Príncipe", "Senegal", "Seychelles", "Sierra Leone", "Somalia", "South Africa", "South Sudan", "Sudan", "Swaziland", "Tanzania", "Togo", "Uganda", "Zambia", "Zimbabwe")
 
+#' TMB compile and load
+#' 
+#' TMB compile and load
+#' 
+#' @param x model character
+#' @return dll
+tmb_compile_and_load <- function(code) {
+  # from Jeff
+  file <- tempfile(fileext = ".cpp")
+  name <- tools::file_path_sans_ext(file)
+  writeLines(code, file)
+  TMB::compile(file)
+  dyn.load(TMB::dynlib(name))
+  basename(name)
+}
 #' Square
 #' 
 #' why not when we have square root
@@ -21,13 +36,15 @@ square <- function(x) x^2
 #' @param x x-axis vector to plot
 #' @return weights use in \code{\link[ggplot2]{geom_tile}}
 #' @examples
+#' \dontrun{
 #' df <- data.frame(
 #'   x = rep(c(2, 5, 7, 9, 12), 2),
 #'   y = rep(c(1, 2), each = 5),
-#'   z = factor(rep(1:5, each = 2)),
+#'   z = factor(rep(1:5, each = 2))
 #' )
-#' w = gen_w(df$x)
+#' w = gen_widths(df$x)
 #' ggplot(df, aes(x, y)) +geom_tile(aes(fill = z, width=w), colour = "white")
+#' }
 #' @export
 gen_widths <- function(x) {
     xx = sort(unique(x))
