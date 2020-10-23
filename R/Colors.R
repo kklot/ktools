@@ -1,3 +1,11 @@
+gmap <- c(
+  Iron = "#D5D8DB",
+  White_Lilac = "#E8E8E8",
+  Madang = "#C2ECB2",
+  Columbia_Blue = "#AADAFF",
+  Drover = "#FDF2AF",
+  Orange_Yellow = "#F6CF65"
+)
 kg <- c(
 "#5643BD",
 "#9030DA",
