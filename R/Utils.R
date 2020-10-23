@@ -6,6 +6,24 @@
 # https://en.wikipedia.org/wiki/Sub-Saharan_Africa
 .UN_SSA = c("Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", "Cameroon", "Cape Verde", "Central African Republic", "Chad", "Comoros", "Democratic Republic of the Congo", "Djibouti", "Equatorial Guinea", "Eritrea", "Ethiopia", "Gabon", "Gambia", "Ghana", "Guinea", "Guinea Bissau", "Ivory Coast", "Kenya", "Lesotho", "Liberia", "Madagascar", "Malawi", "Mali", "Mauritania", "Mauritius", "Mozambique", "Namibia", "Niger", "Nigeria", "Republic of the Congo", "Rwanda", "São Tomé and Príncipe", "Senegal", "Seychelles", "Sierra Leone", "Somalia", "South Africa", "South Sudan", "Sudan", "Swaziland", "Tanzania", "Togo", "Uganda", "Zambia", "Zimbabwe")
 
+#' Print ggplot off-screen
+#' 
+#' Print ggplot off-screen
+#' 
+#' @param gg ggplot object
+#' @param name file name including path without extenstion
+#' @param type pdf, png,...
+#' @return nothing
+#' @value a figure save at path
+#' @export
+quartz_off <- function(gg, name='Rplot', width=7, height=5, type='pdf', open=FALSE,...) {
+    filename <- paste0(name,'.',type)
+    quartz(width=width, height=height,type=type, file=filename,...)
+    print(gg)
+    dev.off()
+    if (open) open_file(filename)
+}
+
 #' TMB compile and load
 #' 
 #' TMB compile and load
