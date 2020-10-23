@@ -58,6 +58,13 @@ F_gllogisI <- function(t, lambda, p, gamma) {
   (1 + (lambda*t)^-p)^-gamma
 }
 
+#' Generalized log-logistic type I probability density
+#' 
+#' @export
+median_gllogisI <- function(lambda, p, gamma) {
+  1/lambda * (-1 + 0.5^(-1/gamma))^(-1/p)
+}
+
 # hazard function for log-logistic distribution (parameterize as in INLA)
 hz_llogis <- function (x, alpha = 8, lambda = 1/18) {
     num <- alpha * lambda
