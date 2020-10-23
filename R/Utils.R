@@ -36,6 +36,13 @@ quantile95 <- function(x,...) {
   names(q) <- c('lo', 'med', 'up')
   q
 }
+
+#' Not in = out
+#' 
+#' Not in = out
+#' @export
+`%out%` <- function (x, table) !(x %in% table)
+
 #' TMB compile and load
 #' 
 #' TMB compile and load
