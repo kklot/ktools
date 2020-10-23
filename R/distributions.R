@@ -1,3 +1,13 @@
+#' Compute the variance of skew loglogistic distribution
+#' 
+#' @param scale scale
+#' @param shape shape
+#' @param skew skewness parameters
+#' @export
+var_skew_llogis <- function(shape, skew) {
+  shape^2 * (pi^2/6 + trigamma(skew))
+}
+
 #' Compute the mean of skew loglogistic distribution
 #' 
 #' @param scale scale
@@ -6,13 +16,6 @@
 #' @export
 mu_skew_llogis <- function(scale, shape, skew) {
   scale + shape * (digamma(1) - digamma(skew))
-}
-
-#' dagum density
-#' 
-#' @export
-f_dagum <- function(x, a, b, p) {
-  num = a*p*x
 }
 
 #' Generalized logistic type I density
