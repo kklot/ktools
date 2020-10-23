@@ -24,6 +24,18 @@ quartz_off <- function(gg, name='Rplot', width=7, height=5, type='pdf', open=FAL
     if (open) open_file(filename)
 }
 
+#' quantile 95% with name
+#' 
+#' quantile 95% with name
+#' 
+#' @param x x
+#' @return .025. .5, and .975 quantile with name lo, up, and med
+#' @export
+quantile95 <- function(x,...) {
+  q = quantile(x, probs=c(.025, .5, .975),...) 
+  names(q) <- c('lo', 'med', 'up')
+  q
+}
 #' TMB compile and load
 #' 
 #' TMB compile and load
