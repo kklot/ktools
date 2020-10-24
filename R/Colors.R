@@ -1,3 +1,16 @@
+# https://learnui.design/tools/data-color-picker.html#palette
+# 
+c.dcp <- c(
+  "#003f5c",
+  "#2f4b7c",
+  "#665191",
+  "#a05195",
+  "#d45087",
+  "#f95d6a",
+  "#ff7c43",
+  "#ffa600"
+)
+
 gmap <- c(
   Iron = "#D5D8DB",
   White_Lilac = "#E8E8E8",
