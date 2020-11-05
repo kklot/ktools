@@ -1,3 +1,16 @@
+#' @importFrom magrittr %>%
+#' @export
+magrittr::`%>%`
+
+#' Convenient create vector of character without the need to quote
+#' 
+#' Convenient create vector of character without the need to quote, e.g. instead
+#' of typing \code{c("a", "b", "c")} just write \code{char(a, b, c)}
+#' 
+#' 
+#' @param ... list of character separate by comma
+#' @value a character vector
+char <- function(...) as.character(substitute(...()))
 .extra_ISOA3 <- c(
   'Spratly Islands' = 'VNM',
   Kosovo = 'XKX'
@@ -14,7 +27,6 @@
 #' @param name file name including path without extenstion
 #' @param type pdf, png,...
 #' @return nothing
-#' @value a figure save at path
 #' @export
 quartz_off <- function(gg, name='Rplot', width=7, height=5, type='pdf', open=FALSE,...) {
     filename <- paste0(name,'.',type)
@@ -49,6 +61,7 @@ quantile95 <- function(x,...) {
 #' 
 #' @param x model character
 #' @return dll
+#' @export
 tmb_compile_and_load <- function(code) {
   # from Jeff
   file <- tempfile(fileext = ".cpp")
@@ -63,7 +76,7 @@ tmb_compile_and_load <- function(code) {
 #' why not when we have square root
 #' 
 #' @param x R object
-#' @export x x
+#' @export
 square <- function(x) x^2
 
 #' Generate widths for geom_tile with unevenly space x-axis
