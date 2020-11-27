@@ -1,3 +1,35 @@
+#'  same as f_gllogisI
+#' 
+#' @param scale scale
+#' @param shape shape
+#' @param skew skewness parameters
+#' @export
+dskewlogis <- function(x, scale, shape, skew) {
+  term = (scale * x)^-shape
+  (1/x) * skew * shape * term / (1 + term)^(skew+1)
+}
+
+#'  same as F_gllogisI
+#' 
+#' @param scale scale
+#' @param shape shape
+#' @param skew skewness parameters
+#' @export
+pskewlogis <- function(q, scale, shape, skew) (1 + (scale*q)^-shape)^-skew
+
+#' Sampling from skew logistic
+#'  
+#' @param scale scale
+#' @param shape shape
+#' @param skew skewness parameters
+#' @export
+r_glogisI <- function(n, scale=0.05, shape=7, skew=1) {
+    u = runif(n)
+    1/scale * ( u^(-skew^-1) - 1) ^(-shape^-1)
+}
+#' @export
+rskewlogis <- r_glogisI
+
 #' Compute the variance of skew loglogistic distribution
 #' 
 #' @param scale scale
@@ -24,12 +56,16 @@ mu_skew_llogis <- function(scale, shape, skew) {
 f_glogisI <- function(x, alpha, beta, gamma) {
   (gamma/beta) * exp((alpha-x)/beta) * (1 + exp((alpha-x)/beta))^(-gamma-1)
 }
+#' @export
+dskewlogisx <- f_glogisI
 #' Generalized logistic type I cumulative
 #' 
 #' @export
 F_glogisI <- function(x, alpha, beta, gamma) {
   1 / (1 + exp((alpha-x)/beta)^gamma)
 }
+#' @export
+pskewlogisx <- F_glogisI
 
 #' Generalized logistic type I survival
 #' 
