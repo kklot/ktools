@@ -51,7 +51,7 @@ join_list <- function(of_a, from_b, add_new=TRUE, replace=TRUE) {
 remove_text <- function(x, p,...) {
     x <- gsub(p, '', x, ...)
 }
-.ktools_OLD_WD <- '~'
+
 #' replicate some features of bash cd
 #' 
 #' replicate some features of bash cd such as go backs to previous working directory with cd('-')
@@ -59,9 +59,15 @@ remove_text <- function(x, p,...) {
 #' @param x x
 #' @export
 cd <- function(to='~') {
-    .ktools_OLD_WD <- getwd()
-    if (to=="-")
-      to <- .ktools_OLD_WD
+    if (to=="-") {
+      to <- getOption("MY_LAST_WD")
+      if (is.null(to)) {
+        options("MY_LAST_WD"=getwd())
+      }
+    }
+    options("MY_LAST_WD"=getwd())
+    message("Moved from\n\t", getOption("MY_LAST_WD"))
+    message("to\n\t", to)
     setwd(to)
 }
 #' Kill R session
