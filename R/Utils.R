@@ -39,6 +39,25 @@ more <- function(x) {
   print(x)
   file.show(file, delete.file = T)
 }
+#' View table as html
+#' 
+#' for, e.g, copy to Word editors keeping most of the format
+#' 
+#' @param code out of knitr::kable(format='html') for 
+#' @export
+table_as_html <- function(code, ...) {
+  # dots <- modifyList(list(...), list(format='html'))
+  # if (!inherits(code, 'knitr_kable')) {
+    # require(knitr)
+    # code <- do.call('kable', c(code, dots))
+    # code <- do.call('kable', c(code, format='html'))
+  # }
+  file <- tempfile(fileext = ".html")
+  name <- tools::file_path_sans_ext(file)
+  writeLines(code, file)
+  open_file(file)
+}
+
 #' @importFrom magrittr %>%
 #' @export
 magrittr::`%>%`
