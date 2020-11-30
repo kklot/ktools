@@ -80,6 +80,18 @@ magrittr::`%<>%`
 #' @export
 char <- function(...) as.character(substitute(...()))
 
+#' table that take pipe input
+#' 
+#' table that take pipe input
+#' 
+#' @param .data pipe or data
+#' @param ... table's args
+#' @export
+bang <- function(.data, ...) {
+  dots <- substitute(...())
+  do.call('table', napply(  dots, eval, envir=.data))
+}
+
 
 #' format cross-IQR by groups (>2) for publishing
 #' 
