@@ -62,6 +62,14 @@ table_as_html <- function(code, ...) {
 #' @export
 magrittr::`%>%`
 
+#' @importFrom magrittr %$%
+#' @export
+magrittr::`%$%`
+
+#' @importFrom magrittr %<>%
+#' @export
+magrittr::`%<>%`
+
 #' Convenient create vector of character without the need to quote
 #' 
 #' Convenient create vector of character without the need to quote, e.g. instead
