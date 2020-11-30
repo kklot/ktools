@@ -1,3 +1,32 @@
+#' CMC from R date
+#' 
+#' @param x r object
+#' @export
+date_to_cmc <- function(x) {
+  12 * (as.numeric(strftime(x, "%Y")) - 1900) + as.numeric(strftime(x, "%m"))
+}
+
+#' STATA long date format to R date
+#' 
+#' @param x r object
+#' @export
+STATA_date_to_date <- function(x) {
+    x + structure(-3653, class = "Date")
+}
+#' Month year to cmc
+#' 
+#' @param x r object
+#' @export
+month_year_to_cmc <- function(month, year) 12*(year-1900) + month
+#' Range label like 2019-20
+#' 
+#' @param x r object
+#' @export
+range_label <- function(x, start=3, end=4) {
+  if (min(x, na.rm=TRUE)==max(x, na.rm=TRUE)) 
+    return(as.character(min(x, na.rm=TRUE)))
+  paste0(min(x, na.rm=TRUE), '-', substr(max(x, na.rm=TRUE), start, end))
+}
 #' @importFrom magrittr %>%
 #' @export
 magrittr::`%>%`
