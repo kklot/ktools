@@ -79,6 +79,99 @@ magrittr::`%<>%`
 #' @param ... list of character separate by comma
 #' @export
 char <- function(...) as.character(substitute(...()))
+
+
+#' format cross-IQR by groups (>2) for publishing
+#' 
+#' format cross-table for publishing, only kruskal wallis/bonferonni atm
+#' @param .data pipe or data
+#' @param ... table's args
+#' @export
+mustats_3plus <- function(.data, ...) {
+  dots <- substitute(...())
+  .o <- capture.output(o <- dunn.test::dunn.test(
+    eval(dots[[1]], .data), eval(dots[[2]], .data), 
+    method='bonferroni'))
+  sample_size <- aggregate(eval(dots[[1]], .data), list(eval(dots[[2]], .data)), length)
+  names <- paste(sample_size[, 1], bracket(sample_size[, 2]))
+  sds  <- aggregate(eval(dots[[1]], .data), list(eval(dots[[2]], .data)), 
+    quantile, prob=c(0.5, 0.25, 0.75), na.rm=TRUE) %>% format(1, 4)  
+  .o <- paste0(sds[[2]], " [", sds[[3]], "-", sds[[4]], "]") %>% 
+    stats::setNames(names)
+  sig <- which(o$P.adjusted < 0.05)
+  sig <- paste(format_pvalue(o$P.adjusted[sig]), bracket(o$comparisons[sig]), collapse='; ')
+  if (length(sig)==0) sig <- ''
+  t(c(.o, sig, 'bonferroni'))
+}
+
+#' format cross-table for publishing
+#' 
+#' format cross-table for publishing, only Fisher/chiquare here
+#' 
+#' @param row row variable
+#' @param col column (outcome) variable
+#' @export
+tabstat <- function(.data, ...) {
+  dots <- substitute(...())
+  .o <- capture.output(o <- 
+    suppressWarnings(
+      gmodels::CrossTable(
+        x=eval(dots[[1]], .data), 
+        y=eval(dots[[2]], .data), 
+        2, 3, 
+        prop.r=TRUE, 
+        prop.c=FALSE, 
+        prop.t=FALSE, 
+        prop.chisq=FALSE, 
+        expected=TRUE, 
+        chisq=TRUE, 
+        fisher=TRUE, 
+        missing.include=FALSE)
+    )
+  )
+  o$t[] <- paste(format(o$t), bracket(format(round(o$prop.r, 2))))
+  isFisher <- length(which(o$chisq$expected < 5))/length(o$chisq$expected) > .2
+  p <- if (isFisher) o$fisher$p.value else o$chisq$p.value
+  o <- cbind(o$t, c(format_pvalue(p), rep('', nrow(o$t)-1) ))
+  colnames(o)[ncol(o)] <- 'p-value'
+  tname <- "Chi-square"
+  if (isFisher) tname <- 'Fisher'
+  o <- cbind(o, c(tname, rep('', nrow(o)-1) ))
+  colnames(o)[ncol(o)] <- 'test'
+  if ('knit' %in% names(dots)) {
+    if (eval(dots[['knit']])) {
+      return(knitr::kable(o))
+    }
+  }
+  o
+}
+
+#' format p-value for publishing
+#' 
+#' format p-value for publishing
+#' 
+#' @param x computed p-value
+#' @export
+format_pvalue <- function(x) {
+  if (x < 0.001) return('< 0.001*')
+  if (x < 0.01) return('< 0.01*')
+  if (x > 0.1) return('> 0.1')
+  format(round(x, 2))
+}
+format_pvalue <- Vectorize(format_pvalue)
+
+#' dev.new with named width and height
+#' 
+#' dev.new with named width and height
+#' 
+#' @param width width
+#' @param height height
+#' @export
+g <- function(width=7, height=5, ...) {
+  dev.off()
+  do.call('dev.new', modifyList(as.list(environment()), list(...)))
+}
+
 .extra_ISOA3 <- c(
   'Spratly Islands' = 'VNM',
   Kosovo = 'XKX'
