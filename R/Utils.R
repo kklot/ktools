@@ -27,6 +27,18 @@ range_label <- function(x, start=3, end=4) {
     return(as.character(min(x, na.rm=TRUE)))
   paste0(min(x, na.rm=TRUE), '-', substr(max(x, na.rm=TRUE), start, end))
 }
+
+#' Pager view similar to more
+#' 
+#' @param x r object
+#' @export
+more <- function(x) {
+  # https://stackoverflow.com/a/3506450
+  file <- tempfile()
+  sink(file); on.exit(sink())
+  print(x)
+  file.show(file, delete.file = T)
+}
 #' @importFrom magrittr %>%
 #' @export
 magrittr::`%>%`
