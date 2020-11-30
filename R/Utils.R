@@ -77,7 +77,7 @@ magrittr::`%<>%`
 #' 
 #' 
 #' @param ... list of character separate by comma
-#' @value a character vector
+#' @export
 char <- function(...) as.character(substitute(...()))
 .extra_ISOA3 <- c(
   'Spratly Islands' = 'VNM',
