@@ -386,7 +386,7 @@ adj_to_precision <- function(x) {
 #' @param x R object
 #' @export
 nan_rm <- function(x) {
-    x[!is.na(x) | is.finite(x)]
+    x[!is.na(x) & is.finite(x)]
 }
 
 #' Number of unique elements in a vector

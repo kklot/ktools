@@ -1,8 +1,3 @@
-p.abline <- function(intercept=0, slope=1, ...) {
-    panel.levelplot(...)
-    panel.abline(intercept, slope)
-}
-
 kinla_plot <- function(x, fe=F, lc=F, re=F, hp=F, pre=F, q=F, cpo=F, pri=F, ...) {
     plot(x, plot.fixed.effects = fe,
            plot.lincomb = lc, 
