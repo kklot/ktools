@@ -1,3 +1,11 @@
+#' quantile function
+#' 
+#' @param scale scale
+#' @param shape shape
+#' @param skew skewness parameters
+#' @export
+qskewlogis <- function (lambda, p, gamma, q) 1/lambda * (-1 + q^(-1/gamma))^(-1/p)
+
 #'  same as f_gllogisI
 #' 
 #' @param scale scale
