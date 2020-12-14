@@ -92,9 +92,12 @@ tmb_ICs <- function(obj, n_post=1000, pointwise='pwdens', looic=FALSE) {
 #' Generate random walk precision structure matrix
 #' 
 #' @export
-genR <- function(n=10, order=2) {
+genR <- function(n=10, order=2, scale=1) {
     D <- diff(diag(n), diff = order)
-    t(D) %*% D # == crossprod
+    Q <- t(D) %*% D # == crossprod
+    if (!scale) return(Q)
+    Q_pert = Q + Matrix::Diagonal(n) * max(diag(Q)) * sqrt(.Machine$double.eps)
+    INLA::inla.scale.model(Q_pert)
 }
 
 #' @export

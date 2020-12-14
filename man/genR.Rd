@@ -4,7 +4,7 @@
 \alias{genR}
 \title{Generate random walk precision structure matrix}
 \usage{
-genR(n = 10, order = 2)
+genR(n = 10, order = 2, scale = 1)
 }
 \description{
 Generate random walk precision structure matrix
