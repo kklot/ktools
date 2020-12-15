@@ -4,10 +4,10 @@
 #' @examples
 #' fn_to_file(lm)
 #' @export
-fn_to_file <- function(x) {
+screen_to_file <- function(x) {
   file <- tempfile(fileext = ".R")
   name <- tools::file_path_sans_ext(file)
-  writeLines(capture.output(body(x)), file)
+  writeLines(capture.output(x), file)
   open_file(file)
 }
 #' CMC from R date
