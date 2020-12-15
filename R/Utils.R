@@ -1,3 +1,15 @@
+#' Open output of a function in a new text file (default application)
+#' 
+#' @param x name of a function
+#' @examples
+#' fn_to_file(lm)
+#' @export
+fn_to_file <- function(x) {
+  file <- tempfile(fileext = ".R")
+  name <- tools::file_path_sans_ext(file)
+  writeLines(capture.output(body(x)), file)
+  open_file(file)
+}
 #' CMC from R date
 #' 
 #' @param x r object
