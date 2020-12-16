@@ -1,3 +1,44 @@
+#' Frank copulas prob
+#' 
+#' @param u1 dimension 1
+#' @param u2 dimension 2
+#' @param alpha copula parameter
+#' @export
+pfrankCopula <- function(u1,  u2, alpha, log=FALSE) {
+    e1 = exp(-alpha * u1)
+    e2 = exp(-alpha * u2)
+    t0 = exp(-alpha) - 1
+    t1 = log((e1 - 1)/t0)
+    t2 = log((e2 - 1)/t0)
+    t3 = e2 * alpha / t0 / ((e2 - 1)/t0)
+    t4 = e1 * alpha / t0 / ((e1 - 1)/t0)
+    t5 = exp(-(-t1 - t2))
+    tt = -1/alpha * log( 1 + t5 * t0 )
+    if (log) return(log(tt))
+    tt
+}
+#' Frank copulas density
+#' 
+#' @param u1 dimension 1
+#' @param u2 dimension 2
+#' @param alpha copula parameter
+#' @export
+dfrankCopula <- function(u1, u2, alpha, log=FALSE) {
+    e1 = exp(-alpha * u1)
+    e2 = exp(-alpha * u2)
+    t0 = exp(-alpha) - 1
+    t1 = log((e1 - 1)/t0)
+    t2 = log((e2 - 1)/t0)
+    t3 = e2 * alpha / t0 / ((e2 - 1)/t0)
+    t4 = e1 * alpha / t0 / ((e1 - 1)/t0)
+    t5 = exp(-(-t1 - t2))
+    tt = -1/alpha * (
+        t5 * t3 * t4 * t0 / (1 + t5 * t0) - 
+        t5 * t4 * t0 * (t5 * t3 * t0) / (1 + t5 * t0)^2
+    )
+    if (log) return(log(tt))
+    tt
+}
 #' quantile function
 #' 
 #' @param scale scale
