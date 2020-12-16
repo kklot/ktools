@@ -1,3 +1,12 @@
+#' create dir, change to, and return the name
+#' 
+#' @param x path
+#' @export
+save_to <- function(x) {
+    dir.create(x, showWarnings=0, recursive=1)
+    cd(x)
+    x
+}
 #' Open output of a function in a new text file (default application)
 #' 
 #' @param x name of a function
@@ -9,6 +18,47 @@ screen_to_file <- function(x) {
   name <- tools::file_path_sans_ext(file)
   writeLines(capture.output(x), file)
   open_file(file)
+}
+#' tape list data.frame
+#' 
+#' @param ... extra args to Map
+#' @param fn function to apply to each list 
+#' @param a_list a list of data frame
+#' @examples
+#' parent <- list(
+#'    list(
+#'        data.frame(lds=1:10, q = 10:1), 
+#'        data.frame(lds=1:10, q = 10:1)
+#'    ),
+#'    list(
+#'        data.frame(lds=1:10, q = 10:1), 
+#'        data.frame(lds=1:10, q = 10:1)
+#'    )
+#')
+#'tape(function(x, y) cbind(x, y), l[[1]], y='extra_col')
+#'tape(function(child, replicate) 
+#'    tape(function(grandchild, model) cbind(grandchild, replicate, model), 
+#'        child, model = seq_along(child)), 
+#'        parent, replicate = seq_along(parent))
+#' @export
+tape <- function(fn, a_list, ...)  do.call('rbind', Map(fn, a_list, ...))
+#' Read and bind
+#' 
+#' @param ... list of paths
+#' @param fn read function
+#' @param bindfn bind function
+#' @param agrs extra args to fn
+#' @param xcol new column to identify data sources
+#' @export
+readnbind <- function(..., src=TRUE, agrs = NULL, fn='readRDS', bindfn = 'rbind') {
+  dots <- substitute(...())
+  os <- lapply(dots, function(x) {
+    read <- do.call(fn, c(x, args))
+    if (!is.null(src)) 
+      read$source <- x
+    read
+  })
+  do.call(bindfn, os)
 }
 #' CMC from R date
 #' 
