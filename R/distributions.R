@@ -186,6 +186,7 @@ median_gllogisI <- function(lambda, p, gamma) {
 }
 
 # hazard function for log-logistic distribution (parameterize as in INLA)
+#' @export
 hz_llogis <- function (x, alpha = 8, lambda = 1/18) {
     num <- alpha * lambda
     den <- (lambda * x)^(1-alpha) + lambda * x
@@ -201,6 +202,7 @@ mu_llogis2 <- function(alpha, lambda) { # convert to other
 }
 
 # density function for log-logistic distribution (parameterize as in INLA)
+#' @export
 d_llogis <- function (x, alpha = 8, lambda = 1/18) {
     num <- alpha
     den <- x^(1+alpha)*lambda^alpha + x^(1-alpha)*lambda^(-alpha) + 2*x
@@ -217,6 +219,7 @@ lambda_llogis <- function(mu, alpha) pi / (mu * alpha * sin(pi/alpha))
 
 
 # Cumulative function for log-logistic distribution (parameterize as in INLA)
+#' @export
 cdf_llogis <- function (x, alpha = 8, lambda = 1/18) {
     1 / ( 1 + (lambda * x)^(-alpha) )
 }
