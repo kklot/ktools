@@ -1,3 +1,35 @@
+#' gumbel copulas prob
+#' 
+#' @param u1 dimension 1
+#' @param u2 dimension 2
+#' @param alpha copula parameter
+#' @export
+pgumbelCopula <- function(u1, u2, a, give_log=FALSE) {
+    if  (a < 1) stop('a in [1:Inf]')
+    l1  = -log(u1)
+    l2  = -log(u2)
+    t12 = l1^a + l2^a
+    A   = 1/a
+    cdf = exp(-t12^A)
+    (if (give_log) log else identity)(cdf)
+}
+#' gumbel copulas density
+#' 
+#' @param u1 dimension 1
+#' @param u2 dimension 2
+#' @param alpha copula parameter
+#' @export
+dgumbelCopula <- function(u1, u2, a, give_log=FALSE) {
+    if  (a < 1) stop('a in [1:Inf]')
+    l1  = -log(u1)
+    l2  = -log(u2)
+    t12 = l1^a + l2^a
+    A   = 1/a
+    cdf = exp(-t12^A)
+    tt  = (l1 * l2)^(a-1) * a / (u1 * u2)
+    pdf = cdf * tt * ( t12^(2*A-2) / a  -  t12^(A - 2) * (A -1) )
+    (if (give_log) log else identity)(pdf)
+}
 #' Frank copulas prob
 #' 
 #' @param u1 dimension 1
