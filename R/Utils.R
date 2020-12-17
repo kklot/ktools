@@ -241,9 +241,10 @@ format_pvalue <- Vectorize(format_pvalue)
 #' @param width width
 #' @param height height
 #' @export
-g <- function(width=7, height=5, ...) {
-  dev.off()
+resize <- function(width=7, height=5, ...) {
+  if (!is.null(dev.list())) dev.off()
   do.call('dev.new', modifyList(as.list(environment()), list(...)))
+  ggplot2::last_plot()
 }
 
 .extra_ISOA3 <- c(
