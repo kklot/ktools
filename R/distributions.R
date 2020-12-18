@@ -71,6 +71,16 @@ dfrankCopula <- function(u1, u2, alpha, log=FALSE) {
     if (log) return(log(tt))
     tt
 }
+#' Frank copulas parameter to kendall tau or spearman rho
+#' @examples
+#' corfrankCopula(1, 'spearman')
+#' @export
+corfrankCopula <- function(x, type=c('spearman', 'kendall')) {
+    switch(type,
+        kendall = 1 - 4/x * (4 - gsl::debye_1(x)), 
+        spearman = 1 - 12/x * (gsl::debye_1(x) - gsl::debye_2(x))
+    )
+}
 #' quantile function
 #' 
 #' @param scale scale
