@@ -1,13 +1,32 @@
-#' MakeADFun safely terminated if there is bound error
+#' MakeADFun safely terminated if there is a bound error
 #' 
-#' to prevent TMB crashing an R session
+#' to prevent TMB crashing an R session. This should not be done with TMB in parallel mode
 #' 
 #' @param ... MakeADFun argments
 #' 
 #' @export
 MakeADFunSafe <- function(...) {
-  o <- parallel::mcparallel(MakeADFun(...))
+  if (is_windows()) stop('not able to do parallel jobs on Windows')
+  .n <- TMB::openmp()
+  on.exit(TMB::openmp(.n))
+  TMB::openmp(1)
+  o <- parallel::mcparallel(TMB::MakeADFun(...))
   parallel::mccollect(o)[[1]]
+}
+
+#' Crash testing an expression
+#' 
+#' Only on Unix
+#' 
+#' @param x this will be quoted with rlang so anything
+#' 
+#' @export
+crash_test <- function(x) {
+  if (is_windows()) stop('not able to do parallel jobs on Windows')
+  t = rlang::enquo(x)
+  t = rlang::quo(parallel::mcparallel(!!t))
+  t = rlang::eval_tidy(t)
+  parallel::mccollect(t)
 }
 
 #' Compile TMB with ktools header
