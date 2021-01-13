@@ -1,3 +1,14 @@
+#' Check if system is Windows
+#' @export
+is_windows <- function () (tolower(.Platform$OS.type) == "windows")
+
+#' Find R binary depending on systems
+#' 
+#' @export
+R_binary <- function () {
+  R_exe <- ifelse (is_windows(), "R.exe", "R")
+  return(file.path(R.home("bin"), R_exe))
+}
 #' Find text match regex with grep with some tailored options
 #' 
 #' Overidding is OK
