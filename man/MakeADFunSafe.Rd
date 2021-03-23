@@ -2,7 +2,7 @@
 % Please edit documentation in R/tmbutils.R
 \name{MakeADFunSafe}
 \alias{MakeADFunSafe}
-\title{MakeADFun safely terminated if there is bound error}
+\title{MakeADFun safely terminated if there is a bound error}
 \usage{
 MakeADFunSafe(...)
 }
@@ -10,5 +10,5 @@ MakeADFunSafe(...)
 \item{...}{MakeADFun argments}
 }
 \description{
-to prevent TMB crashing an R session
+to prevent TMB crashing an R session. This should not be done with TMB in parallel mode
 }

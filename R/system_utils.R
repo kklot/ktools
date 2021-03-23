@@ -77,8 +77,8 @@ cd <- function(to='~') {
       }
     }
     options("MY_LAST_WD"=getwd())
-    message("Moved from\n\t", getOption("MY_LAST_WD"))
-    message("to\n\t", to)
+    message("Moved from: ", getOption("MY_LAST_WD"))
+    message(" to ", to, "\n")
     setwd(to)
 }
 #' Kill R session
