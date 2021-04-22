@@ -29,5 +29,6 @@ p_adj <- Vectorize(p_adj)              #
 #' @param n sample size
 #' @param spec specificity
 #' @param sens sensitivity
+#' @export
 var_ll <- function(pi, n, spec=.9, sens=.995) pi * (1 - pi) /(n*(sens-spec-1)^2)
 
