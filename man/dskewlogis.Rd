@@ -4,7 +4,7 @@
 \alias{dskewlogis}
 \title{same as f_gllogisI}
 \usage{
-dskewlogis(x, scale, shape, skew)
+dskewlogis(x, scale, shape, skew, log = FALSE)
 }
 \arguments{
 \item{scale}{scale}
