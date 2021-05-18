@@ -1,3 +1,18 @@
+#' Kullback Liebler
+#' 
+#' @param target target distribution density
+#' @param estimate estimate distribution density that we wish to compare
+#' @export
+KLD = function(target, estimate) 
+{
+  if (length(target) !=  length(estimate)) stop('size is not equal')
+  estimate[which(estimate < .Machine$double.xmin)] <- .Machine$double.xmin
+  target = target / sum (target)
+  estimate = estimate / sum (estimate)
+  sum(target * log (target / estimate))
+}
+
+
 #' gumbel copulas prob
 #' 
 #' @param u1 dimension 1
