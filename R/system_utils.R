@@ -1,3 +1,13 @@
+#' scale to defined range
+#'
+#' @export
+scale_to_range <- function(x, min, max) {
+  #       (b-a)(x - min)
+  # f(x) = --------------  + a
+  #           max - min
+  (max-min) * (x-min(x, na.rm=TRUE)) / (max(x, na.rm=TRUE)-min(x, na.rm=TRUE)) + min
+}
+
 #' Check if system is Windows
 #' @export
 is_windows <- function () (tolower(.Platform$OS.type) == "windows")

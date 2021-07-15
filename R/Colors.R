@@ -1,5 +1,47 @@
 # https://learnui.design/tools/data-color-picker.html#palette
 # 
+
+qual_col_pals = RColorBrewer::brewer.pal.info[RColorBrewer::brewer.pal.info$category == 'qual',]
+qual_col = unlist(mapply(RColorBrewer::brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
+
+apple_dark = c("#2141E2", "#348A36", "#3A35A7", "#C13500", "#CB1242", "#8645AE", "#CF0400", "#2471A7", "#9B5A00")
+apple_light = c("#539CFF", "#4FDB4F", "#807BFF", "#F9B328", "#F66581", "#D690FF", "#F66A5C", "#7FD7FF", "#FAD400")
+
+bigsur <- c(
+'#F06048',
+'#C03078',
+'#D81878',
+'#F01860',
+'#484878',
+'#1878C0',
+'#3090C0',
+'#C0D8F0',
+'#F0A848',
+'#FF6060',
+'#48A8D8',
+'#6078A8',
+'#60A8F0',
+'#A8C0F0',
+'#FFA848',
+'#F0D8D8',
+'#F0C090',
+'#786090',
+'#7890C0',
+'#D86078')
+
+kinh <- c(
+  '#303030',
+  '#D84860',
+  '#3090A8',
+  '#C06078',
+  '#607890',
+  '#604878',
+  '#787890',
+  '#D8A8A8',
+  '#F0D8C0',
+  '#F0F0D8'
+)
+
 c.dcp <- c(
   "#003f5c",
   "#2f4b7c",
@@ -19,6 +61,8 @@ gmap <- c(
   Drover = "#FDF2AF",
   Orange_Yellow = "#F6CF65"
 )
+gmap <- unname(gmap)
+
 kg <- c(
 "#5643BD",
 "#9030DA",
@@ -32,6 +76,7 @@ kg <- c(
 "#00BD33",
 "#00CCD3",
 "#007EBE")
+
 zurich <- c(
 grDevices::rgb(182, 206, 229, maxColorValue=255),
 grDevices::rgb( 88, 132, 179, maxColorValue=255),
@@ -60,23 +105,23 @@ Violet     = "#3D00A4",
 Purple     = "#8601AF",
 Magenta = "#A8184A"
 )
-havard <- c(cod.gray="#0b0b09",
-vivid.burgundy="#961b36",
-medium.champagne="#f6eeab",
-tulip.tree="#eba938",
-monte.carlo="#7dc4ba",
-red.damask="#d96043",
-wattle="#d4d849",
-wheat="#f7deb2",
-light.blue="#b2dbde",
-fern.frond="#64821c",
-swans.down="#d8e9dc",
-chocolate="#d46619",
-allports="#206b87",
-red.damask="#d76340",
-boston.blue="#4683a8",
-aluminum="#989897",
-silver="#c2c2c1")
+
+havard <- c(
+"#0b0b09",
+"#961b36",
+"#64821c",
+"#206b87",
+"#d96043",
+"#eba938",
+"#989897",
+"#d76340",
+"#d4d849",
+"#4683a8",
+"#d46619",
+"#f7deb2",
+"#b2dbde",
+"#d8e9dc"
+)
 
 nord = c(
 nord0 = "#2E3440",
@@ -95,6 +140,7 @@ nord12 = "#D2876D",
 nord14 = "#A2BF8A",
 nord13 = "#ECCC87",
 nord15 = "#B58DAE")
+
 nord9c = c(
 nord7 = "#8EBCBB",
 nord8 = "#86C0D1",
@@ -105,6 +151,7 @@ nord12 = "#D2876D",
 nord14 = "#A2BF8A",
 nord13 = "#ECCC87",
 nord15 = "#B58DAE")
+
 nord7b = c(
 nord0 = "#2E3440",
 nord1 = "#3B4253",
@@ -114,6 +161,9 @@ nord4 = "#D8DEE9",
 nord5 = "#E5E9F0",
 nord6 = "#ECEFF4")
 nord <- nord[c(4, 8:16)]
+# show_colors(nord[c(1:5,10,8,9,7,6)])
+nord = nord[c(1:5,10,8,9,7,6)]
+
 solarized = c(
 Base03 = "#042029",
 Base02 = "#0A2933",
@@ -131,6 +181,7 @@ Violet = "#595AB7",
 Blue = "#2176C7",
 Cyan = "#259286",
 Green = "#738A05")
+
 solarize8b = c(
 Base03 = "#042029",
 Base02 = "#0A2933",
@@ -140,6 +191,7 @@ Base0 = "#708284",
 Base1 = "#819090",
 Base2 = "#EAE3CB",
 Base3 = "#FCF4DC")
+
 solarize8c = c(
 Yellow = "#A57706",
 Orange = "#BD3613",
@@ -149,7 +201,9 @@ Violet = "#595AB7",
 Blue = "#2176C7",
 Cyan = "#259286",
 Green = "#738A05")
+
 who_blue <- "#0098CB"
+
 dvinames <- c(
   Apricot       = "#FBB982",
   Aquamarine    = "#00B5BE",
