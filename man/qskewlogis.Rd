@@ -4,7 +4,7 @@
 \alias{qskewlogis}
 \title{quantile function}
 \usage{
-qskewlogis(q, lambda, p, gamma)
+qskewlogis(q, scale, shape, skew)
 }
 \arguments{
 \item{scale}{scale}

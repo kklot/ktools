@@ -102,7 +102,7 @@ corfrankCopula <- function(x, type=c('spearman', 'kendall')) {
 #' @param shape shape
 #' @param skew skewness parameters
 #' @export
-qskewlogis <- function (q, lambda, p, gamma) 1/lambda * (-1 + q^(-1/gamma))^(-1/p)
+qskewlogis <- function (q, scale, shape, skew) 1/scale * (-1 + q^(-1/skew))^(-1/shape)
 
 #'  same as f_gllogisI
 #' 
