@@ -1,3 +1,25 @@
+#' findInterval and return factor with label 
+#'
+#' instead of numeric vector like the base version
+#'
+#' @export
+findInterval2 <- function(x, vec, factor = TRUE, ...) {
+    require(dplyr)
+    y <- findInterval(x, vec, ...)
+    width <- nchar(as.character(max(vec)))
+    o <- bind_cols(x = x, y = y) %>%
+        group_by(y) %>%
+        transmute(
+            a = floor(min(x)), z = floor(max(x)),
+            z = if_else(a == z, z+1, z),
+            a = formatC(a, flag = "0", width = width),
+            z = formatC(z, flag = "0", width = width),
+            lab = paste(a, z, sep = "-")
+        ) %>%
+        ungroup()
+    if (factor) o <- pull(o, lab) else o <- pull(o, y)
+    o
+}
 #' scale to defined range
 #'
 #' @export
