@@ -20,6 +20,12 @@ findInterval2 <- function(x, vec, factor = TRUE, ...) {
     if (factor) o <- pull(o, lab) else o <- pull(o, y)
     o
 }
+
+#' Convert to snake case from package snakecase
+#'
+#' @export
+snaking <- snakecase::to_snake_case
+
 #' scale to defined range
 #'
 #' @export

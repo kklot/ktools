@@ -1,3 +1,16 @@
+#' Rebase for indexing/modellin
+#'
+#' @param x a vector to rebase to start from 0 or 1
+#' @param cpp use C++ index (starting from zero instead of one)
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rebase <- function(x, cpp = FALSE)
+{
+  x - min(x) + cpp
+}
 #' create dir, change to, and return the name
 #' 
 #' @param x path

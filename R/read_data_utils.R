@@ -1,3 +1,25 @@
+#' Help to refactor the factor easier
+#'
+#' @param x a character/factor vector
+#' @param new_position a integer vector specify what do you want the refactor
+#' order look like, e.g., from 1, 2, 3 to 3, 1, 2
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' x <- LETTERS[1:5]
+#' refactor(x, c(5, 1:4))
+refactor <- function(x, new_position = c())
+{
+  if (is.character(x))
+    labs <- unique(x)
+  else if (is.factor(x))
+    labs <- levels(x)
+  else
+    stop("what do you want to do?")
+  labs[new_position]
+}
 #' Pick element in vector base on regex
 #' 
 #' Pick element in vector base on regex
