@@ -1,5 +1,28 @@
+okabe <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
 # https://learnui.design/tools/data-color-picker.html#palette
 # 
+# https://mokole.com/palette.html
+six_col = c("#000000", "#2e8b57", "#ffa500", "#0000ff", "#1e90ff", "#ff1493")
+seven_col = c(
+  "#000000",
+  "#66cdaa",
+  "#ff8c00",
+  "#00ff00",
+  "#0000ff",
+  "#1e90ff",
+  "#ff1493"
+)
+eight_col = c(
+  "#ff0000",
+  "#000000",
+  "#ffd700",
+  "#c71585",
+  "#40e0d0",
+  "#00ff00",
+  "#0000ff",
+  "#1e90ff"
+)
 
 qual_col_pals = RColorBrewer::brewer.pal.info[RColorBrewer::brewer.pal.info$category == 'qual',]
 qual_col = unlist(mapply(RColorBrewer::brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
