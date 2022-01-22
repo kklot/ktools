@@ -9,7 +9,8 @@ Description: plotting, reading, converting,...
 License: GPL (>= 2)
 LazyData: true
 Imports:
-    txtplot,
-    countrycode
+    countrycode,
+    snakecase,
+    txtplot    
 RoxygenNote: 7.1.1
 Encoding: UTF-8
