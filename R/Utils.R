@@ -24,7 +24,7 @@ save_to <- function(x) {
 #' 
 #' @param x name of a function
 #' @examples
-#' fn_to_file(lm)
+#' screen_to_file(lm)
 #' @export
 screen_to_file <- function(x) {
   file <- tempfile(fileext = ".R")
@@ -32,29 +32,7 @@ screen_to_file <- function(x) {
   writeLines(capture.output(x), file)
   open_file(file)
 }
-#' tape list data.frame
-#' 
-#' @param ... extra args to Map
-#' @param fn function to apply to each list 
-#' @param a_list a list of data frame
-#' @examples
-#' parent <- list(
-#'    list(
-#'        data.frame(lds=1:10, q = 10:1), 
-#'        data.frame(lds=1:10, q = 10:1)
-#'    ),
-#'    list(
-#'        data.frame(lds=1:10, q = 10:1), 
-#'        data.frame(lds=1:10, q = 10:1)
-#'    )
-#')
-#'tape(function(x, y) cbind(x, y), l[[1]], y='extra_col')
-#'tape(function(child, replicate) 
-#'    tape(function(grandchild, model) cbind(grandchild, replicate, model), 
-#'        child, model = seq_along(child)), 
-#'        parent, replicate = seq_along(parent))
-#' @export
-tape <- function(fn, a_list, ...)  do.call('rbind', Map(fn, a_list, ...))
+
 #' Read and bind
 #' 
 #' @param ... list of paths

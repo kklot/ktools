@@ -13,5 +13,5 @@ screen_to_file(x)
 Open output of a function in a new text file (default application)
 }
 \examples{
-fn_to_file(lm)
+screen_to_file(lm)
 }

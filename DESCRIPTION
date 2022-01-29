@@ -6,10 +6,11 @@ Date: 2015-06-25
 Author: Van Kinh Nguyen
 Maintainer: Van Kinh Nguyen <van-kinh.nguyen@outlook.com>
 Description: plotting, reading, converting,...
-License: GPL (>= 2)
+License: MIT + file LICENSE
 LazyData: true
 Imports:
     txtplot,
-    countrycode
-RoxygenNote: 7.1.1
+    countrycode,
+    magrittr
+RoxygenNote: 7.1.2
 Encoding: UTF-8
