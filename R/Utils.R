@@ -1,3 +1,14 @@
+#' Cut but automatically include min and max data's value
+#' 
+#' @inheritParams base::cut
+#' @export
+kut <- function(x, breaks, ...) {
+  args <- list(...)
+  breaks <- c(min(x), breaks, max(x))
+  args <- modifyList(args, list(breaks = breaks, x = x))
+  do.call('cut', args)
+}
+
 #' Rebase for indexing/modellin
 #'
 #' @param x a vector to rebase to start from 0 or 1
