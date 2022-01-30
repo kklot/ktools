@@ -2,7 +2,7 @@
 % Please edit documentation in R/Utils.R
 \name{screen_to_file}
 \alias{screen_to_file}
-\title{Open output of a function in a new text file (default application)}
+\title{Open output of a function in a new text file (in default application)}
 \usage{
 screen_to_file(x)
 }
@@ -10,8 +10,10 @@ screen_to_file(x)
 \item{x}{name of a function}
 }
 \description{
-Open output of a function in a new text file (default application)
+Useful to run through a function source code for understanding, debugging
 }
 \examples{
+\dontrun{
 screen_to_file(lm)
+}
 }

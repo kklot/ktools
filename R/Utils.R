@@ -4,7 +4,9 @@
 #' @export
 kut <- function(x, breaks, ...) {
   args <- list(...)
-  breaks <- c(min(x), breaks, max(x))
+  i0 <- ifelse(min(x) > min(breaks), 0, min(x))
+  i1 <- ifelse(max(x) > max(breaks), max(x), max(breaks))
+  breaks <- c(i0, breaks, i1)
   args <- modifyList(args, list(breaks = breaks, x = x))
   do.call("cut", args)
 }
@@ -49,6 +51,7 @@ unkount <- function(x, weight) {
 #' @export
 surv_split <- function(x, duration, event, cuts,
                        time_varying = NULL, label_episode = FALSE) {
+  if (any(cuts < 0)) stop('negative time is not supported')
   x$n_dup <- kut(x[, duration], cuts, include.lowest = TRUE)
   episode_labs <- levels(x$n_dup)
   x <- unkount(x, n_dup)
@@ -84,11 +87,15 @@ save_to <- function(x) {
     cd(x)
     x
 }
-#' Open output of a function in a new text file (default application)
+#' Open output of a function in a new text file (in default application)
+#' 
+#' Useful to run through a function source code for understanding, debugging
 #' 
 #' @param x name of a function
 #' @examples
+#' \dontrun{
 #' screen_to_file(lm)
+#' }
 #' @export
 screen_to_file <- function(x) {
   file <- tempfile(fileext = ".R")

@@ -165,14 +165,17 @@ mu_skew_llogis <- function(scale, shape, skew) {
 f_glogisI <- function(x, alpha, beta, gamma) {
   (gamma/beta) * exp((alpha-x)/beta) * (1 + exp((alpha-x)/beta))^(-gamma-1)
 }
+
 #' @export
 dskewlogisx <- f_glogisI
+
 #' Generalized logistic type I cumulative
 #' 
 #' @export
 F_glogisI <- function(x, alpha, beta, gamma) {
   1 / (1 + exp((alpha-x)/beta)^gamma)
 }
+
 #' @export
 pskewlogisx <- F_glogisI
 
