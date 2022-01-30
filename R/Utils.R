@@ -49,23 +49,20 @@ unkount <- function(x, weight) {
 #' @export
 surv_split <- function(x, duration, event, cuts,
                        time_varying = NULL, label_episode = FALSE) {
-  x$n_dup <- kut(x$duration, cuts, include.lowest = TRUE)
+  x$n_dup <- kut(x[, duration], cuts, include.lowest = TRUE)
   episode_labs <- levels(x$n_dup)
   x <- unkount(x, n_dup)
-  x <- within(x, {
-    episode <- gsub("[0-9]*\\.?(.*)", "\\1", rownames(x), perl = TRUE)
-    episode[episode == ""] <- "0"
-    episode <- as.numeric(episode) + 1
-    t_start <- c(0, cuts)[episode]
-    t_end <- c(t_start[2L:nrow(x)], 0)
-    t_end[t_end == 0] <- duration[t_end == 0]
-    event <- event * (t_end == duration)
-  })
+  episode <- gsub("[0-9]*\\.?(.*)", "\\1", rownames(x), perl = TRUE)
+  episode[episode == ""] <- "0"
+  x$episode <- as.numeric(episode) + 1
+  x$t_start <- c(0, cuts)[x$episode]
+  x$t_end <- c(x$t_start[2L:nrow(x)], 0)
+  x$t_end[x$t_end == 0] <- x[, duration][x$t_end == 0]
+  x[, event] <- x[, event] * (x$t_end == x[, duration])
   if (label_episode)
     x$episode <- factor(x$episode, seq_along(episode_labs), episode_labs)
   x
 }
-
 
 #' Rebase for indexing/modellin
 #'
