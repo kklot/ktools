@@ -4,8 +4,6 @@
 #'
 #' @return
 #' @export
-#'
-#' @examples
 long_matrix <- function(m)
 {
   if (length(dim(m)) != 2)

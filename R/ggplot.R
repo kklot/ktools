@@ -4,8 +4,6 @@
 #'
 #' @return
 #' @export
-#'
-#' @examples
 gg_img <- function(m)
 {
   if (length(dim(m)) != 2)
@@ -26,8 +24,6 @@ gg_img <- function(m)
 #'
 #' @return
 #' @export
-#'
-#' @examples
 gg_mat <- function(m)
 {
   if (length(dim(m)) != 2)
@@ -50,8 +46,6 @@ gg_mat <- function(m)
 #'
 #' @return
 #' @export
-#'
-#' @examples
 gg_group <- function(.data, x, y, g)
 {
   .data %>% 
