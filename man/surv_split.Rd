@@ -4,7 +4,14 @@
 \alias{surv_split}
 \title{Split time to interval for survival model - improved}
 \usage{
-surv_split(x, duration, event, cut, time_varying = NULL, label_episode = FALSE)
+surv_split(
+  x,
+  duration,
+  event,
+  cuts,
+  time_varying = NULL,
+  label_episode = FALSE
+)
 }
 \arguments{
 \item{x}{data frame}
@@ -13,22 +20,20 @@ surv_split(x, duration, event, cut, time_varying = NULL, label_episode = FALSE)
 
 \item{event}{binary 0 and 1 coded}
 
-\item{cut}{the cut points on duration forming intervals [min_duration, first_value],
-(first_value, second_value], ..., (last_value, max_duration]}
-
 \item{time_varying}{not in use}
 
 \item{label_episode}{set to TRUE to have the episode labeled with actual cut
 intervals, otherwise episodes are integers}
+
+\item{cut}{the cut points on duration forming intervals [min_duration, first_value],
+(first_value, second_value], ..., (last_value, max_duration]}
 }
 \description{
-This is similar to \code{\link[survival]{survSplit}} but allow:
+This is similar to \code{\link[survival]{survSplit}} but allow the starting
+time and ending time to be equal (e.g., immediate death, automatic default in
+loan) and automatically include min and max of duration in the cut intervals
 }
 \details{
-- starting time and ending time to be equal (e.g., immediate death, automatic
-  default in loan)
-- automatically include min and max of duration in the cut intervals
-
 The tested speed is 1.37 times to that of survSplit.
 }
 \examples{

@@ -28,11 +28,9 @@ unkount <- function(x, weight) {
 
 #' Split time to interval for survival model - improved
 #'
-#' This is similar to \code{\link[survival]{survSplit}} but allow:
-#'
-#' - starting time and ending time to be equal (e.g., immediate death, automatic
-#'   default in loan)
-#' - automatically include min and max of duration in the cut intervals
+#' This is similar to \code{\link[survival]{survSplit}} but allow the starting
+#' time and ending time to be equal (e.g., immediate death, automatic default in
+#' loan) and automatically include min and max of duration in the cut intervals
 #'
 #' The tested speed is 1.37 times to that of survSplit.
 #'
