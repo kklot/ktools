@@ -49,7 +49,7 @@ unkount <- function(x, weight) {
 #' surv_split(x, "time", "event", c(2,4,6))
 #' surv_split(x, "time", "event", c(2,4,6), label_episode = TRUE)
 #' @export
-surv_split <- function(x, duration, event, cut,
+surv_split <- function(x, duration, event, cuts,
                        time_varying = NULL, label_episode = FALSE) {
   x$n_dup <- kut(x$duration, cuts, include.lowest = TRUE)
   episode_labs <- levels(x$n_dup)
