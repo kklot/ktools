@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ktools
+# ktools <img src='man/figures/logo.png' align="right" height="120" />
 
 <!-- badges: start -->
 
@@ -11,61 +11,32 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-The goal of ktools is to …
+Miscellaneous function, color palettes, collected doing modelling, many
+trivial ones. ## Installation
 
-## Installation
-
-You can install the released version of ktools from
-[CRAN](https://CRAN.R-project.org) with:
+The development version from [GitHub](https://github.com/) with:
 
 ``` r
-install.packages("ktools")
-```
-
-And the development version from [GitHub](https://github.com/) with:
-
-``` r
-# install.packages("devtools")
 devtools::install_github("kklot/ktools")
 ```
 
-## Example
+Examples of what inside:
 
-This is a basic example which shows you how to solve a common problem:
+-   `take_note`: Write a note to file
+-   `unkount`: Uncounting data frame using a weights
+-   `surv_split` to split survival time for immediate death model
+-   `screen_to_file`: write object on screen to a file, e.g. get
+    contents of a function
+-   `char`: quoting automatic
+-   `MakeADFunSafe`: MakeADFun safely terminated if there is a bound
+    error
+-   `double_logistic`: Double logistic function
+-   `findInterval2`: findInterval and return factor with label
+-   `fractional_poly`: find best fit fractional polynomial using GLM
+-   `kut`: Cut but automatically include min and max data’s value
+-   `lsSize`: list objects with size
+-   `napply`: n(amed)apply: lapply but automatic add names to output
+-   `pfrankCopula`: Frank copulas prob
+-   `tmb_fixit`: TMB fix parameters
 
-``` r
-library(ktools)
-#> 
-#> Attaching package: 'ktools'
-#> The following object is masked from 'package:base':
-#> 
-#>     remove
-## basic example code
-```
-
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
-
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/master/examples>.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+Let search engines do the work of documenting.
