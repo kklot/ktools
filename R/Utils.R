@@ -1,3 +1,24 @@
+#' Rename a column
+#' 
+#' Side_0o_Effect's \url{https://stackoverflow.com/a/16490387}
+#' 
+#' @param data data with columns to rename
+#' @param old_name old name - no need to "quote"
+#' @param new_name new name - no need to "quote"
+#' @inheritParams base::make.names 
+#' @examples 
+#' dt <- data.frame(a = 1, b = 2)
+#' rename(dt, a, b)
+#' rename(dt, a, a, unique = TRUE)
+#' @export
+rename <- function(data, old_name, new_name, ...) {
+  old_name <- deparse(substitute(old_name))
+  new_name <- deparse(substitute(new_name))
+  colnames(data)[colnames(data) == old_name] <- new_name
+  colnames(data) <- make.names(colnames(data),...)
+  data
+}
+
 #' Cut but automatically include min and max data's value
 #'
 #' @inheritParams base::cut
