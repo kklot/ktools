@@ -6,8 +6,8 @@
 \alias{pskewlogis}
 \alias{rskewlogis}
 \alias{sskewlogis}
-\alias{var_skew_llogis}
-\alias{mu_skew_llogis}
+\alias{var_skewlogis}
+\alias{mu_skewlogis}
 \title{Skew-log-logistic distribution}
 \usage{
 dskewlogis(x, scale, shape, skew, log = FALSE)
@@ -20,9 +20,9 @@ rskewlogis(n, scale = 0.05, shape = 7, skew = 1)
 
 sskewlogis(t, lambda, p, gamma)
 
-var_skew_llogis(shape, skew)
+var_skewlogis(shape, skew)
 
-mu_skew_llogis(scale, shape, skew)
+mu_skewlogis(scale, shape, skew)
 }
 \arguments{
 \item{scale}{scale}
@@ -42,9 +42,9 @@ Sampling
 
 Survival function
 
-Compute the variance of skew loglogistic distribution
+Compute the variance
 
-Compute the mean of skew loglogistic distribution
+Compute the mean
 }
 \examples{
 plot(dskewlogis(1:100, 1/20, 10, 2), type = "l")
