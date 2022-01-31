@@ -88,132 +88,95 @@ dfrankCopula <- function(u1, u2, alpha, log=FALSE) {
 }
 #' Frank copulas parameter to kendall tau or spearman rho
 #' @examples
-#' corfrankCopula(1, 'spearman')
+#' corfrankCopula(1, "spearman")
 #' @export
-corfrankCopula <- function(x, type=c('spearman', 'kendall')) {
-    switch(type,
-        kendall = 1 - 4/x * (4 - gsl::debye_1(x)), 
-        spearman = 1 - 12/x * (gsl::debye_1(x) - gsl::debye_2(x))
-    )
+corfrankCopula <- function(x, type = c("spearman", "kendall")) {
+  switch(type,
+    kendall = 1 - 4 / x * (4 - gsl::debye_1(x)),
+    spearman = 1 - 12 / x * (gsl::debye_1(x) - gsl::debye_2(x))
+  )
 }
-#' quantile function
-#' 
+
+#' Skew-log-logistic distribution
+#'
 #' @param scale scale
 #' @param shape shape
 #' @param skew skewness parameters
+#' @examples
+#' plot(dskewlogis(1:100, 1/20, 10, 2), type = "l")
+#' qskewlogis(.5, 1/20, 10, 2)
+#' rskewlogis(10, 1/20, 10, 2)
+#' @export
+dskewlogis <- function(x, scale, shape, skew, log = FALSE) { # old is f_gllogisI
+  term = (scale * x)^-shape
+  o = (1 / x) * skew * shape * term / (1 + term)^(skew + 1)
+  if (log) o = log(o)
+  o
+}
+
+#' Quantile
+#' @rdname dskewlogis
 #' @export
 qskewlogis <- function (q, scale, shape, skew) 1/scale * (-1 + q^(-1/skew))^(-1/shape)
 
-#'  same as f_gllogisI
-#' 
-#' @param scale scale
-#' @param shape shape
-#' @param skew skewness parameters
+#' Probability density
+#' @rdname dskewlogis
 #' @export
-dskewlogis <- function(x, scale, shape, skew, log = FALSE) {
-  term = (scale * x)^-shape
-  o = (1/x) * skew * shape * term / (1 + term)^(skew+1)
-	if (log)
-		o = log(o)
-	o
+pskewlogis <- function(t, scale, shape, skew) (1 + (scale * t)^-shape)^-skew
+# old name F_gllogisI 
+
+#' Sampling
+#' @rdname dskewlogis
+#' @export
+rskewlogis <- function(n, scale = 0.05, shape = 7, skew = 1) {
+  # rskewlogis is the old r_glogisI
+  u = runif(n)
+  1 / scale * (u^(-skew^-1) - 1)^(-shape^-1)
 }
 
-#'  same as F_gllogisI
-#' 
-#' @param scale scale
-#' @param shape shape
-#' @param skew skewness parameters
+#' Survival function
+#' @rdname dskewlogis
 #' @export
-pskewlogis <- function(q, scale, shape, skew) (1 + (scale*q)^-shape)^-skew
-
-#' Sampling from skew logistic
-#'  
-#' @param scale scale
-#' @param shape shape
-#' @param skew skewness parameters
-#' @export
-r_glogisI <- function(n, scale=0.05, shape=7, skew=1) {
-    u = runif(n)
-    1/scale * ( u^(-skew^-1) - 1) ^(-shape^-1)
-}
-#' @export
-rskewlogis <- r_glogisI
-
-#' Compute the variance of skew loglogistic distribution
-#' 
-#' @param scale scale
-#' @param shape shape
-#' @param skew skewness parameters
-#' @export
-var_skew_llogis <- function(shape, skew) {
-  shape^2 * (pi^2/6 + trigamma(skew))
+sskewlogis <- function(t, lambda, p, gamma) {
+  term = (lambda * t)^-p
+  1 - 1 / (1 + term)^gamma;
 }
 
-#' Compute the mean of skew loglogistic distribution
-#' 
-#' @param scale scale
-#' @param shape shape
-#' @param skew skewness parameters
+
+#' Compute the variance 
+#' @rdname dskewlogis
 #' @export
-mu_skew_llogis <- function(scale, shape, skew) {
-  scale + shape * (digamma(1) - digamma(skew))
-}
+var_skewlogis <- function(shape, skew) shape^2 * (pi^2 / 6 + trigamma(skew))
+
+#' Compute the mean 
+#' @rdname dskewlogis
+#' @export
+mu_skewlogis <- function(scale, shape, skew) scale + shape * (digamma(1) - digamma(skew))
 
 #' Generalized logistic type I density
 #' 
+#' @param x x
+#' @param alpha scale
+#' @param beta shape
+#' @param gamma skewness
 #' @export
 f_glogisI <- function(x, alpha, beta, gamma) {
   (gamma/beta) * exp((alpha-x)/beta) * (1 + exp((alpha-x)/beta))^(-gamma-1)
 }
 
-#' @export
-dskewlogisx <- f_glogisI
-
 #' Generalized logistic type I cumulative
 #' 
+#' @rdname f_glogisI
 #' @export
 F_glogisI <- function(x, alpha, beta, gamma) {
   1 / (1 + exp((alpha-x)/beta)^gamma)
 }
 
-#' @export
-pskewlogisx <- F_glogisI
-
 #' Generalized logistic type I survival
-#' 
+#'
 #' @export
 S_glogisI <- function(x, alpha, beta, gamma) {
   1 - F_glogisI(x, alpha, beta, gamma)
-}
-
-#' Generalized log-logistic type I density
-#' 
-#' @export
-f_gllogisI <- function(t, lambda, p, gamma) {
-  term = (lambda * t)^-p
-  (1/t) * gamma * p * term / (1 + term)^(gamma+1)
-}
-
-#' Generalized log-logistic type I survival
-#' 
-#' @export
-S_gllogisI <- function(t, lambda, p, gamma) {
-  term = (lambda * t)^-p
-  1 - 1 / (1 + term)^gamma;
-}
-
-#' Generalized log-logistic type I probability density
-#' 
-#' @export
-F_gllogisI <- function(t, lambda, p, gamma) {
-  (1 + (lambda*t)^-p)^-gamma
-}
-
-#' Generalized log-logistic type I probability density
-#' 
-#' @export
-median_gllogisI <- function(lambda, p, gamma) {
-  1/lambda * (-1 + 0.5^(-1/gamma))^(-1/p)
 }
 
 # hazard function for log-logistic distribution (parameterize as in INLA)

@@ -2,9 +2,27 @@
 % Please edit documentation in R/distributions.R
 \name{dskewlogis}
 \alias{dskewlogis}
-\title{same as f_gllogisI}
+\alias{qskewlogis}
+\alias{pskewlogis}
+\alias{rskewlogis}
+\alias{sskewlogis}
+\alias{var_skew_llogis}
+\alias{mu_skew_llogis}
+\title{Skew-log-logistic distribution}
 \usage{
 dskewlogis(x, scale, shape, skew, log = FALSE)
+
+qskewlogis(q, scale, shape, skew)
+
+pskewlogis(t, scale, shape, skew)
+
+rskewlogis(n, scale = 0.05, shape = 7, skew = 1)
+
+sskewlogis(t, lambda, p, gamma)
+
+var_skew_llogis(shape, skew)
+
+mu_skew_llogis(scale, shape, skew)
 }
 \arguments{
 \item{scale}{scale}
@@ -14,5 +32,22 @@ dskewlogis(x, scale, shape, skew, log = FALSE)
 \item{skew}{skewness parameters}
 }
 \description{
-same as f_gllogisI
+Skew-log-logistic distribution
+
+Quantile
+
+Probability density
+
+Sampling
+
+Survival function
+
+Compute the variance of skew loglogistic distribution
+
+Compute the mean of skew loglogistic distribution
+}
+\examples{
+plot(dskewlogis(1:100, 1/20, 10, 2), type = "l")
+qskewlogis(.5, 1/20, 10, 2)
+rskewlogis(10, 1/20, 10, 2)
 }
