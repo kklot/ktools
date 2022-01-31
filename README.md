@@ -28,6 +28,9 @@ Examples of what inside:
 -   `screen_to_file`: write object on screen to a file, e.g. get
     contents of a function
 -   `char`: quoting automatic
+-   `bracket`: put bracket around a text
+-   `browse`: Show data frame in browser
+-   `cd`: replicate some features of bash cd
 -   `MakeADFunSafe`: MakeADFun safely terminated if there is a bound
     error
 -   `double_logistic`: Double logistic function
