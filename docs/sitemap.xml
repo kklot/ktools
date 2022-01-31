@@ -46,9 +46,6 @@
     <loc>/reference/STATA_date_to_date.html</loc>
   </url>
   <url>
-    <loc>/reference/S_gllogisI.html</loc>
-  </url>
-  <url>
     <loc>/reference/S_glogisI.html</loc>
   </url>
   <url>
@@ -113,9 +110,6 @@
   </url>
   <url>
     <loc>/reference/eval_text.html</loc>
-  </url>
-  <url>
-    <loc>/reference/f_gllogisI.html</loc>
   </url>
   <url>
     <loc>/reference/f_glogisI.html</loc>
@@ -253,16 +247,10 @@
     <loc>/reference/lsSize.html</loc>
   </url>
   <url>
-    <loc>/reference/median_gllogisI.html</loc>
-  </url>
-  <url>
     <loc>/reference/month_year_to_cmc.html</loc>
   </url>
   <url>
     <loc>/reference/more.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mu_skew_llogis.html</loc>
   </url>
   <url>
     <loc>/reference/mustats_3plus.html</loc>
@@ -331,13 +319,7 @@
     <loc>/reference/prec2sd.html</loc>
   </url>
   <url>
-    <loc>/reference/pskewlogis.html</loc>
-  </url>
-  <url>
     <loc>/reference/put.html</loc>
-  </url>
-  <url>
-    <loc>/reference/qskewlogis.html</loc>
   </url>
   <url>
     <loc>/reference/quantile95.html</loc>
@@ -356,9 +338,6 @@
   </url>
   <url>
     <loc>/reference/rBind.html</loc>
-  </url>
-  <url>
-    <loc>/reference/r_glogisI.html</loc>
   </url>
   <url>
     <loc>/reference/range2seq.html</loc>
@@ -383,6 +362,9 @@
   </url>
   <url>
     <loc>/reference/remove_text.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rename.html</loc>
   </url>
   <url>
     <loc>/reference/resize.html</loc>
@@ -461,9 +443,6 @@
   </url>
   <url>
     <loc>/reference/var_ll.html</loc>
-  </url>
-  <url>
-    <loc>/reference/var_skew_llogis.html</loc>
   </url>
   <url>
     <loc>/reference/vline.html</loc>
