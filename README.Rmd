@@ -44,6 +44,7 @@ Examples of what inside:
 - `findInterval2`: findInterval and return factor with label
 - `fractional_poly`: find best fit fractional polynomial using GLM
 - `kut`: Cut but automatically include min and max data's value
+- `kompile`: compile TMB with extra `ktools`'s `C++` headers 
 - `lsSize`: list objects with size
 - `napply`: n(amed)apply: lapply but automatic add names to output
 - `pfrankCopula`: Frank copulas prob
