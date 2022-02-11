@@ -10,5 +10,5 @@ corfrankCopula(x, type = c("spearman", "kendall"))
 Frank copulas parameter to kendall tau or spearman rho
 }
 \examples{
-corfrankCopula(1, 'spearman')
+corfrankCopula(1, "spearman")
 }

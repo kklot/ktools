@@ -34,6 +34,8 @@ crash_test <- function(x) {
 #' Add ktools.hpp to compile flags
 #' 
 #' @param user_flags extra flag to compile
+#' @param verbose print 
+#' @inheritParams TMB::compile
 #' @export
 kompile <- function(..., user_flags, verbose=FALSE) {
   kfile <- system.file('include', 'ktools.hpp', package='ktools')
@@ -42,7 +44,7 @@ kompile <- function(..., user_flags, verbose=FALSE) {
     kheader <- paste(kheader, '-Wno-macro-redefined -Wno-unused-variable -Wno-unused-function -Wno-unused-local-typedefs -Wno-unknown-pragmas -Wno-c++11-inline-namespace')
   if (!missing(user_flags))
     kheader <- paste(kheader, user_flags)
-  compile(..., flags=kheader)
+  TMB::compile(..., flags=kheader)
 }
 
 #' precision to sd

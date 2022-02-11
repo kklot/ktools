@@ -1,3 +1,20 @@
+#' Right assign to using with pipe
+#' 
+#' Using \code{->} with pipe
+#' 
+#' @param .data data to assign
+#' @param name name of object to assign
+#' @examples 
+#' x <- 1
+#' allot(2, x)
+#' 3 %>% allot(x)
+#' x
+#' @export
+allot <- function(.data, name) {
+    name <- deparse(substitute(name))
+    assign(name, .data, parent.frame(2))
+}
+
 #' Rename a column
 #' 
 #' Side_0o_Effect's \url{https://stackoverflow.com/a/16490387}
@@ -72,16 +89,22 @@ unkount <- function(x, weight) {
 #' @export
 surv_split <- function(x, duration, event, cuts,
                        time_varying = NULL, label_episode = FALSE) {
-  if (any(cuts < 0)) stop('negative time is not supported')
+  if (any(cuts < 0)) stop("negative time is not supported")
+  # TODD: add support for naming the times variable
+  # find number of needed interval and expand data
   x$n_dup <- kut(x[, duration], cuts, include.lowest = TRUE)
   episode_labs <- levels(x$n_dup)
   x <- unkount(x, n_dup)
+  x$n_dup <- NULL
+  # numbering the expanded
   episode <- gsub("[0-9]*\\.?(.*)", "\\1", rownames(x), perl = TRUE)
   episode[episode == ""] <- "0"
   x$episode <- as.numeric(episode) + 1
+  # recode duration
   x$t_start <- c(0, cuts)[x$episode]
   x$t_end <- c(x$t_start[2L:nrow(x)], 0)
   x$t_end[x$t_end == 0] <- x[, duration][x$t_end == 0]
+  # recode event to last time point
   x[, event] <- x[, event] * (x$t_end == x[, duration])
   if (label_episode)
     x$episode <- factor(x$episode, seq_along(episode_labs), episode_labs)

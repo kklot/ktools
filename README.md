@@ -22,6 +22,8 @@ devtools::install_github("kklot/ktools")
 
 Examples of what inside:
 
+-   `allot`: `->` right assign with pipe
+-   `rename`: rename a column in data.frame
 -   `take_note`: Write a note to file
 -   `unkount`: Uncounting data frame using a weights
 -   `surv_split` to split survival time for immediate death model
