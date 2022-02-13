@@ -11,6 +11,8 @@ LazyData: true
 Imports:
     txtplot,
     countrycode,
-    magrittr
+    magrittr,
+    httr,
+    snakecase
 RoxygenNote: 7.1.2
 Encoding: UTF-8

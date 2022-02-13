@@ -1,3 +1,24 @@
+#' Download with httr
+#' 
+#' wrapper with automatic nameing, urldecode, and progress
+#' 
+#' @param url directly link 
+#' @param path where to save
+#' @inheritParam httr::write_disk
+#' @inheritDotParams httr::GET
+download <- function(url, path = '.', overwrite = FALSE,...) {
+    file_name <- paste0(path, URLdecode(basename(url)))
+    if (file.exists(file_name)) {
+        message(file_name, " exists, skipped, set overwrite to TRUE to overwrite")
+        return(invisible(0))
+    }
+    httr::GET(
+        url,
+        httr::write_disk(paste0(path, URLdecode(basename(url))), overwrite),
+        httr::progress(),
+        ...
+    )
+}
 #' Right assign to using with pipe
 #' 
 #' Using \code{->} with pipe
