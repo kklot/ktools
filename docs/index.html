@@ -74,7 +74,38 @@
 <p>Examples of what inside:</p>
 <ul>
 <li>
-<code>allot</code>: <code>-&gt;</code> right assign with pipe</li>
+<code>pick</code>: wrapper of <code>grep</code> tp pick element with regex</li>
+<li>
+<code>query_label</code>: search variable labels on labelled data (e.g. <code><a href="https://haven.tidyverse.org/reference/read_dta.html" class="external-link">haven::read_dta</a></code>)</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># query KAIS surveys</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">query_label</span>(b1, <span class="st">"cmc"</span>)                                                                                                  </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    name                              label</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span> qhint            Date of <span class="fu">interview</span> (CMC)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">:</span>  q102                Date of <span class="fu">birth</span> (CMC)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span><span class="sc">:</span>  q212 Date of birth <span class="cf">for</span> last <span class="fu">child</span> (CMC)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span><span class="sc">:</span>  q318 Date of birth <span class="cf">for</span> last <span class="fu">child</span> (CMC)</span></code></pre></div>
+<ul>
+<li>
+<code>query_name</code>: search name on a data (e.g. <code><a href="https://haven.tidyverse.org/reference/read_dta.html" class="external-link">haven::read_dta</a></code>)</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">query_name</span>(b2, <span class="st">"weight"</span>)                                                                                                </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>         name label</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span> rawiweight      </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">:</span> rawbweight      </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span><span class="sc">:</span>   aiweight      </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span><span class="sc">:</span>   abweight      </span></code></pre></div>
+<ul>
+<li>
+<code>allot</code>: <code>-&gt;</code> right assign with pipe (<strong>experimental - use interactive only</strong>)</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># these two are equivalent</span>
+<span class="va">a</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="fu">tibble</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="reference/allot.html">allot</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>
+<code>recode_if</code>: like <code>case_when</code> when you want to keep original data (<code>TRUE ~ original</code>)</li>
 <li>
 <code>rename</code>: rename a column in data.frame</li>
 <li>
@@ -87,12 +118,24 @@
 <code>screen_to_file</code>: write object on screen to a file, e.g. get contents of a function</li>
 <li>
 <code>char</code>: quoting automatic</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">char</span>(a, b, c)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"a"</span> <span class="st">"b"</span> <span class="st">"c"</span></span></code></pre></div>
+<ul>
 <li>
 <code>bracket</code>: put bracket around a text</li>
 <li>
 <code>browse</code>: Show data frame in browser</li>
 <li>
 <code>cd</code>: replicate some features of bash cd</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">cd</span>()</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>Moved from<span class="sc">:</span> <span class="er">/</span>Users<span class="sc">/</span>knguyen<span class="sc">/</span>Code<span class="sc">/</span>R<span class="sc">/</span>ktools</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a> to <span class="sc">~</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span> <span class="fu">cd</span>(<span class="st">'-'</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>Moved from<span class="sc">:</span> <span class="er">/</span>Users<span class="sc">/</span>knguyen</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a> to <span class="sc">/</span>Users<span class="sc">/</span>knguyen<span class="sc">/</span>Code<span class="sc">/</span>R<span class="sc">/</span>ktools</span></code></pre></div>
+<ul>
 <li>
 <code>MakeADFunSafe</code>: MakeADFun safely terminated if there is a bound error</li>
 <li>

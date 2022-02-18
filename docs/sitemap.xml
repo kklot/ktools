@@ -106,6 +106,9 @@
     <loc>/reference/double_logistic2.html</loc>
   </url>
   <url>
+    <loc>/reference/download.html</loc>
+  </url>
+  <url>
     <loc>/reference/dskewlogis.html</loc>
   </url>
   <url>
@@ -116,6 +119,9 @@
   </url>
   <url>
     <loc>/reference/f_glogisI.html</loc>
+  </url>
+  <url>
+    <loc>/reference/file_name.html</loc>
   </url>
   <url>
     <loc>/reference/findInterval2.html</loc>
@@ -200,6 +206,9 @@
   </url>
   <url>
     <loc>/reference/invert.html</loc>
+  </url>
+  <url>
+    <loc>/reference/is_missing.html</loc>
   </url>
   <url>
     <loc>/reference/is_negative.html</loc>
@@ -355,6 +364,9 @@
     <loc>/reference/rebase.html</loc>
   </url>
   <url>
+    <loc>/reference/recode_if.html</loc>
+  </url>
+  <url>
     <loc>/reference/reexports.html</loc>
   </url>
   <url>
@@ -367,7 +379,7 @@
     <loc>/reference/remove_text.html</loc>
   </url>
   <url>
-    <loc>/reference/rename.html</loc>
+    <loc>/reference/rename_col.html</loc>
   </url>
   <url>
     <loc>/reference/resize.html</loc>
