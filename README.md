@@ -47,7 +47,8 @@ query_name(b2, "weight")
 4:   abweight      
 ```
 
--   `allot`: `->` right assign with pipe
+-   `allot`: `->` right assign with pipe (**experimental - use
+    interactive only**)
 
 ``` r
 # these two are equivalent
@@ -55,6 +56,8 @@ a <- tibble(x = 1)
 tibble(x = 1) %>% allot(a)
 ```
 
+-   `recode_if`: like `case_when` when you want to keep original data
+    (`TRUE ~ original`)
 -   `rename`: rename a column in data.frame
 -   `take_note`: Write a note to file
 -   `unkount`: Uncounting data frame using a weights
@@ -63,12 +66,23 @@ tibble(x = 1) %>% allot(a)
     contents of a function
 -   `char`: quoting automatic
 
-
+``` r
+> char(a, b, c)
+[1] "a" "b" "c"
+```
 
 -   `bracket`: put bracket around a text
 -   `browse`: Show data frame in browser
 -   `cd`: replicate some features of bash cd
 
+``` r
+> cd()
+Moved from: /Users/knguyen/Code/R/ktools
+ to ~
+> cd('-')
+Moved from: /Users/knguyen
+ to /Users/knguyen/Code/R/ktools
+```
 
 -   `MakeADFunSafe`: MakeADFun safely terminated if there is a bound
     error

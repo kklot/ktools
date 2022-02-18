@@ -56,14 +56,14 @@ query_name(b2, "weight")
 4:   abweight      
 ```
 
-- `allot`: `->` right assign with pipe
+- `allot`: `->` right assign with pipe (**experimental - use interactive only**)
 
 ```r
 # these two are equivalent
 a <- tibble(x = 1)
 tibble(x = 1) %>% allot(a)
 ```
-
+- `recode_if`: like `case_when` when you want to keep original data (`TRUE ~ original`)
 - `rename`: rename a column in data.frame
 - `take_note`: Write a note to file
 - `unkount`: Uncounting data frame using a weights

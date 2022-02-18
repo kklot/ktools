@@ -1,3 +1,35 @@
+#' recode keeping original data when conditions have NA
+#'
+#' \code{\link[dplyr]{if_else}} will replace original data with NA when
+#' conditions has NAs. Handling only a simple case so it is 20 times faster than
+#' \code{\link[dplyr]{case_when}} (see Examples).
+#'
+#' @param cond condition
+#' @param yes value when condition is true
+#' @param no value when condition is false **or NA**
+#' @examples
+#' x <- c(rnorm(100), NA_real_)
+#' y <- c(rnorm(100), NA_real_)
+#' bench::mark(
+#'     dplyr::case_when(x < 0 ~ 10, T ~ x),
+#'     recode_if(x < 0, 10, x),
+#'     relative = T
+#' )
+#' bench::mark(
+#'     dplyr::case_when(x < 0 ~ y, T ~ x),
+#'     recode_if(x < 0, y, x), 
+#'     relative = T
+#' )
+#' @export
+recode_if <- function(cond, yes, no) {
+  if (length(yes) == 1) {
+    yes <- rep(yes, length(cond))
+  }
+  id <- which(cond)
+  no[id] <- yes[id]
+  no
+}
+
 #' rename is.na to read the code naturally
 #'
 #' help when writing and reading code
