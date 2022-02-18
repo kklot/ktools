@@ -1,3 +1,20 @@
+#' clean file name 
+#' 
+#' @param path string of path/url
+#' @param keep_extension or not?
+#' @param escape_space or not?, escape space in file name
+#' @export 
+file_name <- function(path, keep_extension = FALSE, escape_space = FALSE,...) {
+    bn <- basename(path)
+    if (!keep_extension) {
+      bn <- tools::file_path_sans_ext(bn)
+    }
+    if (escape_space) {
+      bn <- gsub(" ", "\\ ", bn)
+    }
+    bn
+}
+
 #' Help to refactor the factor easier
 #'
 #' @param x a character/factor vector
@@ -156,7 +173,7 @@ list_zip <- function(zipfile, long=FALSE, verylong=FALSE, password, encoding, pr
         cmd <- paste(cmd, '-pe')
       if (indexes)
         cmd <- paste(cmd, '-i')
-      system(paste(cmd, shQuote(zipfile)), intern=TRUE)
+      system(paste(cmd, zipfile), intern=TRUE)
     }
 }
 

@@ -4,7 +4,7 @@
 \alias{allot}
 \title{Right assign to using with pipe}
 \usage{
-allot(.data, name)
+allot(.data, name, envir = parent.frame())
 }
 \arguments{
 \item{.data}{data to assign}

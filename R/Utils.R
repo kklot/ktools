@@ -1,3 +1,10 @@
+#' rename is.na to read the code naturally
+#'
+#' help when writing and reading code
+#'
+#' @export
+is_missing <- is.na
+
 #' Download with httr
 #' 
 #' wrapper with automatic nameing, urldecode, and progress
@@ -31,9 +38,9 @@ download <- function(url, path = '.', overwrite = FALSE,...) {
 #' 3 %>% allot(x)
 #' x
 #' @export
-allot <- function(.data, name) {
+allot <- function(.data, name, envir = parent.frame()) {
     name <- deparse(substitute(name))
-    assign(name, .data, parent.frame(2))
+    assign(name, .data, parent.env(envir))
 }
 
 #' Rename a column
@@ -49,7 +56,7 @@ allot <- function(.data, name) {
 #' rename(dt, a, b)
 #' rename(dt, a, a, unique = TRUE)
 #' @export
-rename <- function(data, old_name, new_name, ...) {
+rename_col <- function(data, old_name, new_name, ...) {
   old_name <- deparse(substitute(old_name))
   new_name <- deparse(substitute(new_name))
   colnames(data)[colnames(data) == old_name] <- new_name
