@@ -1,3 +1,15 @@
+#' tabulate a variable with pipe
+#' 
+#' default table is easier to read than \code{\link[dplyr]{count}}
+#' @param  .data data containing the variable to tabulate
+#' @param var the variable to tabulate
+#' @inheritParam base::table useNA
+#' @inheritDotParams base::table
+#' @export 
+table <- function(.data, var, useNA = 'a', ...) {
+    var <- deparse(substitute(var))
+    base::table(.data[, var], useNA = useNA, ...)
+}
 #' recode keeping original data when conditions have NA
 #'
 #' \code{\link[dplyr]{if_else}} will replace original data with NA when
@@ -30,10 +42,22 @@ recode_if <- function(cond, yes, no) {
   no
 }
 
-#' rename is.na to read the code naturally
+#' Collection of naming, renaming functions, values
+#' 
+#' @name name_collection
+#' @rdname name_collection
+NULL
+
+
+#' name TRUE as `otherwise`
 #'
-#' help when writing and reading code
+#' @rdname name_collection
+#' @export
+otherwise <- TRUE
+
+#' name `is_missing` = `is.na`
 #'
+#' @rdname name_collection
 #' @export
 is_missing <- is.na
 
