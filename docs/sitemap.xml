@@ -121,6 +121,9 @@
     <loc>/reference/f_glogisI.html</loc>
   </url>
   <url>
+    <loc>/reference/facet_unwrap.html</loc>
+  </url>
+  <url>
     <loc>/reference/file_name.html</loc>
   </url>
   <url>
@@ -208,9 +211,6 @@
     <loc>/reference/invert.html</loc>
   </url>
   <url>
-    <loc>/reference/is_missing.html</loc>
-  </url>
-  <url>
     <loc>/reference/is_negative.html</loc>
   </url>
   <url>
@@ -272,6 +272,9 @@
   </url>
   <url>
     <loc>/reference/name2iso.html</loc>
+  </url>
+  <url>
+    <loc>/reference/name_collection.html</loc>
   </url>
   <url>
     <loc>/reference/nan_rm.html</loc>
@@ -425,6 +428,9 @@
   </url>
   <url>
     <loc>/reference/surv_split.html</loc>
+  </url>
+  <url>
+    <loc>/reference/table.html</loc>
   </url>
   <url>
     <loc>/reference/table_as_html.html</loc>

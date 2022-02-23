@@ -97,9 +97,19 @@
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span><span class="sc">:</span>   abweight      </span></code></pre></div>
 <ul>
 <li>
-<code>allot</code>: <code>-&gt;</code> right assign with pipe (<strong>experimental - use interactive only</strong>)</li>
+<code>facet_unwrap</code>: unwrap a ggplot2::facet_wrap plot to view or save separately</li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_histogram</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">facet_wrap</span><span class="op">(</span><span class="op">~</span><span class="va">Species</span><span class="op">)</span>
+<span class="fu"><a href="reference/facet_unwrap.html">facet_unwrap</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>
+<code>allot</code>: <code>-&gt;</code> right assign with pipe (<strong>experimental - use interactive only</strong>)</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># these two are equivalent</span>
 <span class="va">a</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="fu">tibble</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="reference/allot.html">allot</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></code></pre></div>
@@ -119,8 +129,8 @@
 <li>
 <code>char</code>: quoting automatic</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">char</span>(a, b, c)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"a"</span> <span class="st">"b"</span> <span class="st">"c"</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">char</span>(a, b, c)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"a"</span> <span class="st">"b"</span> <span class="st">"c"</span></span></code></pre></div>
 <ul>
 <li>
 <code>bracket</code>: put bracket around a text</li>
@@ -129,12 +139,12 @@
 <li>
 <code>cd</code>: replicate some features of bash cd</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">cd</span>()</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>Moved from<span class="sc">:</span> <span class="er">/</span>Users<span class="sc">/</span>knguyen<span class="sc">/</span>Code<span class="sc">/</span>R<span class="sc">/</span>ktools</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a> to <span class="sc">~</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span> <span class="fu">cd</span>(<span class="st">'-'</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>Moved from<span class="sc">:</span> <span class="er">/</span>Users<span class="sc">/</span>knguyen</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a> to <span class="sc">/</span>Users<span class="sc">/</span>knguyen<span class="sc">/</span>Code<span class="sc">/</span>R<span class="sc">/</span>ktools</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">cd</span>()</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>Moved from<span class="sc">:</span> <span class="er">/</span>Users<span class="sc">/</span>knguyen<span class="sc">/</span>Code<span class="sc">/</span>R<span class="sc">/</span>ktools</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a> to <span class="sc">~</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span> <span class="fu">cd</span>(<span class="st">'-'</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>Moved from<span class="sc">:</span> <span class="er">/</span>Users<span class="sc">/</span>knguyen</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a> to <span class="sc">/</span>Users<span class="sc">/</span>knguyen<span class="sc">/</span>Code<span class="sc">/</span>R<span class="sc">/</span>ktools</span></code></pre></div>
 <ul>
 <li>
 <code>MakeADFunSafe</code>: MakeADFun safely terminated if there is a bound error</li>
