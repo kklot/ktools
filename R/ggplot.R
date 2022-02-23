@@ -9,11 +9,13 @@
 #' @param path where to save them?
 #' @inheritDotParams ggplot2::ggsave
 #' @examples
+#' \dontrun{
 #' g <- iris %>%
 #'   ggplot(aes(Sepal.Length)) +
 #'   geom_histogram() +
 #'   facet_wrap(~Species)
 #' facet_unwrap(g)
+#' }
 #' @export
 facet_unwrap <- function(g, plot = TRUE, save = FALSE, path = '.', ...) {
     on.exit(devAskNewPage(ask = FALSE))
