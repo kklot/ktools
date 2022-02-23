@@ -56,6 +56,16 @@ query_name(b2, "weight")
 4:   abweight      
 ```
 
+- `facet_unwrap`: unwrap a ggplot2::facet_wrap plot to view or save separately
+
+```r
+g <- iris %>%
+  ggplot(aes(Sepal.Length)) +
+  geom_histogram() +
+  facet_wrap(~Species)
+facet_unwrap(g)
+```
+
 - `allot`: `->` right assign with pipe (**experimental - use interactive only**)
 
 ```r

@@ -13,6 +13,9 @@ Imports:
     countrycode,
     magrittr,
     httr,
-    snakecase
+    snakecase,
+    ggplot2,
+    dplyr,
+    tidyselect
 RoxygenNote: 7.1.2
 Encoding: UTF-8

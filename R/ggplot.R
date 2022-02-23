@@ -1,3 +1,46 @@
+#' Unwrap a facet_wrap plot
+#' 
+#' Useful when there are a lot of panels in \code{\link[ggplot2]{facet_wrap})
+#' and you want to browse (and optionally save) them one by one
+#' 
+#' @param g the ggplot2 object created as normal
+#' @param plot whether to plot (or just save by turn the next args to TRUE)
+#' @param save whether to save the plot to disk
+#' @param path where to save them?
+#' @inheritDotParams ggplot2::ggsave
+#' @examples
+#' g <- iris %>%
+#'   ggplot(aes(Sepal.Length)) +
+#'   geom_histogram() +
+#'   facet_wrap(~Species)
+#' facet_unwrap(g)
+#' @export
+facet_unwrap <- function(g, plot = TRUE, save = FALSE, path = '.', ...) {
+    on.exit(devAskNewPage(ask = FALSE))
+    devAskNewPage(ask = TRUE)
+    gb <- ggplot2::ggplot_build(g)
+    fc <- names(gb$layout$facet_params$facets)
+    cb <- g$data %>%
+      dplyr::select(tidyselect::all_of(fc)) %>%
+      dplyr::distinct()
+    cb[1, , drop = FALSE]
+    message("There are ", nrow(cb), " plots")
+    for (r in 1:nrow(cb)) {
+        p <- g %+% dplyr::semi_join(g$data, cb[r, , drop = F], by = tidyselect::all_of(fc))
+        print(p)
+        if (save) {
+          name <- paste0(path, "/", paste0(cb[1, ], collapse = "_"))
+          dots <- list(...)
+          if (exists("device", dots)) {
+            name <- paste0(name, dots$device)
+          } else {
+            name <- paste0(name, "pdf")
+          }            
+          ggplot2::ggsave(name, p, ...)
+        }
+    }
+}
+
 #' Plot a 2D matrix as image
 #'
 #' @param a matrix which columns are to plotted
