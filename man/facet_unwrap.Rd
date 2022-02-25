@@ -42,9 +42,11 @@ from the plot theme.}
 
 }
 \examples{
+\dontrun{
 g <- iris \%>\%
   ggplot(aes(Sepal.Length)) +
   geom_histogram() +
   facet_wrap(~Species)
 facet_unwrap(g)
+}
 }

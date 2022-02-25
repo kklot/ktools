@@ -285,6 +285,9 @@ range_label <- function(x, start=3, end=4) {
 #' @param x r object
 #' @export
 more <- function(x) {
+  mp <- getOption('max.print')
+  on.exit(options(max.print = mp))
+  options(max.print = 99999)
   # https://stackoverflow.com/a/3506450
   file <- tempfile()
   sink(file); on.exit(sink())

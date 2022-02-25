@@ -31,29 +31,36 @@ devtools::install_github("kklot/ktools")
 
 Examples of what inside:
 
+- `more`: View a big object in a pager view similar to `bash more`, press `q` to
+  quit viewing
+
+```r
+more(LETTERS[rep(1:26, each=1000)])
+```
+
 - `pick`: wrapper of `grep` tp pick element with regex
 - `query_label`: search variable labels on labelled data (e.g.
 `haven::read_dta`)
 
 ```r
 # query KAIS surveys
-query_label(b1, "cmc")                                                                                                  
-    name                              label
-1: qhint            Date of interview (CMC)
-2:  q102                Date of birth (CMC)
-3:  q212 Date of birth for last child (CMC)
-4:  q318 Date of birth for last child (CMC)
+query_label(b1, "cmc")
+#     name                              label
+# 1: qhint            Date of interview (CMC)
+# 2:  q102                Date of birth (CMC)
+# 3:  q212 Date of birth for last child (CMC)
+# 4:  q318 Date of birth for last child (CMC)
 ```
 
 - `query_name`: search name on a data (e.g. `haven::read_dta`)
 
 ```r
 query_name(b2, "weight")                                                                                                
-         name label
-1: rawiweight      
-2: rawbweight      
-3:   aiweight      
-4:   abweight      
+#          name label
+# 1: rawiweight      
+# 2: rawbweight      
+# 3:   aiweight      
+# 4:   abweight      
 ```
 
 - `facet_unwrap`: unwrap a ggplot2::facet_wrap plot to view or save separately
@@ -82,8 +89,8 @@ tibble(x = 1) %>% allot(a)
 - `char`: quoting automatic
 
 ```r
-> char(a, b, c)
-[1] "a" "b" "c"
+char(a, b, c)
+# [1] "a" "b" "c"
 ```
 
 - `bracket`: put bracket around a text
@@ -91,12 +98,12 @@ tibble(x = 1) %>% allot(a)
 - `cd`: replicate some features of bash cd
 
 ```r
-> cd()
-Moved from: /Users/knguyen/Code/R/ktools
- to ~
-> cd('-')
-Moved from: /Users/knguyen
- to /Users/knguyen/Code/R/ktools
+cd()
+# Moved from: /Users/knguyen/Code/R/ktools
+#  to ~
+cd('-')
+# Moved from: /Users/knguyen
+#  to /Users/knguyen/Code/R/ktools
 ```
 
 - `MakeADFunSafe`: MakeADFun safely terminated if there is a bound error
