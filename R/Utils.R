@@ -715,7 +715,6 @@ iso2name <- function(x,...) {
   code <- ifelse(nchar(x)==2, 'iso2c', 'iso3c')
   countrycode::countrycode(x, code, 'country.name', custom_match=.extra_ISOA3,...)
 }
-iso2name <- Vectorize(iso2name)
 
 #' shorthand country name to ISO from countrycode package with some custom match
 #' 
