@@ -1,3 +1,24 @@
+#' Log penalized complexity precision prior like INLA's internal
+#'
+#' @param log_prec log precision
+#' @param u u
+#' @param alpha alpha
+#' @examples
+#' sd <- seq(0.001, 2, 0.01)
+#' prec <- sd2prec(sd)
+#' lprec <- log(prec)
+#' log_prec_prior(lprec, 0.33, 0.01) %>%
+#'   exp() %>%
+#'   plot(sd, .)
+#' log_prec_prior(lprec, 1, 0.01) %>%
+#'   exp() %>%
+#'   lines(sd, .)
+#' @export
+log_prec_prior <- function(log_prec, u, alpha) {
+  theta = -log(alpha) / u
+  log(theta / 2.0) - theta * exp(-log_prec / 2) - log_prec / 2
+}
+
 #' tabulate a variable with pipe
 #' 
 #' default table is easier to read than \code{\link[dplyr]{count}}
