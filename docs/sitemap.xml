@@ -247,6 +247,9 @@
     <loc>/reference/list_zip.html</loc>
   </url>
   <url>
+    <loc>/reference/log_prec_prior.html</loc>
+  </url>
+  <url>
     <loc>/reference/logistic.html</loc>
   </url>
   <url>
@@ -272,6 +275,9 @@
   </url>
   <url>
     <loc>/reference/name2iso.html</loc>
+  </url>
+  <url>
+    <loc>/reference/name2list.html</loc>
   </url>
   <url>
     <loc>/reference/name_collection.html</loc>
