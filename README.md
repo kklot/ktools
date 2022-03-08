@@ -114,4 +114,8 @@ cd('-')
 -   `pfrankCopula`: Frank copulas prob
 -   `tmb_fixit`: TMB fix parameters
 
+``` r
+name2list(c(x = 1, abc = 2))
+```
+
 Let search engines do the work of documenting.

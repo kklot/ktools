@@ -1,3 +1,14 @@
+#' Convert named vector to a named list 
+#' 
+#' Main usage is extracting named parameters returned by e.g., \code{\link[base]{optim}}
+#' 
+#' @param x a named vector
+#' @examples 
+#' x <- c(a = 1, b = 2)
+#' name2list(x)
+#' @export
+name2list <-  function(x) split(unname(x), names(x))
+
 #' Log penalized complexity precision prior like INLA's internal
 #'
 #' @param log_prec log precision
