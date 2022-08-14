@@ -65,7 +65,7 @@ Compute the mean"><meta property="og:image" content="/logo.png"><!-- mathjax -->
 
 <span class="fu">qskewlogis</span><span class="op">(</span><span class="va">q</span>, <span class="va">scale</span>, <span class="va">shape</span>, <span class="va">skew</span><span class="op">)</span>
 
-<span class="fu">pskewlogis</span><span class="op">(</span><span class="va">t</span>, <span class="va">scale</span>, <span class="va">shape</span>, <span class="va">skew</span><span class="op">)</span>
+<span class="fu">pskewlogis</span><span class="op">(</span><span class="va">x</span>, <span class="va">scale</span>, <span class="va">shape</span>, <span class="va">skew</span><span class="op">)</span>
 
 <span class="fu">rskewlogis</span><span class="op">(</span><span class="va">n</span>, scale <span class="op">=</span> <span class="fl">0.05</span>, shape <span class="op">=</span> <span class="fl">7</span>, skew <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 
@@ -88,13 +88,13 @@ Compute the mean"><meta property="og:image" content="/logo.png"><!-- mathjax -->
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">dskewlogis</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">20</span>, <span class="fl">10</span>, <span class="fl">2</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">dskewlogis</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, <span class="fl">1</span> <span class="op">/</span> <span class="fl">20</span>, <span class="fl">10</span>, <span class="fl">2</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span>
 <span class="r-plt img"><img src="dskewlogis-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">qskewlogis</span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">20</span>, <span class="fl">10</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">qskewlogis</span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">1</span> <span class="op">/</span> <span class="fl">20</span>, <span class="fl">10</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 21.84276</span>
-<span class="r-in"><span class="fu">rskewlogis</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">20</span>, <span class="fl">10</span>, <span class="fl">2</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 31.84990 23.13592 18.22703 21.72016 43.35725 27.31025 22.31878 23.17824</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] 35.69354 27.26386</span>
+<span class="r-in"><span class="fu">rskewlogis</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">1</span> <span class="op">/</span> <span class="fl">20</span>, <span class="fl">10</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 18.99893 25.85904 19.56040 19.44503 21.14176 21.98542 21.40489 20.49214</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] 23.23296 24.31749</span>
 </code></pre></div>
     </div>
   </div>
