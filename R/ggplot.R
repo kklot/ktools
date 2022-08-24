@@ -1,3 +1,18 @@
+#' Sizing the figure in Python notebook IRKernel
+#' 
+#' too lazy to type the long options?
+#' 
+#' @param w repr.plot.width
+#' @param h repr.plot.height
+#' @examples
+#' \dontrun{
+#' sizing(7, 4)
+#' }
+#' @export
+sizing <- function(w = 7, h = 4) {
+    options(repr.plot.height = h, repr.plot.width = w) 
+}
+
 #' Unwrap a facet_wrap plot
 #' 
 #' Useful when there are a lot of panels in \code{\link[ggplot2]{facet_wrap})
