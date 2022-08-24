@@ -102,8 +102,18 @@ cd('-')
 #  to /Users/knguyen/Code/R/ktools
 ```
 
--   `MakeADFunSafe`: MakeADFun safely terminated if there is a bound
-    error
+-   Generate AR(2) precision matrix
+
+``` r
+AR2_Q
+```
+
+-   MakeADFun safely terminated if there is a bound error
+
+``` r
+MakeADFunSafe
+```
+
 -   `double_logistic`: Double logistic function
 -   `findInterval2`: findInterval and return factor with label
 -   `fractional_poly`: find best fit fractional polynomial using GLM
@@ -113,6 +123,11 @@ cd('-')
 -   `napply`: n(amed)apply: lapply but automatic add names to output
 -   `pfrankCopula`: Frank copulas prob
 -   `tmb_fixit`: TMB fix parameters
+-   NullSpace penalty
+
+``` r
+nullspace_penalty()
+```
 
 ``` r
 name2list(c(x = 1, abc = 2))
