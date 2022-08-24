@@ -14,7 +14,7 @@ dskewlogis(x, scale, shape, skew, log = FALSE)
 
 qskewlogis(q, scale, shape, skew)
 
-pskewlogis(t, scale, shape, skew)
+pskewlogis(x, scale, shape, skew)
 
 rskewlogis(n, scale = 0.05, shape = 7, skew = 1)
 
@@ -47,7 +47,7 @@ Compute the variance
 Compute the mean
 }
 \examples{
-plot(dskewlogis(1:100, 1/20, 10, 2), type = "l")
-qskewlogis(.5, 1/20, 10, 2)
-rskewlogis(10, 1/20, 10, 2)
+plot(dskewlogis(1:100, 1 / 20, 10, 2), type = "l")
+qskewlogis(.5, 1 / 20, 10, 2)
+rskewlogis(10, 1 / 20, 10, 2)
 }

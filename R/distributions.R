@@ -103,9 +103,9 @@ corfrankCopula <- function(x, type = c("spearman", "kendall")) {
 #' @param shape shape
 #' @param skew skewness parameters
 #' @examples
-#' plot(dskewlogis(1:100, 1/20, 10, 2), type = "l")
-#' qskewlogis(.5, 1/20, 10, 2)
-#' rskewlogis(10, 1/20, 10, 2)
+#' plot(dskewlogis(1:100, 1 / 20, 10, 2), type = "l")
+#' qskewlogis(.5, 1 / 20, 10, 2)
+#' rskewlogis(10, 1 / 20, 10, 2)
 #' @export
 dskewlogis <- function(x, scale, shape, skew, log = FALSE) { # old is f_gllogisI
   term = (scale * x)^-shape
@@ -117,12 +117,16 @@ dskewlogis <- function(x, scale, shape, skew, log = FALSE) { # old is f_gllogisI
 #' Quantile
 #' @rdname dskewlogis
 #' @export
-qskewlogis <- function (q, scale, shape, skew) 1/scale * (-1 + q^(-1/skew))^(-1/shape)
+qskewlogis <- function(q, scale, shape, skew) {
+  1 / scale * (-1 + q^(-1 / skew))^(-1 / shape)
+}
 
 #' Probability density
 #' @rdname dskewlogis
 #' @export
-pskewlogis <- function(t, scale, shape, skew) (1 + (scale * t)^-shape)^-skew
+pskewlogis <- function(x, scale, shape, skew) {
+  (1 + (scale * x)^-shape)^-skew
+}
 # old name F_gllogisI 
 
 #' Sampling
