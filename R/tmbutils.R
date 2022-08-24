@@ -1,3 +1,49 @@
+#' Autoregressive order 2 - AR(2) precision matrix generator
+#' 
+#' @param n length 
+#' @param sd standard deviation 
+#' @param rho two AR2 coefficients 
+#' @examples 
+#' QQ <- AR2_Q(10)
+#' x <- INLA::inla.qsample(1, Q, 
+#'   constr = list(A = matrix(1, ncol = nrow(Q)), e = 0))
+#' plot(x, type = 'l')
+#' @export
+AR2_Q <- function(n = 10, sd = 1, rho = c(0.9, 0.05)) {
+    R <- Matrix::Diagonal(n, 1)
+    for (i in 2:n) {
+        if (i == 2) {
+            R[i, i - 1] <- -rho[1]
+            next
+        }
+        R[i, i - 1] <- -rho[1]
+        R[i, i - 2] <- -rho[2]
+    }
+    R <- t(R) %*% (R) # Kai
+    # precision
+    Q <- (1 / sd^2) * R
+    Q
+}
+
+#' Null-space penalty of the precision matrix
+#' 
+#' This add e.g., constraints zero intercept and slope for second-order random
+#' walk model.
+#' 
+#' @details 
+#' Using eigen decomposition to find the zero eigenvalues, which is then added
+#' back to the original penalized matrix. Note that this leads to loss of
+#' sparseness.
+#' 
+#' @param x a precision matrix
+#' @export 
+nullspace_penalty <- function(x) {
+    eg <- eigen(x, TRUE)
+    ind <- eg$values < max(eg$values) * .Machine$double.eps^.66
+    U <- eg$vectors[, ind, drop = FALSE]
+    x + U %*% t(U)
+}
+
 #' MakeADFun safely terminated if there is a bound error
 #' 
 #' to prevent TMB crashing an R session. This should not be done with TMB in parallel mode
