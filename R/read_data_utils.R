@@ -1,3 +1,18 @@
+#' Read a file match a pattern inside a zip file
+#' 
+#' may be to improve caching file, in case one wants to read again without the 
+#' need to extracting again
+#' 
+#' @param file the path to the zip file
+#' @param pattern a regex pattern
+#' @param readfn what function use to read the file?
+#' @export
+read_in_zip <- function(file, pattern, readfn = haven::read_dta) {
+    name <- find_in_zip(file, pattern)
+    unar(file, exdir = tempdir(), force_directory = F, overwrite = FALSE)
+    readfn(paste0(tempdir(), '/', name))
+}
+
 #' clean file name 
 #' 
 #' @param path string of path/url
