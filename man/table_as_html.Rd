@@ -4,10 +4,12 @@
 \alias{table_as_html}
 \title{View table as html}
 \usage{
-table_as_html(code, ...)
+table_as_html(code, save_as = NULL, ...)
 }
 \arguments{
 \item{code}{out of knitr::kable(format='html') for}
+
+\item{save_as}{name (including path if needed) to save the html}
 }
 \description{
 for, e.g, copy to Word editors keeping most of the format
