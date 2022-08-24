@@ -313,26 +313,28 @@ range_label <- function(x, start=3, end=4) {
 }
 
 #' Pager view similar to more
-#' 
+#'
 #' @param x r object
 #' @export
 more <- function(x) {
-  mp <- getOption('max.print')
+  mp <- getOption("max.print")
   on.exit(options(max.print = mp))
   options(max.print = 99999)
   # https://stackoverflow.com/a/3506450
   file <- tempfile()
-  sink(file); on.exit(sink())
+  sink(file)
+  on.exit(sink())
   print(x)
   file.show(file, delete.file = T)
 }
 #' View table as html
-#' 
+#'
 #' for, e.g, copy to Word editors keeping most of the format
-#' 
-#' @param code out of knitr::kable(format='html') for 
+#'
+#' @param code out of knitr::kable(format='html') for
+#' @param save_as name (including path if needed) to save the html
 #' @export
-table_as_html <- function(code, ...) {
+table_as_html <- function(code, save_as = NULL, ...) {
   # dots <- modifyList(list(...), list(format='html'))
   # if (!inherits(code, 'knitr_kable')) {
     # require(knitr)
@@ -342,6 +344,9 @@ table_as_html <- function(code, ...) {
   file <- tempfile(fileext = ".html")
   name <- tools::file_path_sans_ext(file)
   writeLines(code, file)
+  if (!is.null(save_as)) {
+    file.copy(file, save_as)
+  }
   open_file(file)
 }
 
