@@ -349,6 +349,9 @@
     <loc>/reference/put.html</loc>
   </url>
   <url>
+    <loc>/reference/py2r.html</loc>
+  </url>
+  <url>
     <loc>/reference/quantile95.html</loc>
   </url>
   <url>
@@ -371,6 +374,9 @@
   </url>
   <url>
     <loc>/reference/range_label.html</loc>
+  </url>
+  <url>
+    <loc>/reference/read_in_zip.html</loc>
   </url>
   <url>
     <loc>/reference/readnbind.html</loc>
