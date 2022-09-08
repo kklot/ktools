@@ -406,10 +406,16 @@
     <loc>/reference/resize.html</loc>
   </url>
   <url>
+    <loc>/reference/rmvnorm_sparseprec.html</loc>
+  </url>
+  <url>
     <loc>/reference/row2id.html</loc>
   </url>
   <url>
     <loc>/reference/s2n.html</loc>
+  </url>
+  <url>
+    <loc>/reference/sample_tmb.html</loc>
   </url>
   <url>
     <loc>/reference/savePDF.html</loc>
