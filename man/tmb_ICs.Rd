@@ -4,7 +4,13 @@
 \alias{tmb_ICs}
 \title{Calculate Information criteria for TMB model}
 \usage{
-tmb_ICs(post_sample, pointwise = "pwdens", islog = TRUE, looic = FALSE)
+tmb_ICs(
+  post_sample,
+  pointwise = "pwdens",
+  islog = TRUE,
+  looic = FALSE,
+  fix_nan = TRUE
+)
 }
 \arguments{
 \item{post_sample}{posterior samples (results from ktools::sample_tmb)}
@@ -14,6 +20,8 @@ tmb_ICs(post_sample, pointwise = "pwdens", islog = TRUE, looic = FALSE)
 \item{islog}{Is the pointwise density or log density?}
 
 \item{looic}{Report leave one out IC from `loo` package?}
+
+\item{fix_nan}{replace NaN density with minimum density - pls check the likelihood yourself}
 }
 \value{
 WAIC-1 and WAIC-2, DIC, and LOO when requested

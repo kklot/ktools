@@ -120,13 +120,16 @@ sd2prec <- function(x) {
 #' @param pointwise character name of pointwise predictive density reported from your model
 #' @param islog Is the pointwise density or log density?
 #' @param looic Report leave one out IC from `loo` package?
+#' @param fix_nan replace NaN density with minimum density - pls check the likelihood yourself
 #' @inheritParams
 #' @return WAIC-1 and WAIC-2, DIC, and LOO when requested
 #' @export
-tmb_ICs <- function(post_sample, pointwise = 'pwdens', islog = TRUE, looic=FALSE) {
+tmb_ICs <- function(post_sample, pointwise = 'pwdens', islog = TRUE, looic=FALSE, fix_nan = TRUE) {
   # pointwise_predictive_density
   ppd = apply(post_sample, 1, function(x) obj$report(x)[[pointwise]])
   if (islog) ppd <- exp(ppd)
+  if (any(is.na(ppd))) warnings("There are NaN in individual density.")
+  if (fix_nan) ppd[is.na(ppd)] <- min(ppd, na.rm = TRUE)
   log_ppd = sum(log(rowMeans(ppd)))
 
   # DIC - dum logic here but lazy to improve
