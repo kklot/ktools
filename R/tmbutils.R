@@ -112,27 +112,27 @@ sd2prec <- function(x) {
 }
 
 #' Calculate Information criteria for TMB model
-#' 
-#' @param obj TMB object
-#' @param n_post Number of posterior samples
-#' @param pointwise Name of pointwise predictive density from your model
+#'
+#' Note that the model need to report *point-wise density* of the likelihood to
+#' calculate the ICs
+#'
+#' @param post_sample posterior samples (results from ktools::sample_tmb)
+#' @param pointwise character name of pointwise predictive density reported from your model
+#' @param islog Is the pointwise density or log density?
 #' @param looic Report leave one out IC from `loo` package?
+#' @inheritParams
+#' @return WAIC-1 and WAIC-2, DIC, and LOO when requested
 #' @export
-tmb_ICs <- function(obj, n_post=1000, pointwise='pwdens', looic=FALSE) {
-  
-  if (is.null(obj$env$random)) {
-    joint_cov = sdreport(obj)$cov.fixed
-  } else {
-    joint_cov = as.matrix(solve(sdreport(obj,,,1)$jointPrecision))
-  }
-  post_sample = mvtnorm::rmvnorm(n_post, obj$env$last.par.best, joint_cov)
-
+tmb_ICs <- function(post_sample, pointwise = 'pwdens', islog = TRUE, looic=FALSE) {
   # pointwise_predictive_density
   ppd = apply(post_sample, 1, function(x) obj$report(x)[[pointwise]])
+  if (islog) ppd <- exp(ppd)
   log_ppd = sum(log(rowMeans(ppd)))
 
-  # DIC
-  log_post = sum(log(obj$report(obj$env$last.par.best)[[pointwise]]))
+  # DIC - dum logic here but lazy to improve
+  post_est = obj$report(obj$env$last.par.best)[[pointwise]]
+  if (islog) post_est <- exp(post_est)
+  log_post = sum(log(post_est))
   mean_log = mean(colSums(log(ppd)))
 
   # WAIC

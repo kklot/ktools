@@ -4,17 +4,21 @@
 \alias{tmb_ICs}
 \title{Calculate Information criteria for TMB model}
 \usage{
-tmb_ICs(obj, n_post = 1000, pointwise = "pwdens", looic = FALSE)
+tmb_ICs(post_sample, pointwise = "pwdens", islog = TRUE, looic = FALSE)
 }
 \arguments{
-\item{obj}{TMB object}
+\item{post_sample}{posterior samples (results from ktools::sample_tmb)}
 
-\item{n_post}{Number of posterior samples}
+\item{pointwise}{character name of pointwise predictive density reported from your model}
 
-\item{pointwise}{Name of pointwise predictive density from your model}
+\item{islog}{Is the pointwise density or log density?}
 
 \item{looic}{Report leave one out IC from `loo` package?}
 }
+\value{
+WAIC-1 and WAIC-2, DIC, and LOO when requested
+}
 \description{
-Calculate Information criteria for TMB model
+Note that the model need to report *point-wise density* of the likelihood to
+calculate the ICs
 }
