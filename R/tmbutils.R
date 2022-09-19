@@ -6,6 +6,8 @@
 #' @value a sparsed matrix 
 #' @details the original values is made unique and sorted
 #' @export 
+#' @examples 
+#' make_re_matrix(sample(1:10, 7))
 make_re_matrix <- function(x) {
   require(Matrix)
   mm <- seq(min(x), max(x), 1)
