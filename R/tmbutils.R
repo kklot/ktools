@@ -1,3 +1,27 @@
+#' Unload TMB if loaded
+#' 
+#' help when rerun the code with unload included
+#' 
+#' @param x character name of the TMB file
+#' @return nothing
+#' @export
+tmb_unload <- function(x) {
+    yes <- x %in% names(getLoadedDLLs())
+    if (yes) base::dyn.unload(TMB::dynlib(x))
+}
+
+#' Basic loading of TMB model with basic name handling, unloading
+#' 
+#' @param x character name of the TMB model, with or without extension is OK
+#' @inheritParams TMB::config
+tmb_load <- function(x, ...) {
+    if (tools::file_ext(x) == 'cpp') x <- tools::file_path_sans_ext(x)
+    tmb_unload(x)
+    TMB::compile(paste0(x, '.cpp'))
+    base::dyn.load(TMB::dynlib(x))
+    TMB::config(tape.parallel = 0, DLL = x, ...)
+}
+
 #' Autoregressive order 2 - AR(2) precision matrix generator
 #' 
 #' @param n length 
@@ -121,7 +145,6 @@ sd2prec <- function(x) {
 #' @param islog Is the pointwise density or log density?
 #' @param looic Report leave one out IC from `loo` package?
 #' @param fix_nan replace NaN density with minimum density - pls check the likelihood yourself
-#' @inheritParams
 #' @return WAIC-1 and WAIC-2, DIC, and LOO when requested
 #' @export
 tmb_ICs <- function(post_sample, pointwise = 'pwdens', islog = TRUE, looic=FALSE, fix_nan = TRUE) {
@@ -292,9 +315,9 @@ sample_tmb <- function(fit, nsample = 1000, random_only = TRUE, verbose = TRUE) 
   par.full <- fit$obj$env$last.par.best
   if (!random_only) {
     if (verbose) print("Calculating joint precision")
-    hess <- TMB::sdreport(fit$obj, fit$fit$par, getJointPrecision = TRUE)
+    rp <- TMB::sdreport(fit$obj, fit$fit$par, getJointPrecision = TRUE)
     if (verbose) print("Drawing sample")
-    smp <- rmvnorm_sparseprec(nsample, par.full, hess)
+    smp <- rmvnorm_sparseprec(nsample, par.full, rp$jointPrecision)
   } else {
     r_id <- fit$obj$env$random
     par_f <- par.full[-r_id]
