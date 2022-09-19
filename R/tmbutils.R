@@ -1,3 +1,22 @@
+#' Generte model matrix for random effect, such as AR model
+#' 
+#' the original value is saved a attributes
+#' 
+#' @param x the covariate that we wish to smooth
+#' @value a sparsed matrix 
+#' @details the original values is made unique and sorted
+#' @export 
+make_re_matrix <- function(x) {
+  require(Matrix)
+  mm <- seq(min(x), max(x), 1)
+  id <- match(x, mm)
+  ma <- matrix(0, length(x), length(mm))
+  ma[cbind(1:length(x), id)] <- 1
+  re <- as(ma, "sparseMatrix")
+  attr(re, "value") <- min(x):max(x)
+  re
+}
+
 #' Unload TMB if loaded
 #' 
 #' help when rerun the code with unload included
