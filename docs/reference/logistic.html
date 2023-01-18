@@ -49,27 +49,36 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">logistic</span><span class="op">(</span>
-  time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.01</span><span class="op">)</span>,
-  initial <span class="op">=</span> <span class="fl">1</span>,
-  percent_reduction <span class="op">=</span> <span class="fl">0.5</span>,
-  midpoint <span class="op">=</span> <span class="fl">0.5</span>,
-  shape <span class="op">=</span> <span class="fl">1</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">logistic</span><span class="op">(</span></span>
+<span>  time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.01</span><span class="op">)</span>,</span>
+<span>  initial <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  percent_reduction <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  midpoint <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  shape <span class="op">=</span> <span class="fl">1</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>time</dt>
 <dd><p>time horizon</p></dd>
+
+
 <dt>initial</dt>
 <dd><p>value at time zero</p></dd>
+
+
 <dt>percent_reduction</dt>
 <dd><p>in [0, 1], percentage reduction compare to the initial value after midpoint of the time horizon, so the end value equals initial x percent_reduction</p></dd>
+
+
 <dt>midpoint</dt>
 <dd><p>the time the function changes</p></dd>
+
+
 <dt>shape</dt>
 <dd><p>control how sharp the transition from initial value to the end value</p></dd>
+
 </dl></div>
 
   </div>
@@ -84,7 +93,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -49,30 +49,35 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">log_prec_prior</span><span class="op">(</span><span class="va">log_prec</span>, <span class="va">u</span>, <span class="va">alpha</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">log_prec_prior</span><span class="op">(</span><span class="va">log_prec</span>, <span class="va">u</span>, <span class="va">alpha</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>log_prec</dt>
 <dd><p>log precision</p></dd>
+
+
 <dt>u</dt>
 <dd><p>u</p></dd>
+
+
 <dt>alpha</dt>
 <dd><p>alpha</p></dd>
+
 </dl></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0.001</span>, <span class="fl">2</span>, <span class="fl">0.01</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">prec</span> <span class="op">&lt;-</span> <span class="fu"><a href="sd2prec.html">sd2prec</a></span><span class="op">(</span><span class="va">sd</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">lprec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">prec</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">log_prec_prior</span><span class="op">(</span><span class="va">lprec</span>, <span class="fl">0.33</span>, <span class="fl">0.01</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">sd</span>, <span class="va">.</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">log_prec_prior</span><span class="op">(</span><span class="va">lprec</span>, <span class="fl">1</span>, <span class="fl">0.01</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">sd</span>, <span class="va">.</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0.001</span>, <span class="fl">2</span>, <span class="fl">0.01</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">prec</span> <span class="op">&lt;-</span> <span class="fu"><a href="sd2prec.html">sd2prec</a></span><span class="op">(</span><span class="va">sd</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">lprec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">prec</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">log_prec_prior</span><span class="op">(</span><span class="va">lprec</span>, <span class="fl">0.33</span>, <span class="fl">0.01</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">sd</span>, <span class="va">.</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">log_prec_prior</span><span class="op">(</span><span class="va">lprec</span>, <span class="fl">1</span>, <span class="fl">0.01</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">sd</span>, <span class="va">.</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="log_prec_prior-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -88,7 +93,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

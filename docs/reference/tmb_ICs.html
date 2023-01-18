@@ -51,31 +51,42 @@ calculate the ICs</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">tmb_ICs</span><span class="op">(</span>
-  <span class="va">post_sample</span>,
-  pointwise <span class="op">=</span> <span class="st">"pwdens"</span>,
-  islog <span class="op">=</span> <span class="cn">TRUE</span>,
-  looic <span class="op">=</span> <span class="cn">FALSE</span>,
-  fix_nan <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tmb_ICs</span><span class="op">(</span></span>
+<span>  <span class="va">post_sample</span>,</span>
+<span>  pointwise <span class="op">=</span> <span class="st">"pwdens"</span>,</span>
+<span>  islog <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  looic <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  fix_nan <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>post_sample</dt>
 <dd><p>posterior samples (results from ktools::sample_tmb)</p></dd>
+
+
 <dt>pointwise</dt>
 <dd><p>character name of pointwise predictive density reported from your model</p></dd>
+
+
 <dt>islog</dt>
 <dd><p>Is the pointwise density or log density?</p></dd>
+
+
 <dt>looic</dt>
 <dd><p>Report leave one out IC from `loo` package?</p></dd>
+
+
 <dt>fix_nan</dt>
 <dd><p>replace NaN density with minimum density - pls check the likelihood yourself</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>WAIC-1 and WAIC-2, DIC, and LOO when requested</p>
+    
+
+<p>WAIC-1 and WAIC-2, DIC, and LOO when requested</p>
     </div>
 
   </div>
@@ -90,7 +101,7 @@ calculate the ICs</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -75,14 +75,14 @@
 <p>Miscellaneous function, color palettes, collected doing modelling, many trivial ones. ## Installation</p>
 <p>The development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"kklot/ktools"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"kklot/ktools"</span><span class="op">)</span></span></code></pre></div>
 <p>Examples of what inside:</p>
 <ul>
 <li>
 <code>more</code>: View a big object in a pager view similar to <code>bash more</code>, press <code>q</code> to quit viewing</li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/more.html">more</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">26</span>, each<span class="op">=</span><span class="fl">1000</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/more.html">more</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">26</span>, each<span class="op">=</span><span class="fl">1000</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>
 <code>pick</code>: wrapper of <code>grep</code> tp pick element with regex</li>
@@ -90,42 +90,42 @@
 <code>query_label</code>: search variable labels on labelled data (e.g. <code><a href="https://haven.tidyverse.org/reference/read_dta.html" class="external-link">haven::read_dta</a></code>)</li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># query KAIS surveys</span>
-<span class="fu"><a href="reference/query_label.html">query_label</a></span><span class="op">(</span><span class="va">b1</span>, <span class="st">"cmc"</span><span class="op">)</span>
-<span class="co">#     name                              label</span>
-<span class="co"># 1: qhint            Date of interview (CMC)</span>
-<span class="co"># 2:  q102                Date of birth (CMC)</span>
-<span class="co"># 3:  q212 Date of birth for last child (CMC)</span>
-<span class="co"># 4:  q318 Date of birth for last child (CMC)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># query KAIS surveys</span></span>
+<span><span class="fu"><a href="reference/query_label.html">query_label</a></span><span class="op">(</span><span class="va">b1</span>, <span class="st">"cmc"</span><span class="op">)</span></span>
+<span><span class="co">#     name                              label</span></span>
+<span><span class="co"># 1: qhint            Date of interview (CMC)</span></span>
+<span><span class="co"># 2:  q102                Date of birth (CMC)</span></span>
+<span><span class="co"># 3:  q212 Date of birth for last child (CMC)</span></span>
+<span><span class="co"># 4:  q318 Date of birth for last child (CMC)</span></span></code></pre></div>
 <ul>
 <li>
 <code>query_name</code>: search name on a data (e.g. <code><a href="https://haven.tidyverse.org/reference/read_dta.html" class="external-link">haven::read_dta</a></code>)</li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/query_name.html">query_name</a></span><span class="op">(</span><span class="va">b2</span>, <span class="st">"weight"</span><span class="op">)</span>                                                                                                
-<span class="co">#          name label</span>
-<span class="co"># 1: rawiweight      </span>
-<span class="co"># 2: rawbweight      </span>
-<span class="co"># 3:   aiweight      </span>
-<span class="co"># 4:   abweight      </span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/query_name.html">query_name</a></span><span class="op">(</span><span class="va">b2</span>, <span class="st">"weight"</span><span class="op">)</span>                                                                                                </span>
+<span><span class="co">#          name label</span></span>
+<span><span class="co"># 1: rawiweight      </span></span>
+<span><span class="co"># 2: rawbweight      </span></span>
+<span><span class="co"># 3:   aiweight      </span></span>
+<span><span class="co"># 4:   abweight      </span></span></code></pre></div>
 <ul>
 <li>
 <code>facet_unwrap</code>: unwrap a ggplot2::facet_wrap plot to view or save separately</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_histogram</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">facet_wrap</span><span class="op">(</span><span class="op">~</span><span class="va">Species</span><span class="op">)</span>
-<span class="fu"><a href="reference/facet_unwrap.html">facet_unwrap</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_histogram</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">facet_wrap</span><span class="op">(</span><span class="op">~</span><span class="va">Species</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/facet_unwrap.html">facet_unwrap</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>
 <code>allot</code>: <code>-&gt;</code> right assign with pipe (<strong>experimental - use interactive only</strong>)</li>
 </ul>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># these two are equivalent</span>
-<span class="va">a</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="fu">tibble</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="reference/allot.html">allot</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># these two are equivalent</span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu">tibble</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="reference/allot.html">allot</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>
 <code>recode_if</code>: like <code>case_when</code> when you want to keep original data (<code>TRUE ~ original</code>)</li>
@@ -143,8 +143,8 @@
 <code>char</code>: quoting automatic</li>
 </ul>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/char.html">char</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, <span class="va">c</span><span class="op">)</span>
-<span class="co"># [1] "a" "b" "c"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/char.html">char</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, <span class="va">c</span><span class="op">)</span></span>
+<span><span class="co"># [1] "a" "b" "c"</span></span></code></pre></div>
 <ul>
 <li>
 <code>bracket</code>: put bracket around a text</li>
@@ -154,22 +154,22 @@
 <code>cd</code>: replicate some features of bash cd</li>
 </ul>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/cd.html">cd</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co"># Moved from: /Users/knguyen/Code/R/ktools</span>
-<span class="co">#  to ~</span>
-<span class="fu"><a href="reference/cd.html">cd</a></span><span class="op">(</span><span class="st">'-'</span><span class="op">)</span>
-<span class="co"># Moved from: /Users/knguyen</span>
-<span class="co">#  to /Users/knguyen/Code/R/ktools</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/cd.html">cd</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co"># Moved from: /Users/knguyen/Code/R/ktools</span></span>
+<span><span class="co">#  to ~</span></span>
+<span><span class="fu"><a href="reference/cd.html">cd</a></span><span class="op">(</span><span class="st">'-'</span><span class="op">)</span></span>
+<span><span class="co"># Moved from: /Users/knguyen</span></span>
+<span><span class="co">#  to /Users/knguyen/Code/R/ktools</span></span></code></pre></div>
 <ul>
 <li>Generate AR(2) precision matrix</li>
 </ul>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">AR2_Q</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">AR2_Q</span></span></code></pre></div>
 <ul>
 <li>MakeADFun safely terminated if there is a bound error</li>
 </ul>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">MakeADFunSafe</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">MakeADFunSafe</span></span></code></pre></div>
 <ul>
 <li>
 <code>double_logistic</code>: Double logistic function</li>
@@ -192,9 +192,9 @@
 <li>NullSpace penalty</li>
 </ul>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/nullspace_penalty.html">nullspace_penalty</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/nullspace_penalty.html">nullspace_penalty</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/name2list.html">name2list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span>, abc <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/name2list.html">name2list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span>, abc <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Let search engines do the work of documenting.</p>
 </div>
   </div>
@@ -242,7 +242,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
