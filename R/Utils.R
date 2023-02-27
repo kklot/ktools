@@ -408,6 +408,42 @@ mustats_3plus <- function(.data, ...) {
   t(c(.o, sig, 'bonferroni'))
 }
 
+#' format cross table for publushing
+#' 
+#' t-test and wilcoxon
+#' 
+#' @param y continouus/count
+#' @param g grouping variable
+meanstat <- function(.data, y, g, method = c("t.test", "wilcox.test")) {
+    FUN <- match.arg(method)
+    if (FUN == "t.test") {
+        rn <- "Mean (SD)"
+        fun1 <- function(x) format(round(mean(x), 2))
+        fun2 <- function(x) format(round(sd(x), 2))
+    } else {
+        rn <- "Median (IQR)"
+        fun1 <- function(x) format(round(median(x), 2))
+        fun2 <- function(x) {
+            quantile(x, probs = c(.25, .75)) %>%
+                round(2) %>%
+                format() %>%
+                paste0(collapse = "-")
+        }
+    }
+    y <- rlang::enquo(y)
+    g <- rlang::enquo(g)
+    fml <- rlang::new_formula(rlang::quo_get_expr(y), rlang::quo_get_expr(g))
+    pvl <- match.fun(FUN)(fml, .data)$p.value %>% format_pvalue()
+    o <- .data %>%
+        group_by(!!g) %>%
+        summarise(stats = paste(fun1(!!y), bracket(fun2(!!y)))) %>%
+        pivot_wider(names_from = !!g, values_from = stats) %>%
+        mutate(`p-value` = pvl, test = FUN)
+    o[1, ] %>%
+        as.matrix() %>%
+        magrittr::set_rownames(rn)
+}
+
 #' format cross-table for publishing
 #' 
 #' format cross-table for publishing, only Fisher/chiquare here
@@ -435,7 +471,7 @@ tabstat <- function(.data, ...) {
   )
   o$t[] <- paste(format(o$t), bracket(format(round(o$prop.r, 2))))
   isFisher <- length(which(o$chisq$expected < 5))/length(o$chisq$expected) > .2
-  p <- if (isFisher) o$fisher$p.value else o$chisq$p.value
+  p <- if (isFisher) o$fisher.ts$p.value else o$chisq$p.value
   o <- cbind(o$t, c(format_pvalue(p), rep('', nrow(o$t)-1) ))
   colnames(o)[ncol(o)] <- 'p-value'
   tname <- "Chi-square"

@@ -15,9 +15,6 @@ gg_group(.data, x, y, g)
 
 \item{g}{grouping variabe}
 }
-\value{
-
-}
 \description{
 Prepare ggplot by groups
 }

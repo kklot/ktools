@@ -11,9 +11,6 @@ rebase(x, cpp = FALSE)
 
 \item{cpp}{use C++ index (starting from zero instead of one)}
 }
-\value{
-
-}
 \description{
 Rebase for indexing/modellin
 }

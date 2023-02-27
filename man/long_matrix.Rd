@@ -9,9 +9,6 @@ long_matrix(m)
 \arguments{
 \item{a}{matrix which columns are to plotted}
 }
-\value{
-
-}
 \description{
 Plot a 2D matrix as lines
 }

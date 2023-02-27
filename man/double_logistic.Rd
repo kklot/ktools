@@ -35,20 +35,11 @@ vector of length x
 \description{
 Double logistic function  have two periods each with a logistic shape, either one of them will be decreasing and the other increases.
 }
-\note{
-
-}
 \examples{
 plotl(double_logistic(bound1=0.1, bound2=0.8))
 plotl(double_logistic(bound1=0.8, bound2=0.1))
 
 }
-\references{
-
-}
 \seealso{
 \code{\link{logistic}}
-}
-\author{
-
 }

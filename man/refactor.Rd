@@ -12,9 +12,6 @@ refactor(x, new_position = c())
 \item{new_position}{a integer vector specify what do you want the refactor
 order look like, e.g., from 1, 2, 3 to 3, 1, 2}
 }
-\value{
-
-}
 \description{
 Help to refactor the factor easier
 }
