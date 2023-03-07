@@ -41,7 +41,7 @@ hex_fill <- function(.data, ids, var, h3var = "h3", radius_max = 3, mode = c("sa
     }
     mode <- match.arg(mode)
     done <- FALSE
-    if (mode == "retry") {
+    if (mode == "same") {
         while (!done) {
             for (i in 1:radius_max) {
                 use_r <- i
