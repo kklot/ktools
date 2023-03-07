@@ -58,6 +58,15 @@
     <loc>/reference/allot.html</loc>
   </url>
   <url>
+    <loc>/reference/as_field.html</loc>
+  </url>
+  <url>
+    <loc>/reference/as_or.html</loc>
+  </url>
+  <url>
+    <loc>/reference/as_query.html</loc>
+  </url>
+  <url>
     <loc>/reference/bang.html</loc>
   </url>
   <url>
@@ -196,6 +205,9 @@
     <loc>/reference/grept.html</loc>
   </url>
   <url>
+    <loc>/reference/hex_fill.html</loc>
+  </url>
+  <url>
     <loc>/reference/histt.html</loc>
   </url>
   <url>
@@ -268,10 +280,16 @@
     <loc>/reference/make_re_matrix.html</loc>
   </url>
   <url>
+    <loc>/reference/meanstat.html</loc>
+  </url>
+  <url>
     <loc>/reference/month_year_to_cmc.html</loc>
   </url>
   <url>
     <loc>/reference/more.html</loc>
+  </url>
+  <url>
+    <loc>/reference/most_frequent.html</loc>
   </url>
   <url>
     <loc>/reference/mustats_3plus.html</loc>
