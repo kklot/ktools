@@ -1,3 +1,22 @@
+#' K-ring smoothing
+#'
+#' @param df data with h3 column
+#' @param hex character name of the h3 column
+#' @param metric character name of the metric column (continous variable)
+#' @param k ring's radius
+#' @export
+kring_smooth <- function(df, hex, metric, k = 1) {
+    rs <- k
+    if (inherits(df, "sf")) {
+        df <- sf::st_drop_geometry(df)
+    }
+    knb <- lapply(df[, hex], function(x) h3::k_ring(x, rs))
+    est <- lapply(knb, function(x) {
+        casev <- df[df[, hex] %in% x, metric]
+        sum(casev, na.rm = T) / (1 + 3 * rs * (rs + 1))
+    })
+}
+
 #' Find most frequent occurrences with rle
 #'
 #' @param x a vector
