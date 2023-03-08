@@ -4,17 +4,29 @@
 #' @param hex character name of the h3 column
 #' @param metric character name of the metric column (continous variable)
 #' @param k ring's radius
+#' @param only_na fill missing values only, otherwise smooth all
 #' @export
-kring_smooth <- function(df, hex, metric, k = 1) {
-    rs <- k
-    if (inherits(df, "sf")) {
-        df <- sf::st_drop_geometry(df)
-    }
-    knb <- lapply(df[, hex], function(x) h3::k_ring(x, rs))
-    est <- lapply(knb, function(x) {
-        casev <- df[df[, hex] %in% x, metric]
-        sum(casev, na.rm = T) / (1 + 3 * rs * (rs + 1))
-    })
+kring_smooth <- function(df, hex, metric, k = 1, only_na = TRUE) {
+  rs <- k
+  if (inherits(df, "sf"))
+    df <- sf::st_drop_geometry(df)
+  type <- typeof(df[1, metric])
+  knb <- lapply(df[, hex], function(x) h3::k_ring(x, rs))
+  est <- lapply(knb, function(x) {
+    casev <- df[df[, hex] %in% x, metric]
+    if (type == "double")
+      o <- sum(casev, na.rm = T) / (1 + 3 * rs * (rs + 1))
+    else
+      o <- most_frequent(casev)
+    o
+  })
+  if (type == 'character')
+    est <- sapply(est, \(x) ifelse(identical(x, character(0)), NA_character_, x))
+  if (only_na) {
+    notna <- which(!is.na(df[, metric]))
+    est[notna] <- my[notna]
+  }
+  est
 }
 
 #' Find most frequent occurrences with rle
@@ -22,8 +34,9 @@ kring_smooth <- function(df, hex, metric, k = 1) {
 #' @param x a vector
 #' @export
 most_frequent <- function(x) {
-  o <- rle(sort(x))
-  o$values[which.max(o$lengths)]
+    if (is.factor(x)) x <- as.character(x)
+    o <- rle(sort(x))
+    o$values[which.max(o$lengths)]
 }
 
 #' Find most frequent occurrences in the neighbors and fill in the missing

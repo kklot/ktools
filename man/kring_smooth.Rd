@@ -4,7 +4,7 @@
 \alias{kring_smooth}
 \title{K-ring smoothing}
 \usage{
-kring_smooth(df, hex, metric, k = 1)
+kring_smooth(df, hex, metric, k = 1, only_na = TRUE)
 }
 \arguments{
 \item{df}{data with h3 column}
@@ -14,6 +14,8 @@ kring_smooth(df, hex, metric, k = 1)
 \item{metric}{character name of the metric column (continous variable)}
 
 \item{k}{ring's radius}
+
+\item{only_na}{fill missing values only, otherwise smooth all}
 }
 \description{
 K-ring smoothing
