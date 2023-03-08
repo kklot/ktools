@@ -24,7 +24,7 @@ kring_smooth <- function(df, hex, metric, k = 1, only_na = TRUE) {
     est <- sapply(est, \(x) ifelse(identical(x, character(0)), NA_character_, x))
   if (only_na) {
     notna <- which(!is.na(df[, metric]))
-    est[notna] <- my[notna]
+    est[notna] <- df[notna, metric]
   }
   est
 }
