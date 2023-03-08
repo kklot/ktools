@@ -1,3 +1,16 @@
+#' Fill `sf` with `h3` indexes
+#'
+#' @param df `sf` data
+#' @param res resolution, 7 = 5km2, 6 = ~36km2, ...
+#' @param ts for st_transform if needed
+#' @return a vector of h3 indexes of all the polygons in the supplied data
+#' @export
+fill_polygon_h3 <- function(.data, res = 7, ts = 4326) {
+    N <- nrow(.data)
+    .data <- sf::st_transform(.data, ts)
+    unlist(sapply(1:N, function(x) h3::polyfill(.data[x, ], res)))
+}
+
 #' K-ring smoothing
 #'
 #' @param df data with h3 column
