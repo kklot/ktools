@@ -23,6 +23,7 @@ sizing <- function(w = 7, h = 4) {
 #' @param save whether to save the plot to disk
 #' @param path where to save them?
 #' @inheritDotParams ggplot2::ggsave
+#' @return invisible a list of ggplot objects, one for each panels
 #' @examples
 #' \dontrun{
 #' g <- iris %>%
@@ -42,20 +43,23 @@ facet_unwrap <- function(g, plot = TRUE, save = FALSE, path = '.', ...) {
       dplyr::distinct()
     cb[1, , drop = FALSE]
     message("There are ", nrow(cb), " plots")
+    o <- list()
     for (r in 1:nrow(cb)) {
-        p <- g %+% dplyr::semi_join(g$data, cb[r, , drop = F], by = tidyselect::all_of(fc))
-        print(p)
-        if (save) {
-          name <- paste0(path, "/", paste0(cb[1, ], collapse = "_"))
-          dots <- list(...)
-          if (exists("device", dots)) {
-            name <- paste0(name, dots$device)
-          } else {
-            name <- paste0(name, "pdf")
-          }            
-          ggplot2::ggsave(name, p, ...)
+      p <- g %+% dplyr::semi_join(g$data, cb[r, , drop = F], by = tidyselect::all_of(fc))
+      o[[r]] <- p
+      print(p)
+      if (save) {
+        name <- paste0(path, "/", paste0(cb[1, ], collapse = "_"))
+        dots <- list(...)
+        if (exists("device", dots)) {
+          name <- paste0(name, dots$device)
+        } else {
+          name <- paste0(name, "pdf")
         }
+        ggplot2::ggsave(name, p, ...)
+      }
     }
+    invisible(o)
 }
 
 #' Plot a 2D matrix as image

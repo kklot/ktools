@@ -34,6 +34,9 @@ specifying dimensions in pixels.}
 from the plot theme.}
   }}
 }
+\value{
+invisible a list of ggplot objects, one for each panels
+}
 \description{
 
 }
