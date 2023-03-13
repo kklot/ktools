@@ -47,7 +47,8 @@ facet_unwrap <- function(g, plot = TRUE, save = FALSE, path = '.', ...) {
     for (r in 1:nrow(cb)) {
       p <- g %+% dplyr::semi_join(g$data, cb[r, , drop = F], by = tidyselect::all_of(fc))
       o[[r]] <- p
-      print(p)
+      if (plot)
+        print(p)
       if (save) {
         name <- paste0(path, "/", paste0(cb[1, ], collapse = "_"))
         dots <- list(...)
