@@ -1,3 +1,21 @@
+#' Leaflet map wrapper
+#' 
+#' For a quick plot with leafelt, can be piped to further processing
+#' 
+#' @param type which type to plot
+#' @param ... further customization
+#' @param provider Provider base map
+#' @export 
+map <- function(.data, type = c('polygon', 'point', 'line'), ..., provider = "OpenStreetMap.DE") {
+    o <- leaflet::leaflet() %>% leaflet::addProviderTiles(provider)
+    t <- match.arg(type)
+    switch(t, 
+      polygon = o %>% leaflet::addPolygons(data=.data, ...),
+      point = o %>% leaflet::addCircleMarkers(data=.data, ...),
+      polygon = o %>% leaflet::addPolylines(data=.data, ...)
+    )
+}
+
 kinla_plot <- function(x, fe=F, lc=F, re=F, hp=F, pre=F, q=F, cpo=F, pri=F, ...) {
     plot(x, plot.fixed.effects = fe,
            plot.lincomb = lc, 
