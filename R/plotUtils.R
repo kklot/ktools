@@ -7,13 +7,13 @@
 #' @param provider Provider base map
 #' @export 
 map <- function(.data, type = c('polygon', 'point', 'line'), ..., provider = "OpenStreetMap.DE") {
-    o <- leaflet::leaflet() %>% leaflet::addProviderTiles(provider)
+    o <- leaflet::leaflet(.data) %>% leaflet::addProviderTiles(provider)
     t <- match.arg(type)
     switch(t, 
-      polygon = o %>% leaflet::addPolygons(data=.data, ...),
-      point = o %>% leaflet::addCircleMarkers(data=.data, ...),
-      polygon = o %>% leaflet::addPolylines(data=.data, ...)
-    )
+        polygon = o <- o %>% leaflet::addPolygons(...), 
+        point = o <- o %>% leaflet::addCircleMarkers(...), 
+        polygon = o <- o %>% leaflet::addPolylines(...))
+    o
 }
 
 kinla_plot <- function(x, fe=F, lc=F, re=F, hp=F, pre=F, q=F, cpo=F, pri=F, ...) {
