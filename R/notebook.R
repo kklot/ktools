@@ -14,4 +14,20 @@ py2r <- function(file, name = 'name', ext = "R",...)
     knitr::purl(file, documentation = 2)
 }
 
-
+#' Display HTML with common options
+#' 
+#' @param x a data frame
+#' @param ... options to DT::datatable
+dttb <- function(x,...) {
+  DT::datatable(
+    x, 
+    extensions = c('Buttons', 'FixedColumns'),
+    options = list(
+      dom = c('Bfrtip'),
+      scrollX = TRUE,
+      fixedColumns = TRUE, 
+      buttons = c('csv', 'excel')
+    ),
+    ...
+  )
+}
