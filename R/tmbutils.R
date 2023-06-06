@@ -1,3 +1,18 @@
+#' Unload loaded TMB dynamics 
+#' 
+#' when using `devtools` multiple times, multiple vesions of the same package
+#' exist. Tried to unload with several others methods but none work for me
+#' except this way.
+#' 
+#' @param name Name of the package, exact.
+#' @export 
+tmb_unload <- function(name) {
+    ldll <- getLoadedDLLs() 
+    idx  <- grep(name, names(ldll))
+    for (i in seq_along(idx)) dyn.unload(unlist(ldll[[idx]])$path)
+    cat('Unload ', length(idx), "loaded versions.\n")
+}
+
 #' Generte model matrix for random effect, such as AR model
 #' 
 #' the original value is saved a attributes
