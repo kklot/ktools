@@ -9,7 +9,7 @@
 tmb_unload <- function(name) {
     ldll <- getLoadedDLLs() 
     idx  <- grep(name, names(ldll))
-    for (i in seq_along(idx)) dyn.unload(unlist(ldll[[idx]])$path)
+    for (i in seq_along(idx)) dyn.unload(unlist(ldll[[idx[i]]])$path)
     cat('Unload ', length(idx), "loaded versions.\n")
 }
 
