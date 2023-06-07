@@ -34,18 +34,6 @@ make_re_matrix <- function(x) {
   re
 }
 
-#' Unload TMB if loaded
-#' 
-#' help when rerun the code with unload included
-#' 
-#' @param x character name of the TMB file
-#' @return nothing
-#' @export
-tmb_unload <- function(x) {
-    yes <- x %in% names(getLoadedDLLs())
-    if (yes) base::dyn.unload(TMB::dynlib(x))
-}
-
 #' Basic loading of TMB model with basic name handling, unloading
 #' 
 #' @param x character name of the TMB model, with or without extension is OK
