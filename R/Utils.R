@@ -1,3 +1,39 @@
+#' Convinient for R4 pipe
+#' 
+#' adding two numbers
+#' @export 
+add <- `+`
+
+#' subtracting
+#' @rdname add
+#' @export 
+subtract <- `-`
+
+#' multiplying
+#' @rdname add
+#' @export 
+multiply <- `*`
+
+#' dividing
+#' @rdname add
+#' @export 
+divide <- `/`
+
+#' extract first level (`[`)
+#' @rdname add
+#' @export 
+xtract <- `[`
+
+#' extract second level (`[[`)
+#' @rdname add
+#' @export 
+xxtract <- `[[`
+
+#' Use dollar extract (`$`)
+#' @rdname add
+#' @export 
+dollar <- `$`
+
 #' Convert named vector to a named list 
 #' 
 #' Main usage is extracting named parameters returned by e.g., \code{\link[base]{optim}}
@@ -451,7 +487,7 @@ meanstat <- function(.data, y, g, method = c("t.test", "wilcox.test")) {
 #' @param row row variable
 #' @param col column (outcome) variable
 #' @export
-tabstat <- function(.data, ...) {
+tabstat <- function(.data, ..., .inequal = TRUE, .digits = 2) {
   dots <- substitute(...())
   .o <- capture.output(o <- 
     suppressWarnings(
@@ -472,7 +508,7 @@ tabstat <- function(.data, ...) {
   o$t[] <- paste(format(o$t), bracket(format(round(o$prop.r, 2))))
   isFisher <- length(which(o$chisq$expected < 5))/length(o$chisq$expected) > .2
   p <- if (isFisher) o$fisher.ts$p.value else o$chisq$p.value
-  o <- cbind(o$t, c(format_pvalue(p), rep('', nrow(o$t)-1) ))
+  o <- cbind(o$t, c(format_pvalue(p, .inequal, .digits), rep('', nrow(o$t)-1) ))
   colnames(o)[ncol(o)] <- 'p-value'
   tname <- "Chi-square"
   if (isFisher) tname <- 'Fisher'
@@ -492,11 +528,11 @@ tabstat <- function(.data, ...) {
 #' 
 #' @param x computed p-value
 #' @export
-format_pvalue <- function(x) {
+format_pvalue <- function(x, inequality = TRUE, digits = 2) {
+  if (!inequality) return(format(round(x, digits)))
   if (x < 0.001) return('< 0.001*')
   if (x < 0.01) return('< 0.01*')
   if (x > 0.1) return('> 0.1')
-  format(round(x, 2))
 }
 format_pvalue <- Vectorize(format_pvalue)
 

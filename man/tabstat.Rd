@@ -4,7 +4,7 @@
 \alias{tabstat}
 \title{format cross-table for publishing}
 \usage{
-tabstat(.data, ...)
+tabstat(.data, ..., .inequal = TRUE, .digits = 2)
 }
 \arguments{
 \item{row}{row variable}

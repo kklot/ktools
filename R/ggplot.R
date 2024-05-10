@@ -1,3 +1,48 @@
+#' Default histogram plot for ktools
+#' 
+#' @param .data data
+#' @param x aes x
+#' @param bins bins for histogram
+#' @export
+gghist <- function(.data, x, bins = 30) {
+    x <- rlang::enquo(x)
+    .data %>% 
+        ggplot() +
+        geom_histogram(aes(!!x), bins = bins) +
+        k.theme
+}
+
+#' Default pie plot for ktools
+#' 
+#' @param .data data
+#' @param x aes x
+#' @export
+ggpie <- function(.data, x) {
+    x <- rlang::enquo(x)
+    .data %>%
+        count(!!x) %>% 
+        ggplot() + 
+        geom_bar(aes('', n, fill = !!x), stat = 'identity', width = 1, color = 'white') + 
+        coord_polar('y', start = 0) + 
+        k.theme
+}
+#' Default column plot for ktools
+#' 
+#' @param .data data
+#' @param x aes x
+#' @param y aes y
+#' @param p position **function**
+#' @export
+ggcol <- function(.data, x, y, p = position_dodge()) {
+    x <- rlang::enquo(x)
+    y <- rlang::enquo(y)
+    .data %>% 
+        ggplot() +
+        geom_col(aes(!!x, !!y), position = p) +
+        coord_flip() +
+        k.theme
+}
+
 #' Sizing the figure in Python notebook IRKernel
 #' 
 #' too lazy to type the long options?

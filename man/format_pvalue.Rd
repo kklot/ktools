@@ -4,7 +4,7 @@
 \alias{format_pvalue}
 \title{format p-value for publishing}
 \usage{
-format_pvalue(x)
+format_pvalue(x, inequality = TRUE, digits = 2)
 }
 \arguments{
 \item{x}{computed p-value}
