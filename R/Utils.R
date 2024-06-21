@@ -1,3 +1,14 @@
+#' Constructing list with named from object name
+#'
+#' @export
+named_list <- function(...) {
+  xs <- list(...)
+  sym <- as.character(substitute(list(...)))[-1]
+  i <- names(xs) == ""
+  names(xs)[i] <- sym[i]
+  xs
+}
+
 #' Convinient for R4 pipe
 #' 
 #' adding two numbers
