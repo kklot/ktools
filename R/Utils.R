@@ -2,11 +2,7 @@
 #'
 #' @export
 named_list <- function(...) {
-  xs <- list(...)
-  sym <- as.character(substitute(list(...)))[-1]
-  i <- names(xs) == ""
-  names(xs)[i] <- sym[i]
-  xs
+  rlang::dots_list(..., .named = TRUE)
 }
 
 #' Convinient for R4 pipe
