@@ -13,19 +13,21 @@ tmb_unload <- function(name) {
     cat('Unload ', length(idx), "loaded versions.\n")
 }
 
-#' Generte model matrix for random effect, such as AR model
+#' Generate model matrix for random effect, such as AR model
 #' 
 #' the original value is saved a attributes
 #' 
 #' @param x the covariate that we wish to smooth
-#' @value a sparsed matrix 
+#' @value a sparse matrix
 #' @details the original values is made unique and sorted
 #' @export 
 #' @examples 
 #' make_re_matrix(sample(1:10, 7))
-make_re_matrix <- function(x) {
+make_re_matrix <- function(x, lower, upper, space = 1) {
   require(Matrix)
-  mm <- seq(min(x), max(x), 1)
+  if (missing(lower)) lower <- min(x)
+  if (missing(upper)) upper <- max(x)
+  mm <- seq(lower, upper, space)
   id <- match(x, mm)
   ma <- matrix(0, length(x), length(mm))
   ma[cbind(1:length(x), id)] <- 1

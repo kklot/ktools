@@ -2,9 +2,9 @@
 % Please edit documentation in R/tmbutils.R
 \name{make_re_matrix}
 \alias{make_re_matrix}
-\title{Generte model matrix for random effect, such as AR model}
+\title{Generate model matrix for random effect, such as AR model}
 \usage{
-make_re_matrix(x)
+make_re_matrix(x, lower, upper, space = 1)
 }
 \arguments{
 \item{x}{the covariate that we wish to smooth}

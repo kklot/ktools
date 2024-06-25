@@ -11,6 +11,23 @@ using namespace Eigen;
   
 #define _eps 1e-8 // An alternative limit argument for the first-order IGRMF
 
+// https://en.wikipedia.org/wiki/Partial_autocorrelation_function
+template <class Type>
+vector<Type> to_phi(vector<Type> thetas)
+{ // order 2
+  vector<Type> psi(2), phi(2);
+  psi[0] = 2. * exp(thetas[0]) / (1. + exp(thetas[0])) - 1.;
+  psi[1] = 2. * exp(thetas[1]) / (1. + exp(thetas[1])) - 1.;
+  phi[1] = psi[1];
+  phi[0] = psi[0] * (1.0 - phi[1]);
+  // https://github.com/kaskr/adcomp/issues/360#issuecomment-1073667612
+  if (phi[1] == -1) // this should not happen sampled from MVN and transformation
+    phi[1] += FLT_EPSILON;
+  if (phi[1] == 1 - CppAD::abs(phi[0])) // this might happen
+    phi[1] -= DBL_EPSILON;
+  return phi;
+}
+
 // Constraint space-time interaction if use a vector input
 template<class Type>
 Type constraint2D(Type * v, int n_rows, int n_cols, 
