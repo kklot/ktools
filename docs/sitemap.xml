@@ -283,6 +283,9 @@
     <loc>/reference/list_zip.html</loc>
   </url>
   <url>
+    <loc>/reference/load_pkg.html</loc>
+  </url>
+  <url>
     <loc>/reference/log_prec_prior.html</loc>
   </url>
   <url>
@@ -329,6 +332,9 @@
   </url>
   <url>
     <loc>/reference/name_collection.html</loc>
+  </url>
+  <url>
+    <loc>/reference/named_list.html</loc>
   </url>
   <url>
     <loc>/reference/nan_rm.html</loc>
@@ -491,6 +497,9 @@
   </url>
   <url>
     <loc>/reference/sizing.html</loc>
+  </url>
+  <url>
+    <loc>/reference/skim.html</loc>
   </url>
   <url>
     <loc>/reference/snaking.html</loc>
