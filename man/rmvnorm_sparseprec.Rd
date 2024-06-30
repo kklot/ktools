@@ -4,7 +4,7 @@
 \alias{rmvnorm_sparseprec}
 \title{Sample multivariates with precision matrix}
 \usage{
-rmvnorm_sparseprec(n, mean = rep(0, nrow(prec)), prec = diag(lenth(mean)))
+rmvnorm_sparseprec(n, mean = rep(0, nrow(prec)), prec = diag(length(mean)))
 }
 \arguments{
 \item{n}{number of samples}

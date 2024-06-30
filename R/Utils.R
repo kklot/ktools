@@ -1,3 +1,19 @@
+#' Wrapper of suppress message library loadings
+#'
+#' @param ... name of package that is normally loaded with `library`
+#' @export
+load_pkg <- function(...) suppressMessages(library(...))
+
+#' Simpler data overview
+#' @param x data frame
+#' @param ncol wrap the variables description into several columns to print
+#' @export
+skim <- function(x, ncol = 5) {
+  a <- paste(names(x), bracket(str_trunc(as.character(x[1, ]), 30)))
+  length(a) <- prod(dim(matrix(a, ncol = ncol)))
+  matrix(a, ncol = ncol, byrow = 0)
+}
+
 #' Constructing list with named from object name
 #'
 #' @export

@@ -293,7 +293,7 @@ get_report <- function(x, name='.*', se = TRUE) {
 #' @param prec precision matrix
 #' @return n samples 
 #' @export 
-rmvnorm_sparseprec <- function(n, mean = rep(0, nrow(prec)), prec = diag(lenth(mean))) {
+rmvnorm_sparseprec <- function(n, mean = rep(0, nrow(prec)), prec = diag(length(mean))) {
   z <- matrix(rnorm(n * length(mean)), ncol = n)
   L_inv <- Matrix::Cholesky(prec)
   v <- mean +
@@ -305,6 +305,7 @@ rmvnorm_sparseprec <- function(n, mean = rep(0, nrow(prec)), prec = diag(lenth(m
     )
   as.matrix(Matrix::t(v))
 }
+
 # y=z
 # y = backsolve(chol(prec), z)
 # L_inv = Matrix::Cholesky(prec, perm=FALSE, LDL=FALSE)
@@ -318,12 +319,11 @@ rmvnorm_sparseprec <- function(n, mean = rep(0, nrow(prec)), prec = diag(lenth(m
 #'
 #' @return Sampled fit.
 #' @export
-sample_tmb <- function(fit, nsample = 1000, random_only = TRUE, verbose = TRUE) {
-  to_tape <- TMB:::isNullPointer(fit$obj$env$ADFun$ptr)
+sample_tmb <- function(fit, obj, nsample = 1000, random_only = TRUE, verbose = TRUE) {
+  to_tape <- TMB:::isNullPointer(obj$env$ADFun$ptr)
   if (to_tape) {
     message("Retaping...")
-    obj <- fit$obj
-    fit$obj <- with(
+    obj <- with(
       obj$env,
       TMB::MakeADFun(
         data,
@@ -334,21 +334,20 @@ sample_tmb <- function(fit, nsample = 1000, random_only = TRUE, verbose = TRUE) 
         DLL = DLL
       )
     )
-    fit$obj$env$last.par.best <- obj$env$last.par.best
   } else {
     message("No taping done.")
   }
-  par.full <- fit$obj$env$last.par.best
+  par.full <- obj$env$last.par.best
   if (!random_only) {
-    if (verbose) print("Calculating joint precision")
-    rp <- TMB::sdreport(fit$obj, fit$fit$par, getJointPrecision = TRUE)
-    if (verbose) print("Drawing sample")
+    if (verbose) message("Calculating joint precision")
+    rp <- TMB::sdreport(obj, fit$par, getJointPrecision = TRUE)
+    if (verbose) message("Drawing sample")
     smp <- rmvnorm_sparseprec(nsample, par.full, rp$jointPrecision)
   } else {
-    r_id <- fit$obj$env$random
+    r_id <- obj$env$random
     par_f <- par.full[-r_id]
     par_r <- par.full[r_id]
-    hess_r <- fit$obj$env$spHess(par.full, random = TRUE)
+    hess_r <- obj$env$spHess(par.full, random = TRUE)
     smp_r <- rmvnorm_sparseprec(nsample, par_r, hess_r)
     smp <- matrix(0, nsample, length(par.full))
     smp[, r_id] <- smp_r

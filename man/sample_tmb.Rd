@@ -4,7 +4,7 @@
 \alias{sample_tmb}
 \title{Sample TMB fit}
 \usage{
-sample_tmb(fit, nsample = 1000, random_only = TRUE, verbose = TRUE)
+sample_tmb(fit, obj, nsample = 1000, random_only = TRUE, verbose = TRUE)
 }
 \arguments{
 \item{fit}{The TMB fit}

@@ -28,6 +28,13 @@ vector<Type> to_phi(vector<Type> thetas)
   return phi;
 }
 
+template <class Type>
+Type to_phi(Type theta)
+{ // order 1
+  Type phi = 2. * exp(theta) / (1. + exp(theta)) - 1.;
+  return phi;
+}
+
 // Constraint space-time interaction if use a vector input
 template<class Type>
 Type constraint2D(Type * v, int n_rows, int n_cols, 
