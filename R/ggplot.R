@@ -1,3 +1,29 @@
+#' ggplot to 300 dpi JPG for article submission
+#'
+#' what this does is save as PDF, then crop it, and convert to JPG which
+#'
+#' - not change scale, as compared to `ggsave` as JPG and put `dpi = 300`, always set width and height! my favorites are 7-4, 7-5, 9-6
+#' - crop white space surrounding (such as from `geom_sf`), with `pdfcrop` or `pdfcrop.pl` for mamba/conda.
+#' - convert to JPG with `pdftoppm` (from `poppler-utils`)
+#'
+#' this will create a subfolder at `here::here('fig')` and save into it.
+#'
+#' Try adding `+ k.theme`?
+#'
+#' @param name name to save without extension
+#' @param figure ggplot object, empty means the last plot
+#' @param ... more parameters for `ggsave`
+#' @export
+save_jpg_for_submission <- function(name, figure = NULL, ...) {
+  if (is.null(figure)) figure <- ggplot2::last_plot()
+  pdfname <- paste0(here("fig", name), ".pdf")
+  cropname <- paste0(here("fig", name), "-crop.pdf")
+  jpgname <- here("fig", name)
+  ggplot2::ggsave(pdfname, figure, ..., create.dir = T)
+  system(paste("pdfcrop.pl", pdfname))
+  system(paste("pdftoppm -jpeg -rx 300 -ry 300", cropname, jpgname))
+}
+
 #' Default histogram plot for ktools
 #' 
 #' @param .data data
