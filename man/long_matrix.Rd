@@ -2,13 +2,13 @@
 % Please edit documentation in R/dplyr.R
 \name{long_matrix}
 \alias{long_matrix}
-\title{Plot a 2D matrix as lines}
+\title{Matrix with names to long table with rowname as column}
 \usage{
 long_matrix(m)
 }
 \arguments{
-\item{a}{matrix which columns are to plotted}
+\item{m}{matrix with rowname}
 }
 \description{
-Plot a 2D matrix as lines
+Matrix with names to long table with rowname as column
 }
