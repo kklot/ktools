@@ -35,7 +35,7 @@ as_field <- function(...) {
 #'
 #' @param ... a named list
 #' @examples
-#' \dontrunt{
+#' \dontrun{
 #' query = as_or(interview = "Main interview", interview = "COVID-19 CATI interview (ca)")
 #' }
 #' @export

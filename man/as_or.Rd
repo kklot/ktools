@@ -13,7 +13,7 @@ as_or(...)
 Convert an R named list to mongo `OR`
 }
 \examples{
-\dontrunt{
+\dontrun{
 query = as_or(interview = "Main interview", interview = "COVID-19 CATI interview (ca)")
 }
 }
