@@ -484,6 +484,9 @@
     <loc>/reference/save_to.html</loc>
   </url>
   <url>
+    <loc>/reference/sbatch.html</loc>
+  </url>
+  <url>
     <loc>/reference/scale_inverse.html</loc>
   </url>
   <url>
@@ -505,10 +508,16 @@
     <loc>/reference/skim.html</loc>
   </url>
   <url>
+    <loc>/reference/slurm.html</loc>
+  </url>
+  <url>
     <loc>/reference/snaking.html</loc>
   </url>
   <url>
     <loc>/reference/square.html</loc>
+  </url>
+  <url>
+    <loc>/reference/squeue.html</loc>
   </url>
   <url>
     <loc>/reference/strip_U.html</loc>
@@ -527,6 +536,9 @@
   </url>
   <url>
     <loc>/reference/take_note.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tbl_AB.html</loc>
   </url>
   <url>
     <loc>/reference/tmb_ICs.html</loc>
