@@ -18,9 +18,19 @@ slurm(
   submit = FALSE,
   monitor = FALSE,
   user = "knguyen",
-  iteration = 1
+  iteration = 1,
+  first.line = 1,
+  last.line = Inf,
+  shift.line = 2
 )
 }
 \description{
-adjust SLURM and conda configuration to your case
+The workflow is: you're working on a R script, and every lines from the
+top of the file (or from `first_line` parameter) to the current line (or the last
+run a full-blown model on the HPC. Then adjust the r script and run this
+function after the last line you want to send to the cluster (or outside the
+range from `first.line` to `last.line`.).
+}
+\details{
+Adjust SLURM and conda configuration to your case.
 }
