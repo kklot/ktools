@@ -22,12 +22,16 @@
     ggplot2.discrete.fill=ktools:::okabe
   )
   require('showtext')
+  default_font <- "sans"
   require('ggplot2')
-  font_add_google('Roboto Slab', 'Roboto Slab')
+  if (curl::has_internet()) {
+    default_font <- "Roboto Slab"
+    font_add_google(default_font, default_font)
+  }
   showtext_auto() 
   k.theme <<- theme_light() +
       theme(
-          text = element_text(family = 'Roboto Slab', colour = okcol['base00']),
+          text = element_text(family = default_font, colour = okcol['base00']),
           panel.grid = element_blank(),
           panel.background = element_rect(fill = okcol['base3']),
           panel.border = element_rect(linewidth = 0.1, fill = NA, colour = 'gray1'),
